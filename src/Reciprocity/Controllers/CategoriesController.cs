@@ -45,7 +45,7 @@ namespace Reciprocity.Controllers
 
             _categoryData.Add(category);
 
-            return View("Details", category);
+            return RedirectToAction("Details", new { id = category.CategoryId });
 
         }
 
