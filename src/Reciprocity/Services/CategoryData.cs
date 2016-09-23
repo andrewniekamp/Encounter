@@ -1,4 +1,4 @@
-﻿using Reciprocity.Models;
+﻿using Reciprocity.Entities;
 using System.Collections.Generic;
 
 namespace Reciprocity.Services
