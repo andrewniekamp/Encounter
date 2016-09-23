@@ -8,7 +8,7 @@
     <div>
         @foreach(var category in Model.Categories)
         {
-            <li>@category.CategoryId | @category.Name</li>
+            <li>@category.CategoryId | @category.Name @Html.ActionLink("See more", "Details", new { id = category.CategoryId })</li>
 
         }
     </div>
