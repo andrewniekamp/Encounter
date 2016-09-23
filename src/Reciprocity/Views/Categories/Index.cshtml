@@ -1,4 +1,4 @@
-﻿@model Reciprocity.Models.Category
+﻿@model IEnumerable<Reciprocity.Models.Category>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Categories</title>
@@ -6,7 +6,11 @@
 <body>
     <h1>Welcome</h1>
     <div>
-        @Model.Name
+        @foreach(var category in Model)
+        {
+            <li>@category.CategoryId | @category.Name</li>
+
+        }
     </div>
 </body>
 </html>
