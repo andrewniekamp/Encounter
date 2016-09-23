@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Routing;
+using System;
 
 namespace Reciprocity
 {
@@ -23,6 +25,7 @@ namespace Reciprocity
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,11 +38,20 @@ namespace Reciprocity
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseFileServer();
+
+            app.UseMvc(ConfigureRoutes);
+
             app.Run(async (context) =>
             {
                 var greeting = Configuration["greeting"];
                 await context.Response.WriteAsync(greeting);
             });
+        }
+
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            routeBuilder.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
         }
     }
 }
