@@ -1,12 +1,12 @@
-﻿@model IEnumerable<Reciprocity.Models.Category>
+﻿@model Reciprocity.ViewModels.CategoryPageViewModel
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Categories</title>
 </head>
 <body>
-    <h1>Welcome</h1>
+    <h1>@Model.CurrentGreeting</h1>
     <div>
-        @foreach(var category in Model)
+        @foreach(var category in Model.Categories)
         {
             <li>@category.CategoryId | @category.Name</li>
 
