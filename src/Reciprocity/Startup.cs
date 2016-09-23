@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Routing;
 using System;
 using Reciprocity.Services;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Reciprocity.Entities;
 
 namespace Reciprocity
 {
@@ -27,9 +29,13 @@ namespace Reciprocity
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddEntityFramework()
+                .AddDbContext<ReciprocityDbContext>(options => options.UseSqlServer(Configuration["database:connection"]));
+
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
-            services.AddScoped<ICategoryData, InMemoryCategoryData>();
+            services.AddScoped<ICategoryData, SqlCategoryData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
