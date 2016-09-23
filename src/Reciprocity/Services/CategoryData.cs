@@ -1,11 +1,14 @@
 ﻿using Reciprocity.Entities;
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace Reciprocity.Services
 {
     public interface ICategoryData
     {
         IEnumerable<Category> GetAll();
+        Category Get(int id);
     }
     public class InMemoryCategoryData : ICategoryData
     {
@@ -22,6 +25,11 @@ namespace Reciprocity.Services
         public IEnumerable<Category> GetAll()
         {
             return _categories;
+        }
+
+        public Category Get(int id)
+        {
+            return _categories.FirstOrDefault(c => c.CategoryId == id);
         }
 
         List<Category> _categories;

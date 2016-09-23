@@ -30,5 +30,11 @@ namespace Reciprocity.Controllers
 
             return View(model);
         }
+
+        public IActionResult Details(int id)
+        {
+            var model = _categoryData.Get(id);
+            return View(model);
+        }
     }
 }
