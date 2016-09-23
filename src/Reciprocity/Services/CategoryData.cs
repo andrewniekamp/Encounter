@@ -1,6 +1,5 @@
 ﻿using Reciprocity.Entities;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 
 namespace Reciprocity.Services
@@ -9,10 +8,11 @@ namespace Reciprocity.Services
     {
         IEnumerable<Category> GetAll();
         Category Get(int id);
+        void Add(Category newCategory);
     }
     public class InMemoryCategoryData : ICategoryData
     {
-        public InMemoryCategoryData()
+        static InMemoryCategoryData()
         {
             _categories = new List<Category>
             {
@@ -32,6 +32,12 @@ namespace Reciprocity.Services
             return _categories.FirstOrDefault(c => c.CategoryId == id);
         }
 
-        List<Category> _categories;
+        public void Add(Category newCategory)
+        {
+            newCategory.CategoryId = _categories.Max(c => c.CategoryId) + 1;
+            _categories.Add(newCategory);
+        }
+
+        static List<Category> _categories;
     }
 }
