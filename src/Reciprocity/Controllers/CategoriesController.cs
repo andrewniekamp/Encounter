@@ -15,7 +15,7 @@ namespace Reciprocity.Controllers
         public IActionResult Index()
         {
             var model = new Category { CategoryId = 1, Name = "Dessert" };
-            return new ObjectResult(model);
+            return View(model);
         }
     }
 }
