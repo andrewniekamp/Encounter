@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Reciprocity.Migrations
+namespace Encounter.Migrations
 {
     public partial class Initial : Migration
     {

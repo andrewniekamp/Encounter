@@ -6,12 +6,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Routing;
 using System;
-using Reciprocity.Services;
+using Encounter.Services;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Reciprocity.Entities;
+using Encounter.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Reciprocity
+namespace Encounter
 {
     public class Startup
     {
@@ -32,7 +32,7 @@ namespace Reciprocity
             services.AddMvc();
 
             services.AddEntityFramework()
-                .AddDbContext<ReciprocityDbContext>(options => options.UseSqlServer(Configuration["database:connection"]));
+                .AddDbContext<EncounterDbContext>(options => options.UseSqlServer(Configuration["database:connection"]));
 
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();

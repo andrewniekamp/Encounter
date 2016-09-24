@@ -1,9 +1,9 @@
-﻿using Reciprocity.Entities;
+﻿using Encounter.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace Reciprocity.Services
+namespace Encounter.Services
 {
     public interface ICategoryData
     {
@@ -14,9 +14,9 @@ namespace Reciprocity.Services
 
     public class SqlCategoryData : ICategoryData
     {
-        private ReciprocityDbContext _context;
+        private EncounterDbContext _context;
 
-        public SqlCategoryData(ReciprocityDbContext context)
+        public SqlCategoryData(EncounterDbContext context)
         {
             _context = context;
         }

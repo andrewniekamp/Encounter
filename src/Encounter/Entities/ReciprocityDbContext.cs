@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Reciprocity.Entities
+namespace Encounter.Entities
 {
-    public class ReciprocityDbContext : DbContext
+    public class EncounterDbContext : DbContext
     {
-        public ReciprocityDbContext(DbContextOptions options)
+        public EncounterDbContext(DbContextOptions options)
             : base(options)
         {
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Reciprocity.Controllers
+namespace Encounter.Controllers
 {
     public class HomeController : Controller
     {

@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Reciprocity.Entities;
+using Encounter.Entities;
 
-namespace Reciprocity.Migrations
+namespace Encounter.Migrations
 {
-    [DbContext(typeof(ReciprocityDbContext))]
+    [DbContext(typeof(EncounterDbContext))]
     [Migration("20160923232805_Initial")]
     partial class Initial
     {
@@ -17,7 +17,7 @@ namespace Reciprocity.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Reciprocity.Entities.Category", b =>
+            modelBuilder.Entity("Encounter.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd();

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Reciprocity.ViewModels;
-using Reciprocity.Services;
-using Reciprocity.Entities;
+using Encounter.ViewModels;
+using Encounter.Services;
+using Encounter.Entities;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Reciprocity.Controllers
+namespace Encounter.Controllers
 {
     public class CategoriesController : Controller
     {

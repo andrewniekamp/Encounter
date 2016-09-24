@@ -1,7 +1,7 @@
-﻿using Reciprocity.Entities;
+﻿using Encounter.Entities;
 using System.Collections.Generic;
 
-namespace Reciprocity.ViewModels
+namespace Encounter.ViewModels
 {
     public class CategoryPageViewModel
     {

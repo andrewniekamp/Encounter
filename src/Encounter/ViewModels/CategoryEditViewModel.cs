@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Reciprocity.ViewModels
+namespace Encounter.ViewModels
 {
     public class CategoryEditViewModel
     {

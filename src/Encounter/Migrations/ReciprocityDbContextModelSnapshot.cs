@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Reciprocity.Entities;
+using Encounter.Entities;
 
-namespace Reciprocity.Migrations
+namespace Encounter.Migrations
 {
-    [DbContext(typeof(ReciprocityDbContext))]
-    partial class ReciprocityDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(EncounterDbContext))]
+    partial class EncounterDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -16,7 +16,7 @@ namespace Reciprocity.Migrations
                 .HasAnnotation("ProductVersion", "1.0.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Reciprocity.Entities.Category", b =>
+            modelBuilder.Entity("Encounter.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd();
