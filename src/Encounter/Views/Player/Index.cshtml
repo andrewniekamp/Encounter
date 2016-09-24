@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Encounter.ViewModels.PlayerPageViewModel
+
+<h1>@Model.CurrentGreeting</h1>
+<div>
+    <ul>
+        @foreach (var category in Model.Categories)
+        {
+            <li>@category.CategoryId | @category.Name @Html.ActionLink("See more", "Details", new { id = category.CategoryId })</li>
+
+        }
+    </ul>
+</div>
+
+<div>
+    <ul>
+        @foreach (var player in Model.Players)
+        {
+            <li>@player.PlayerId | @player.Name</li>
+
+        }
+    </ul>
+</div>

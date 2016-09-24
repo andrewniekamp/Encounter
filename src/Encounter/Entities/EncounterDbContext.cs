@@ -10,5 +10,6 @@ namespace Encounter.Entities
 
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Player> Players { get; set; }
     }
 }

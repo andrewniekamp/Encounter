@@ -8,9 +8,10 @@ using Encounter.Entities;
 namespace Encounter.Migrations
 {
     [DbContext(typeof(EncounterDbContext))]
-    partial class EncounterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160924190537_WithPlayer")]
+    partial class WithPlayer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -26,6 +27,18 @@ namespace Encounter.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Encounter.Entities.Player", b =>
+                {
+                    b.Property<int>("PlayerId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("PlayerId");
+
+                    b.ToTable("Players");
                 });
         }
     }

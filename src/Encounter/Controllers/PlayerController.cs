@@ -7,16 +7,19 @@ using Encounter.Entities;
 
 namespace Encounter.Controllers
 {
-    public class CategoriesController : Controller
+    public class PlayerController : Controller
     {
         private IGreeter _greeter;
         private ICategoryData _categoryData;
+        private IPlayerData _playerData;
 
-        public CategoriesController(
+        public PlayerController(
             ICategoryData categoryData,
+            IPlayerData playerData,
             IGreeter greeter)
         {
             _categoryData = categoryData;
+            _playerData = playerData;
             _greeter = greeter;
         }
 
@@ -25,8 +28,9 @@ namespace Encounter.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var model = new CategoryPageViewModel();
+            var model = new PlayerPageViewModel();
             model.Categories = _categoryData.GetAll();
+            model.Players = _playerData.GetAll();
             model.CurrentGreeting = _greeter.GetGreeting();
 
             return View(model);
