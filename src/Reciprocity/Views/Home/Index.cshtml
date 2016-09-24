@@ -1,2 +1,6 @@
-﻿<h1>Hello from the HomeController View</h1>
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Hello from the HomeController View</h1>
 @Html.ActionLink("See all categories", "Index", "Categories")

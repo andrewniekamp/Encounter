@@ -1,16 +1,14 @@
-﻿@model Reciprocity.ViewModels.CategoryPageViewModel
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Categories</title>
-</head>
-<body>
-    <h1>@Model.CurrentGreeting</h1>
-    <div>
-        @foreach(var category in Model.Categories)
-        {
-            <li>@category.CategoryId | @category.Name @Html.ActionLink("See more", "Details", new { id = category.CategoryId })</li>
+﻿@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Reciprocity.ViewModels.CategoryPageViewModel
 
-        }
-    </div>
-</body>
-</html>
+<h1>@Model.CurrentGreeting</h1>
+<div>
+    @foreach(var category in Model.Categories)
+    {
+        <li>@category.CategoryId | @category.Name @Html.ActionLink("See more", "Details", new { id = category.CategoryId })</li>
+
+    }
+</div>

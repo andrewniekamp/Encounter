@@ -1,20 +1,18 @@
-﻿@using Reciprocity.Entities
+﻿@{
+    ViewData["Title"] = "Category Creation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Reciprocity.Entities
 @model Category
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Add New Category</title>
-</head>
-<body>
-    <h1>Add New Category</h1>
-    @using (Html.BeginForm())
-    {
-        <div>
-            @Html.LabelFor(m => m.Name)
-            @Html.TextBoxFor(m => m.Name)
-        </div>
-        <div>
-            <input type="submit" vale="Save" />
-        </div>
-    }
-</body>
-</html>
+
+<h1>Add New Category</h1>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+    </div>
+    <div>
+        <input type="submit" vale="Save" />
+    </div>
+}

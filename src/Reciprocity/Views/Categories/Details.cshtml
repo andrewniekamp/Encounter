@@ -1,10 +1,8 @@
-﻿@model Reciprocity.Entities.Category
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>@Model.Name</title>
-</head>
-<body>
-    <h1>@Model.CategoryId | @Model.Name</h1>
-    @Html.ActionLink("Home", "Index")
-</body>
-</html>
+﻿@{
+    ViewData["Title"] = "Category Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Reciprocity.Entities.Category
+
+<h1>@Model.CategoryId | @Model.Name</h1>
+@Html.ActionLink("Home", "Index")
