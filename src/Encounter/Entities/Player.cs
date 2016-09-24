@@ -9,7 +9,7 @@ namespace Encounter.Entities
     {
         public int PlayerId { get; set; }
         public string Name { get; set; }
-        //public Game GameInstance { get; set; }
+        public Game GameInstance { get; set; }
         //public IEnumerable<Game> GameHistory { get; set; }
     }
 }

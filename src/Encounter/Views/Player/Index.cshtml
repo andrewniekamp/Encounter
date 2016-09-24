@@ -19,7 +19,7 @@
     <ul>
         @foreach (var player in Model.Players)
         {
-            <li>@player.PlayerId | @player.Name @Html.ActionLink("See more", "Details", new { id = player.PlayerId })</li>
+            <li>@player.PlayerId | @player.Name @Html.ActionLink("See more", "Details", new { id = player.PlayerId }) @Html.ActionLink("New Game", "Character", new { id = player.PlayerId })</li>
 
         }
     </ul>

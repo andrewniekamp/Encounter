@@ -72,5 +72,15 @@ namespace Encounter.Controllers
             }
             return View(model);
         }
+
+        public IActionResult Character(int id)
+        {
+            var model = _playerData.Get(id);
+            if (model == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
     }
 }

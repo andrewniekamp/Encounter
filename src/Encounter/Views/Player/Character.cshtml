@@ -1,0 +1,7 @@
+﻿@model Encounter.Entities.Player
+//should this be game later?
+
+<h1>@Model.Name's game</h1>
+
+<h2>Choose a character</h2>
+<button>@Html.ActionLink("Start Game", "Game", new { id = Model.PlayerId })</button>
