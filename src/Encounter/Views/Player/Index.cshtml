@@ -9,7 +9,7 @@
     <ul>
         @foreach (var category in Model.Categories)
         {
-            <li>@category.CategoryId | @category.Name @Html.ActionLink("See more", "Details", new { id = category.CategoryId })</li>
+            <li>@category.CategoryId | @category.Name</li>
 
         }
     </ul>
@@ -19,7 +19,7 @@
     <ul>
         @foreach (var player in Model.Players)
         {
-            <li>@player.PlayerId | @player.Name</li>
+            <li>@player.PlayerId | @player.Name @Html.ActionLink("See more", "Details", new { id = player.PlayerId })</li>
 
         }
     </ul>

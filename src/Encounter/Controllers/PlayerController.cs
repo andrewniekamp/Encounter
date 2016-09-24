@@ -55,7 +55,17 @@ namespace Encounter.Controllers
 
         public IActionResult Details(int id)
         {
-            var model = _categoryData.Get(id);
+            var model = _playerData.Get(id);
+            if (model == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        public IActionResult Game(int id)
+        {
+            var model = _playerData.Get(id);
             if (model == null)
             {
                 return RedirectToAction("Index");
