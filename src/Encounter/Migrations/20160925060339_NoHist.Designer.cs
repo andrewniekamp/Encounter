@@ -8,8 +8,8 @@ using Encounter.Entities;
 namespace Encounter.Migrations
 {
     [DbContext(typeof(EncounterDbContext))]
-    [Migration("20160924203814_GameUpdate")]
-    partial class GameUpdate
+    [Migration("20160925060339_NoHist")]
+    partial class NoHist
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,14 +29,30 @@ namespace Encounter.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Encounter.Entities.Character", b =>
+                {
+                    b.Property<int>("CharacterId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("SpriteUrl");
+
+                    b.HasKey("CharacterId");
+
+                    b.ToTable("Characters");
+                });
+
             modelBuilder.Entity("Encounter.Entities.Game", b =>
                 {
                     b.Property<int>("GameId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CharacterInstance");
+                    b.Property<int?>("CharacterId");
 
                     b.HasKey("GameId");
+
+                    b.HasIndex("CharacterId");
 
                     b.ToTable("Games");
                 });
@@ -55,6 +71,13 @@ namespace Encounter.Migrations
                     b.HasIndex("GameInstanceGameId");
 
                     b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("Encounter.Entities.Game", b =>
+                {
+                    b.HasOne("Encounter.Entities.Character", "Character")
+                        .WithMany()
+                        .HasForeignKey("CharacterId");
                 });
 
             modelBuilder.Entity("Encounter.Entities.Player", b =>

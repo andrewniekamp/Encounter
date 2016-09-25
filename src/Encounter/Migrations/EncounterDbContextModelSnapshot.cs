@@ -47,11 +47,11 @@ namespace Encounter.Migrations
                     b.Property<int>("GameId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CharacterInstanceCharacterId");
+                    b.Property<int?>("CharacterId");
 
                     b.HasKey("GameId");
 
-                    b.HasIndex("CharacterInstanceCharacterId");
+                    b.HasIndex("CharacterId");
 
                     b.ToTable("Games");
                 });
@@ -74,9 +74,9 @@ namespace Encounter.Migrations
 
             modelBuilder.Entity("Encounter.Entities.Game", b =>
                 {
-                    b.HasOne("Encounter.Entities.Character", "CharacterInstance")
+                    b.HasOne("Encounter.Entities.Character", "Character")
                         .WithMany()
-                        .HasForeignKey("CharacterInstanceCharacterId");
+                        .HasForeignKey("CharacterId");
                 });
 
             modelBuilder.Entity("Encounter.Entities.Player", b =>
