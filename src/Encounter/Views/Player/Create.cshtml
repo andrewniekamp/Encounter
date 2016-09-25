@@ -3,9 +3,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using Encounter.Entities
-@model Category
+@model Player
 
-<h1>Add New Category</h1>
+<h1>Add New Player Account</h1>
 @using (Html.BeginForm())
 {
     <div>
@@ -13,6 +13,6 @@
         @Html.TextBoxFor(m => m.Name)
     </div>
     <div>
-        <input type="submit" vale="Save" />
+        <input type="submit" value="Save" />
     </div>
 }

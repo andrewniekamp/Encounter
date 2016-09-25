@@ -1,5 +1,6 @@
 ﻿using Encounter.Entities;
 using System.Collections.Generic;
+using static Encounter.Services.SqlGameData;
 
 namespace Encounter.ViewModels
 {

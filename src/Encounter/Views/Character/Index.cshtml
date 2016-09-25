@@ -4,13 +4,14 @@
 }
 @model Encounter.ViewModels.CharacterPageViewModel
 
-<h1>Choose a character</h1>
+<h1>Choose a character, @Model.Player.Name</h1>
 <div class="row">
 @foreach (var character in Model.Characters)
 {
     <div class="col-xs-3">
         <h3>@character.Name</h3>
         <img class="char-select" src="@character.SpriteUrl"/>
+        <button>@Html.ActionLink("Select Character", "Create", "Game", new { playerId = Model.Player.PlayerId, selectedCharacter = character})</button>
     </div>
 }
 </div>

@@ -10,39 +10,47 @@ namespace Encounter.Services
     {
         IEnumerable<Game> GetAll();
         Game Get(int id);
-        void Add(Game newGame);
+        void Add(int playerId, int selectedCharId);
     }
 
-    public class InMemoryGameData : IGameData
+    public class SqlGameData : IGameData
     {
-        static InMemoryGameData()
+        private EncounterDbContext _context;
+
+        public SqlGameData(EncounterDbContext context)
         {
-            _games = new List<Game>
-            {
-                new Game { GameId = 1 },
-                new Game { GameId = 2 },
-                new Game { GameId = 3 }
-            };
+            _context = context;
         }
 
-        IEnumerable<Game> IGameData.GetAll()
+        public void AddGameToPlayer(int id)
         {
-            return _games;
+            Game newGame = new Game { CharacterInstance = _context.Characters.First()};
+            _context.Players.FirstOrDefault(p => p.PlayerId == id)
+                .GameInstance = newGame;
+            _context.SaveChanges();
         }
 
-        Game IGameData.Get(int id)
+        public void Add(int playerId, int selectedCharId)
         {
-            return _games.FirstOrDefault(g => g.GameId == id);
+            Character newCharacterInstance = _context.Characters.FirstOrDefault(c => c.CharacterId == playerId);
+            Game newGame = new Game { CharacterInstance = newCharacterInstance };
+            _context.Players.FirstOrDefault(p => p.PlayerId == selectedCharId).GameInstance = newGame;
+            _context.SaveChanges();
+
         }
 
-        public void Add(Game newGame)
+        public Game Get(int id)
         {
-            newGame.GameId = _games.Max(c => c.GameId) + 1;
-            _games.Add(newGame);
+            return _context.Games.FirstOrDefault(g => g.GameId == id);
         }
 
-        static List<Game> _games;
+        public IEnumerable<Game> GetAll()
+        {
+            return _context.Games.ToList();
+        }
     }
+
+
 
 
 }

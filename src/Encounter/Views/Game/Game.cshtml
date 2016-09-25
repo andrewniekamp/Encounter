@@ -1,4 +1,6 @@
-﻿@model Encounter.Entities.Player
+﻿@using Encounter.Entities
+@model Encounter.ViewModels.GamePageViewModel
 
-<h1>This is @Model.Name's game page</h1>
+<h1>This is @Model.CurrentPlayer.Name's game page</h1>
+<h2>The player chose: @Model.SelectedCharacter.Name</h2>
 

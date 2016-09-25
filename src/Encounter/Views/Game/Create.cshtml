@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "New Game";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Encounter.Entities
+@model Encounter.ViewModels.CharacterPageViewModel
+
+<h1>Start New Game, @Model.Player.Name</h1>
+@foreach (var character in Model.Characters)
+{
+    <div class="col-xs-3">
+        <h3>@character.Name</h3>
+        <img class="char-select" src="@character.SpriteUrl" />
+    @using (Html.BeginForm("Create", "Game", 
+        new { playerId = Model.Player.PlayerId, charId = character.CharacterId }))
+    {
+        <div>
+            <input type="submit" value="Select Character" />
+        </div>
+    }
+    </div>
+}
+
+<button>@Html.ActionLink("Select Character", "Create", "Game", new { playerId = Model.Player.PlayerId, selectedCharacter = new Character { } })</button>

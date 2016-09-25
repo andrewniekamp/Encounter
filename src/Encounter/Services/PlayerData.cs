@@ -26,6 +26,12 @@ namespace Encounter.Services
             _context.SaveChanges();
         }
 
+        //public void AddGame(Game newGame, int id)
+        //{
+        //    _context.Players.FirstOrDefault(c => c.PlayerId == id).GameInstance = newGame;
+        //    _context.SaveChanges();
+        //}
+
         public Player Get(int id)
         {
             return _context.Players.FirstOrDefault(c => c.PlayerId == id);

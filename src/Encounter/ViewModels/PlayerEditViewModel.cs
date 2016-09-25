@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Encounter.ViewModels
 {
-    public class CategoryEditViewModel
+    public class PlayerEditViewModel
     {
         public string Name { get; set; }
     }

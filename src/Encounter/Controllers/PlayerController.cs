@@ -42,38 +42,18 @@ namespace Encounter.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(CategoryEditViewModel model)
+        public IActionResult Create(PlayerEditViewModel model)
         {
-            var category = new Category();
-            category.Name = model.Name;
+            var player = new Player();
+            player.Name = model.Name;
 
-            _categoryData.Add(category);
+            _playerData.Add(player);
 
-            return RedirectToAction("Details", new { id = category.CategoryId });
+            return RedirectToAction("Details", new { id = player.PlayerId });
 
         }
 
         public IActionResult Details(int id)
-        {
-            var model = _playerData.Get(id);
-            if (model == null)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
-
-        public IActionResult Game(int id)
-        {
-            var model = _playerData.Get(id);
-            if (model == null)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(model);
-        }
-
-        public IActionResult Character(int id)
         {
             var model = _playerData.Get(id);
             if (model == null)
