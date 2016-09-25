@@ -11,7 +11,7 @@ namespace Encounter.Entities
     {
         [Key]
         public int GameId { get; set; }
-        //public Character CharacterInstance { get; set; }
+        public DateTime Created { get; set; }
         public virtual Character Character { get; set; }
     }
 }

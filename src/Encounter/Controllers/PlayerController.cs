@@ -2,6 +2,7 @@
 using Encounter.ViewModels;
 using Encounter.Services;
 using Encounter.Entities;
+using System;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -46,6 +47,7 @@ namespace Encounter.Controllers
         {
             var player = new Player();
             player.Name = model.Name;
+            player.Created = DateTime.Now;
 
             _playerData.Add(player);
 
