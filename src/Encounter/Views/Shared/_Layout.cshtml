@@ -10,6 +10,17 @@
 <body>
     <div class="container-fluid">
         <h1>You are in: Encounter</h1>
+        <div class="row">
+            <div class="col-xs-4">
+                @Html.ActionLink("Home", "Index", "Home")
+            </div>
+            <div class="col-xs-4">
+                @Html.ActionLink("Player Select", "Index", "Player")
+            </div>
+            <div class="col-xs-4">
+
+            </div>
+        </div>
     </div>
     <div class="container">
         @RenderBody()

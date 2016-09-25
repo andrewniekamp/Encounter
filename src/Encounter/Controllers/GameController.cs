@@ -43,13 +43,20 @@ namespace Encounter.Controllers
 
         [HttpPost]
         [ActionName("Create")]
-        public IActionResult CreateWithChar(int playerId, int charId)
+        public IActionResult CreateGameFormSubmit(int playerId, int charId)
         {
-            _gameData.Add(playerId, charId);
+            int gameId =_gameData.Add(playerId, charId);
+            return RedirectToAction("Game", new { playerId = playerId, charId = charId, gameId = gameId });
+        }
+
+        public IActionResult Game(int playerId, int charId, int gameId)
+        {
             var model = new GamePageViewModel();
             model.CurrentPlayer = _playerData.Get(playerId);
+            //System.Diagnostics.Debug.WriteLine(model.CurrentGame.Created);
             model.SelectedCharacter = _characterData.Get(charId);
-            return View("Game", model);
+            model.CurrentGame = _gameData.Get(gameId);
+            return View(model);
         }
     }
 }

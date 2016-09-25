@@ -29,14 +29,14 @@ namespace Encounter.Controllers
             return View(model);
         }
 
-        public IActionResult Generate(int id)
-        {
-            _characterData.Generate();
-
-            var model = new CharacterPageViewModel();
-            model.Player = _playerData.Get(id);
-            model.Characters = _characterData.GetAll();
-            return View(model);
-        }
+        //public IActionResult Generate(int id)
+        //{
+        //    _characterData.Generate();
+        //
+        //    var model = new CharacterPageViewModel();
+        //    model.Player = _playerData.Get(id);
+        //    model.Characters = _characterData.GetAll();
+        //    return View(model);
+        //}
     }
 }
