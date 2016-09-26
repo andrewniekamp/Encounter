@@ -6,6 +6,18 @@
     color: white;
 }
 
+.bg-image {
+    background: url(/img/bg.png) no-repeat center center fixed;
+    min-height: 80vh;
+}
+
+.welcome {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 .char-select {
     width: 100px;
 }
