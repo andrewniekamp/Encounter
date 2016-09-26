@@ -11,6 +11,7 @@ using static Encounter.Services.SqlGameData;
 
 namespace Encounter.Controllers
 {
+    [Route("[controller]")]
     public class GameController : Controller
     {
         private ICharacterData _characterData;
@@ -33,6 +34,7 @@ namespace Encounter.Controllers
         //}
 
         [HttpGet]
+        [Route("[action]/{id}")]
         public IActionResult Create(int id)
         {
             var model = new CharacterPageViewModel();
@@ -43,12 +45,15 @@ namespace Encounter.Controllers
 
         [HttpPost]
         [ActionName("Create")]
+        [Route("[action]/Player/{playerId}/Character/{charId}")]
         public IActionResult CreateGameFormSubmit(int playerId, int charId)
         {
             int gameId =_gameData.Add(playerId, charId);
             return RedirectToAction("Game", new { playerId = playerId, charId = charId, gameId = gameId });
         }
 
+        [Route("play")]
+        [Route("Player/{playerId}/Character/{charId}/Game/{gameId}")]
         public IActionResult Game(int playerId, int charId, int gameId)
         {
             var model = new GamePageViewModel();
