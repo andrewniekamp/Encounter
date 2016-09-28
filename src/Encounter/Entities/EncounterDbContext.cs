@@ -13,5 +13,6 @@ namespace Encounter.Entities
         public DbSet<Player> Players { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Character> Characters { get; set; }
+        public DbSet<Ability> Abilities { get; set; }
     }
 }

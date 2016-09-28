@@ -40,6 +40,7 @@ namespace Encounter
             services.AddScoped<IPlayerData, SqlPlayerData>();
             services.AddScoped<IGameData, SqlGameData>();
             services.AddScoped<ICharacterData, SqlCharacterData>();
+            services.AddScoped<IAbilityData, SqlAbilityData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,7 +11,7 @@
     <div class="col-xs-3">
         <h3>@character.Name</h3>
         <img class="char-select" src="@character.SpriteUrl"/>
-        <button>@Html.ActionLink("Select Character", "Create", "Game", new { playerId = Model.Player.PlayerId, selectedCharacter = character})</button>
+        <button>@Html.ActionLink("Select Character", "Index", "Ability", new { playerId = Model.Player.PlayerId, selectedCharacter = character})</button>
     </div>
 }
 </div>

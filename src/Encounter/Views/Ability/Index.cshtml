@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "New Game";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Encounter.Entities
+@model Encounter.ViewModels.AbilityPageViewModel
+
+<h1>Start New Game, @Model.CurrentPlayer.Name</h1>
+@foreach (var ability in Model.Abilities)
+{
+    <div class="col-xs-3">
+        <h2>@ability.Name</h2>
+        @*@using (html.beginform("create", "game",
+                new { playerid = model.player.playerid, charid = character.characterid }))
+        {
+            <div>
+                <input type="submit" value="@ability.name" />
+            </div>
+        }*@
+    </div>
+}
