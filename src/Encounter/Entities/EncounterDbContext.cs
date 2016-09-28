@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Encounter.Entities
 {
-    public class EncounterDbContext : DbContext
+    public class EncounterDbContext : IdentityDbContext<ApplicationUser>
     {
         public EncounterDbContext(DbContextOptions options)
             : base(options)

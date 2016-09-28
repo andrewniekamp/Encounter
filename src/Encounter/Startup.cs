@@ -10,6 +10,7 @@ using Encounter.Services;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Encounter.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Encounter
 {
@@ -33,6 +34,10 @@ namespace Encounter
 
             services.AddEntityFramework()
                 .AddDbContext<EncounterDbContext>(options => options.UseSqlServer(Configuration["database:connection"]));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<EncounterDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
@@ -58,6 +63,8 @@ namespace Encounter
             }
 
             app.UseFileServer();
+
+            app.UseIdentity();
 
             app.UseMvc(ConfigureRoutes);
 
