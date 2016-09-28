@@ -2,7 +2,11 @@
     ViewData["Title"] = "Categories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@using System.Security.Claims
 @model Encounter.ViewModels.PlayerPageViewModel
+
+<h1>@User.Identity.Name</h1>
 
 <h1>@Model.CurrentGreeting</h1>
 <div>

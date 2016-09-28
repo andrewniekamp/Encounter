@@ -14,5 +14,6 @@ namespace Encounter.Entities
         public string Name { get; set; }
         public DateTime Created { get; set; }
         public Game GameInstance { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

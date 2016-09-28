@@ -10,6 +10,12 @@ namespace Encounter.Entities
         {
 
         }
+
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    base.OnModelCreating(builder);
+        //}
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Game> Games { get; set; }
