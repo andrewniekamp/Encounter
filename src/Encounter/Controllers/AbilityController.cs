@@ -11,7 +11,7 @@ using static Encounter.Services.SqlAbilityData;
 
 namespace Encounter.Controllers
 {
-    [Route("[controller]")]
+    [Route("Abilities")]
     public class AbilityController : Controller
     {
         private ICharacterData _characterData;
@@ -31,9 +31,8 @@ namespace Encounter.Controllers
             _abilityData = abilityData;
         }
 
-        [Route("play")]
-        [Route("Player/{playerId}/Character/{charId}/Game/{gameId}")]
-        public IActionResult Index(int playerId, int charId, int gameId)
+        [Route("Player/{playerId}/Character/{charId}")]
+        public IActionResult Index(int playerId, int charId)
         {
             //add abilities with character ID in this view...
             var model = new AbilityPageViewModel();

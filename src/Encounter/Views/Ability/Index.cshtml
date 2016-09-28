@@ -5,17 +5,19 @@
 @using Encounter.Entities
 @model Encounter.ViewModels.AbilityPageViewModel
 
-<h1>Start New Game, @Model.CurrentPlayer.Name</h1>
-@foreach (var ability in Model.Abilities)
+<h1>Choose your skills, @Model.CurrentPlayer.Name</h1>
+
+@using (Html.BeginForm("create", "game",
+        new { playerid = Model.CurrentPlayer.PlayerId }))
 {
-    <div class="col-xs-3">
-        <h2>@ability.Name</h2>
-        @*@using (html.beginform("create", "game",
-                new { playerid = model.player.playerid, charid = character.characterid }))
-        {
+    @foreach (var ability in Model.Abilities)
+    {
+        <div class="col-xs-3">
             <div>
-                <input type="submit" value="@ability.name" />
+                @Html.Label(ability.Name)
+                @Html.CheckBox("abilities", false, new { value = ability.AbilityId })
             </div>
-        }*@
-    </div>
+        </div>
+    }
+    <input type="submit" value="Add selected skills" />
 }
