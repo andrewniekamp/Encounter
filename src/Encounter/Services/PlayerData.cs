@@ -9,6 +9,7 @@ namespace Encounter.Services
     {
         IEnumerable<Player> GetAll();
         Player Get(int id);
+        Player GetByUserId(string id);
         void Add(Player newPlayer);
     }
 
@@ -41,6 +42,11 @@ namespace Encounter.Services
         {
             return _context.Players.ToList();
         }
+
+        public Player GetByUserId(string id)
+        {
+            return _context.Players.FirstOrDefault(c => c.User.Id == id);
+        }
     }
 
     public class InMemoryPlayerData : IPlayerData
@@ -69,6 +75,11 @@ namespace Encounter.Services
         {
             newPlayer.PlayerId = _players.Max(c => c.PlayerId) + 1;
             _players.Add(newPlayer);
+        }
+
+        public Player GetByUserId(string id)
+        {
+            throw new NotImplementedException();
         }
 
         static List<Player> _players;

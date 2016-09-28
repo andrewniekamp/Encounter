@@ -5,9 +5,8 @@ namespace Encounter.ViewModels
 {
     public class PlayerPageViewModel
     {
-        public IEnumerable<Category> Categories { get; set; }
-        public string CurrentGreeting { get; set; }
-        public IEnumerable<Player> Players { get; set; }
-        public IEnumerable<Character> Characters { get; set; }
+        public Player Player { get; set; }
+        public bool IsCreated { get; set; }
+
     }
 }

@@ -35,13 +35,21 @@ namespace Encounter.Controllers
 
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var model = new PlayerPageViewModel();
-            model.Categories = _categoryData.GetAll();
-            model.Players = _playerData.GetAll();
-            model.CurrentGreeting = _greeter.GetGreeting();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
+            var currentUser = await _userManager.FindByIdAsync(userId);
+
+            PlayerPageViewModel model = new PlayerPageViewModel();
+            model.Player = _playerData.GetByUserId(userId);
+
+            model.IsCreated = false;
+
+            if (model.Player != null)
+            {
+                model.IsCreated = true;
+            }
             return View(model);
         }
 

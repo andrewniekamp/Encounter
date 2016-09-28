@@ -8,24 +8,15 @@
 
 <h1>@User.Identity.Name</h1>
 
-<h1>@Model.CurrentGreeting</h1>
-<div>
-    <ul>
-        @foreach (var category in Model.Categories)
-        {
-            <li>@category.CategoryId | @category.Name</li>
-
-        }
-    </ul>
-</div>
-
-<button>@Html.ActionLink("New Account", "Create", "Player")</button>
-
-<div>
-    <ul>
-        @foreach (var player in Model.Players)
-        {
-            <li>@player.PlayerId | @player.Name @Html.ActionLink("See more", "Details", new { id = player.PlayerId }) @Html.ActionLink("New Game", "Index", "Character", new { id = player.PlayerId })</li>
-        }
-    </ul>
-</div>
+@if (Model.IsCreated)
+{
+    <div>
+        <ul>
+           <li>@Model.Player.PlayerId | @Model.Player.Name @Html.ActionLink("See more", "Details", new { id = Model.Player.PlayerId }) @Html.ActionLink("New Game", "Index", "Character", new { id = Model.Player.PlayerId })</li>
+        </ul>
+    </div>
+}
+else 
+{ 
+    <button>@Html.ActionLink("New Account", "Create", "Player")</button>
+}
