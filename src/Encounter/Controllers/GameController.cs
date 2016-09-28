@@ -59,8 +59,8 @@ namespace Encounter.Controllers
             var model = new GamePageViewModel();
             model.CurrentPlayer = _playerData.Get(playerId);
             //System.Diagnostics.Debug.WriteLine(model.CurrentGame.Created);
-            model.SelectedCharacter = _characterData.Get(charId);
-            model.CurrentGame = _gameData.Get(gameId);
+            //model.SelectedCharacter = _characterData.Get(charId);
+            //model.CurrentGame = _gameData.Get(gameId);
             return View(model);
         }
     }

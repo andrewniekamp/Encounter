@@ -9,7 +9,7 @@ namespace Encounter.Entities
     {
         public int AbilityId { get; set; }
         public string Name { get; set; }
-        public virtual Character Character { get; set; }
+        public Character Character { get; set; }
         //public virtual IEnumerable<Modifier> Modifiers { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace Encounter.Controllers
             var model = new AbilityPageViewModel();
             model.CurrentPlayer = _playerData.Get(playerId);
             //System.Diagnostics.Debug.WriteLine(model.CurrentAbility.Created);
-            model.SelectedCharacter = _characterData.Get(charId);
+            //model.SelectedCharacter = _characterData.Get(charId);
             model.Abilities = _abilityData.GetAll();
             return View(model);
         }
