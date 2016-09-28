@@ -68,5 +68,12 @@ namespace Encounter.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LogOff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index");
+        }
     }
 }
