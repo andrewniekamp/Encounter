@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Security.Claims
+@model Encounter.Entities.ApplicationUser
+
+<div class="bg-image">
+    <div class="welcome">
+        <h1>Welcome, @Model.PlayerName</h1>
+
+        @Html.ActionLink("Player Profile", "Details", "Player")
+        <h1>Placeholder sections:</h1>
+        <h2>About</h2>
+        <h2>Credits</h2>
+        <h2>Share</h2>
+    </div>
+</div>

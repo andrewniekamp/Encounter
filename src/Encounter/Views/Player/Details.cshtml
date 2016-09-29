@@ -2,7 +2,9 @@
     ViewData["Title"] = "Category Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model Encounter.Entities.Player
+@model Encounter.Entities.ApplicationUser
 
-<h1>@Model.PlayerId | @Model.Name</h1>
+<h1>Hello, @Model.PlayerName</h1>
+<p>Account Created: @Model.DateCreated</p>
+<img class="player-avatar" src="@Model.AvatarUrl" />
 @Html.ActionLink("Home", "Index")

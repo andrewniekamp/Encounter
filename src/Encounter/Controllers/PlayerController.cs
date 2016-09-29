@@ -38,7 +38,6 @@ namespace Encounter.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
             var currentUser = await _userManager.FindByIdAsync(userId);
 
             PlayerPageViewModel model = new PlayerPageViewModel();
@@ -51,6 +50,14 @@ namespace Encounter.Controllers
                 model.IsCreated = true;
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> Landing()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            
+            return View(currentUser);
         }
 
         [HttpGet]
@@ -76,14 +83,12 @@ namespace Encounter.Controllers
 
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details()
         {
-            var model = _playerData.Get(id);
-            if (model == null)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(model);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+            
+            return View(currentUser);
         }
     }
 }
