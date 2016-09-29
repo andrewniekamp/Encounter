@@ -2,10 +2,16 @@
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using System.Security.Claims
 
 <div class="bg-image">
     <div class="welcome">
-        <h1>Play For Free!</h1>
-        @Html.ActionLink("See All Players", "Index", "Player")
+        <h1>Welcome, @User.Identity.Name</h1>
+
+        @Html.ActionLink("Player Profile", "Index", "Player")
+        <h1>Placeholder sections:</h1>
+        <h2>About</h2>
+        <h2>Credits</h2>
+        <h2>Share</h2>
     </div>
 </div>
