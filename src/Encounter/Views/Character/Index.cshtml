@@ -5,14 +5,13 @@
 @using Encounter.Entities
 @model Encounter.ViewModels.CharacterPageViewModel
 
-<h1>Start New Game, @Model.Player.Name</h1>
+<h1>Start New Game, @Model.User.PlayerName</h1>
 @foreach (var character in Model.Characters)
 {
     <div class="col-xs-3">
         <h3>@character.Name</h3>
         <img class="char-select" src="@character.SpriteUrl" />
-        @using (Html.BeginForm("Index", "Ability",
-                new { playerId = Model.Player.PlayerId, charId = character.CharacterId }))
+        @using (Html.BeginForm("Index", "Ability", new { charId = character.CharacterId }))
         {
             <div>
                 <input type="submit" value="Select Character" />

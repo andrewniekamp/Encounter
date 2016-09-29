@@ -15,21 +15,11 @@ namespace Encounter.Controllers
     [Authorize]
     public class PlayerController : Controller
     {
-        private IGreeter _greeter;
-        private ICategoryData _categoryData;
-        private IPlayerData _playerData;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public PlayerController(
-            UserManager<ApplicationUser> userManager,
-            ICategoryData categoryData,
-            IPlayerData playerData,
-            IGreeter greeter)
+        public PlayerController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _categoryData = categoryData;
-            _playerData = playerData;
-            _greeter = greeter;
         }
 
 
@@ -52,23 +42,6 @@ namespace Encounter.Controllers
         public IActionResult Create()
         {
             return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(PlayerEditViewModel model)
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            
-            var currentUser = await _userManager.FindByIdAsync(userId);
-            var player = new Player();
-            player.Name = model.Name;
-            player.Created = DateTime.Now;
-            player.User = currentUser;
-
-            _playerData.Add(player);
-
-            return RedirectToAction("Details", new { id = player.PlayerId });
-
         }
 
         public async Task<IActionResult> Profile()

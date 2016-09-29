@@ -48,7 +48,7 @@ namespace Encounter.Controllers
         public IActionResult Create(int id)
         {
             var model = new CharacterPageViewModel();
-            model.Player = _playerData.Get(id);
+            //model.User = find user here
             model.Characters = _characterData.GetAll();
             return View(model);
         }
