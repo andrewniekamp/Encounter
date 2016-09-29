@@ -38,7 +38,13 @@ namespace Encounter.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserName = model.Email };
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                AvatarUrl = model.AvatarUrl,
+                PlayerName = model.PlayerName,
+                DateCreated = DateTime.Now
+            };
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
