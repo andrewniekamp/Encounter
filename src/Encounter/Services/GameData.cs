@@ -26,7 +26,7 @@ namespace Encounter.Services
         {
             Character newCharacterInstance = _context.Characters.FirstOrDefault(c => c.CharacterId == selectedCharId);
             Player thePlayer = _context.Players.FirstOrDefault(p => p.PlayerId == playerId);
-            Game newGame = new Game { Character = newCharacterInstance, Created = DateTime.Now };
+            Game newGame = new Game { Character = newCharacterInstance, DateCreated = DateTime.Now };
             _context.Players.FirstOrDefault(p => p.PlayerId == playerId).GameInstance = newGame;
             _context.SaveChanges();
             return newGame.GameId;

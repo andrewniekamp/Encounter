@@ -11,7 +11,9 @@ namespace Encounter.Entities
     {
         [Key]
         public int GameId { get; set; }
-        public DateTime Created { get; set; }
+        public DateTime DateCreated { get; set; }
+        public ApplicationUser User { get; set; }
         public Character Character { get; set; }
+        //public ICollection<Encounter> Encounters { get; set; }
     }
 }
