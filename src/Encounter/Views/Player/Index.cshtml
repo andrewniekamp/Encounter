@@ -2,25 +2,5 @@
     ViewData["Title"] = "Categories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using System.Security.Claims
-@model Encounter.Entities.ApplicationUser
 
-@if (User.Identity.IsAuthenticated)
-{
-    <p>Hello @Model.PlayerName!</p>
-    
-    <div>
-        <ul>
-           <li>Profile: @Html.ActionLink("See deets", "Details") @Html.ActionLink("New Game", "Index", "Character", new { id = Model.PlayerName })</li>
-        </ul>
-    </div>
-
-}
-else
-{
-    <p>@Html.ActionLink("Register", "Register")</p>
-    <p>@Html.ActionLink("Log in", "Login")</p>
-}
-
-<h2>fix this...</h2>
-<button>@Html.ActionLink("Edit Profile", "Create", "Player")</button>
+<h1>Player controller index</h1>

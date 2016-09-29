@@ -35,21 +35,9 @@ namespace Encounter.Controllers
 
 
         // GET: /<controller>/
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
-
-            PlayerPageViewModel model = new PlayerPageViewModel();
-            model.Player = _playerData.GetByUserId(userId);
-
-            model.IsCreated = false;
-
-            if (model.Player != null)
-            {
-                model.IsCreated = true;
-            }
-            return View(model);
+            return View();
         }
 
         public async Task<IActionResult> Landing()
@@ -83,7 +71,7 @@ namespace Encounter.Controllers
 
         }
 
-        public async Task<IActionResult> Details()
+        public async Task<IActionResult> Profile()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
