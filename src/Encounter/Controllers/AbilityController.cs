@@ -2,49 +2,48 @@
 using Encounter.Services;
 using Encounter.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using static Encounter.Services.SqlAbilityData;
 
 namespace Encounter.Controllers
 {
-    [Route("Abilities")]
     public class AbilityController : Controller
     {
         private ICharacterData _characterData;
-        private IAbilityData _gameData;
-        private IPlayerData _playerData;
         private IAbilityData _abilityData;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public AbilityController(
-            IPlayerData playerData,
-            IAbilityData gameData,
             ICharacterData characterData,
-            IAbilityData abilityData)
+            IAbilityData abilityData,
+            UserManager<ApplicationUser> userManager)
         {
-            _playerData = playerData;
-            _gameData = gameData;
             _characterData = characterData;
             _abilityData = abilityData;
+            _userManager = userManager;
         }
 
-        [Route("Player/{playerId}/Character/{charId}")]
-        public IActionResult Index(int playerId, int charId)
+        [Route("Character/{charId}/Abilities")]
+        public async Task<IActionResult> Index(int id)
         {
             //add abilities with character ID in this view...
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
             var model = new AbilityPageViewModel();
-            model.CurrentPlayer = _playerData.Get(playerId);
-            //System.Diagnostics.Debug.WriteLine(model.CurrentAbility.Created);
-            //model.SelectedCharacter = _characterData.Get(charId);
+            model.Character = _characterData.Get(id);
+            model.User = currentUser;
             model.Abilities = _abilityData.GetAll();
             return View(model);
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
         public IActionResult Create(int id)
         {
             var model = new CharacterPageViewModel();
@@ -52,14 +51,5 @@ namespace Encounter.Controllers
             model.Characters = _characterData.GetAll();
             return View(model);
         }
-
-        //[HttpPost]
-        //[ActionName("Create")]
-        //[Route("[action]/Player/{playerId}/Character/{charId}")]
-        //public IActionResult CreateAbilityFormSubmit(int playerId, int charId)
-        //{
-        //    int gameId =_gameData.Add(playerId, charId);
-        //    return RedirectToAction("Ability", new { playerId = playerId, charId = charId, gameId = gameId });
-        //}
     }
 }
