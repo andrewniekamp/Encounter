@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "New Game";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Encounter.Entities
+@model Encounter.ViewModels.AbilityPageViewModel
+
+
+<h1>Get ready, @Model.User.PlayerName!</h1>
+<h2>You chose:</h2>
+<h1>@Model.Character.Name</h1>
+<h2>With the following abilities:</h2>
+<ul>
+    @foreach(var ability in Model.Character.Abilities)
+    {
+        <li>@ability.Name</li>
+    }
+</ul>

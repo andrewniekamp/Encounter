@@ -6,8 +6,9 @@
 @model Encounter.ViewModels.AbilityPageViewModel
 
 <h1>Choose your skills, @Model.User.PlayerName</h1>
+<h2>You chose: @Model.Character.Name</h2>
 
-@using (Html.BeginForm("Create", "Game"))
+@using (Html.BeginForm("Ready", "Ability", new { charId = 2 }))
 {
     @foreach (var ability in Model.Abilities)
     {

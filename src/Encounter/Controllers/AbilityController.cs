@@ -29,26 +29,54 @@ namespace Encounter.Controllers
             _userManager = userManager;
         }
 
+        [HttpPost]
         [Route("Character/{charId}/Abilities")]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index(int charId)
         {
-            //add abilities with character ID in this view...
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
 
             var model = new AbilityPageViewModel();
-            model.Character = _characterData.Get(id);
+            model.Character = _characterData.Get(charId);
             model.User = currentUser;
             model.Abilities = _abilityData.GetAll();
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Create(int id)
+        [HttpPost]
+        public async Task<IActionResult> Ready(int charId)
         {
-            var model = new CharacterPageViewModel();
-            //model.User = find user here
-            model.Characters = _characterData.GetAll();
+            //temporary abilities
+            ICollection<Ability> abilities = new List<Ability>();
+            Ability totalMess = new Ability
+            {
+                AbilityId = 1,
+                CharHarm = 1,
+                CharHeal = 3,
+                FoeHarm = 5,
+                FoeHeal = 2,
+                Name = "Total Mess"
+            };
+            Ability powerUp = new Ability
+            {
+                AbilityId = 2,
+                CharHarm = 0,
+                CharHeal = 10,
+                FoeHarm = 0,
+                FoeHeal = 10,
+                Name = "Power Up"
+            };
+            abilities.Add(totalMess);
+            abilities.Add(powerUp);
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
+            var model = new AbilityPageViewModel();
+            model.User = currentUser;
+            // may not need - model.Abilities = abilities;
+            model.Character = _characterData.Get(charId);
+            model.Character.Abilities = abilities;
             return View(model);
         }
     }
