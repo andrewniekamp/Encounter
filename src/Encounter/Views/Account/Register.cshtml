@@ -12,13 +12,13 @@
     <hr />
     @using (Html.BeginForm("Register", "Account", FormMethod.Post))
     {
-        @Html.LabelFor(m => m.PlayerName)
+        @Html.LabelFor(m => m.PlayerName, "Username")
         @Html.TextBoxFor(m => m.PlayerName, new { @class = "form-control" })
 
-        @Html.LabelFor(m => m.AvatarUrl)
+        @Html.LabelFor(m => m.AvatarUrl, "Avatar URL")
         @Html.TextBoxFor(m => m.AvatarUrl, new { @class = "form-control" })
 
-        @Html.LabelFor(m => m.Email)
+        @Html.LabelFor(m => m.Email, "Email Address")
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
 
         @Html.LabelFor(m => m.Password)
