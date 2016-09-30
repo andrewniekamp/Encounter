@@ -1,15 +1,10 @@
 ﻿using Encounter.Entities;
 using Encounter.Services;
 using Encounter.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using static Encounter.Services.SqlGameData;
 
 namespace Encounter.Controllers
 {
