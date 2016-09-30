@@ -63,6 +63,7 @@ namespace Encounter.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
 
+            //TODO clean up how game is instantiated and saved - not able to Get events properly yet
             var model = new GamePageViewModel();
             model.User = currentUser;
             model.Character = _characterData.Get(charId);
