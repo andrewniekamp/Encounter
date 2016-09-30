@@ -9,7 +9,7 @@ namespace Encounter.ViewModels
         public Game Game { get; set; }
         public Character Character { get; set; }
         public ICollection<Ability> Abilities { get; set; }
-        //public Encounter Encounter { get; set; }
-        //public Foe Foe { get; set; }
+        public ICollection<Event> Events { get; set; }
+        public Foe Foe { get; set; }
     }
 }

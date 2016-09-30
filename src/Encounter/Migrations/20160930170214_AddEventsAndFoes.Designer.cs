@@ -8,9 +8,10 @@ using Encounter.Entities;
 namespace Encounter.Migrations
 {
     [DbContext(typeof(EncounterDbContext))]
-    partial class EncounterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160930170214_AddEventsAndFoes")]
+    partial class AddEventsAndFoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -31,15 +32,11 @@ namespace Encounter.Migrations
 
                     b.Property<int>("FoeHeal");
 
-                    b.Property<int?>("FoeId");
-
                     b.Property<string>("Name");
 
                     b.HasKey("AbilityId");
 
                     b.HasIndex("CharacterId");
-
-                    b.HasIndex("FoeId");
 
                     b.ToTable("Abilities");
                 });
@@ -320,16 +317,12 @@ namespace Encounter.Migrations
                     b.HasOne("Encounter.Entities.Character", "Character")
                         .WithMany("Abilities")
                         .HasForeignKey("CharacterId");
-
-                    b.HasOne("Encounter.Entities.Foe", "Foe")
-                        .WithMany()
-                        .HasForeignKey("FoeId");
                 });
 
             modelBuilder.Entity("Encounter.Entities.Event", b =>
                 {
                     b.HasOne("Encounter.Entities.Game", "Game")
-                        .WithMany("Events")
+                        .WithMany("Event")
                         .HasForeignKey("GameId");
                 });
 

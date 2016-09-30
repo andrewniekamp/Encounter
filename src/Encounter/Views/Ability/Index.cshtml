@@ -10,14 +10,13 @@
 
 @using (Html.BeginForm("Ready", "Ability", new { charId = Model.Character.CharacterId }))
 {
-    @foreach (var ability in Model.Abilities)
+    @foreach (var ability in Model.Character.Abilities)
     {
         <div class="col-xs-3">
             <div>
                 @Html.Label(ability.Name)
-                @Html.CheckBox("abilities", false, new { value = ability.AbilityId })
             </div>
         </div>
     }
-    <input type="submit" value="Add selected skills" />
+    <input type="submit" value="Confirm Choice" />
 }

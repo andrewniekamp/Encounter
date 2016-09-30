@@ -12,6 +12,7 @@ namespace Encounter.Entities
         public int AbilityId { get; set; }
         public string Name { get; set; }
         public Character Character { get; set; }
+        public Foe Foe { get; set; }
         // public Foe Foe { get; set; }
         public int CharHeal { get; set; }
         public int CharHarm { get; set; }

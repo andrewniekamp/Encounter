@@ -11,6 +11,7 @@ namespace Encounter.Services
         IEnumerable<Game> GetAll();
         Game Get(int id);
         int Add(int playerId, int selectedCharId);
+        void AddGameToUser(string userId, Game Game);
     }
 
     public class SqlGameData : IGameData
@@ -31,6 +32,12 @@ namespace Encounter.Services
             _context.SaveChanges();
             return newGame.GameId;
 
+        }
+
+        public void AddGameToUser(string userId, Game game)
+        {
+            _context.Users.FirstOrDefault(u => u.Id == userId).Games.Add(game);
+            _context.SaveChanges();
         }
 
         public Game Get(int id)

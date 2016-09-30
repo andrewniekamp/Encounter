@@ -1,4 +1,5 @@
 ﻿using Encounter.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace Encounter.Services
 
         public Character Get(int id)
         {
-            return _context.Characters.FirstOrDefault(c => c.CharacterId == id);
+            return _context.Characters.Include(c => c.Abilities).FirstOrDefault(c => c.CharacterId == id);
         }
 
         public IEnumerable<Character> GetAll()
