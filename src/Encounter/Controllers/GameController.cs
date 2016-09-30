@@ -2,10 +2,12 @@
 using Encounter.Services;
 using Encounter.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using static Encounter.Services.SqlGameData;
 
@@ -17,15 +19,18 @@ namespace Encounter.Controllers
         private ICharacterData _characterData;
         private IGameData _gameData;
         private IPlayerData _playerData;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public GameController(
             IPlayerData playerData,
             IGameData gameData,
-            ICharacterData characterData)
+            ICharacterData characterData,
+            UserManager<ApplicationUser> userManager)
         {
             _playerData = playerData;
             _gameData = gameData;
             _characterData = characterData;
+            _userManager = userManager;
         }
         
         //public IActionResult Index()
@@ -53,13 +58,18 @@ namespace Encounter.Controllers
         }
 
         [Route("play")]
-        [Route("Player/{playerId}/Character/{charId}/Game/{gameId}")]
-        public IActionResult Game(int playerId, int charId, int gameId)
+        [Route("Game/Character/{charId}/Abilities/{abil1Id}/{abil2Id}")]
+        public async Task<IActionResult> Game(int charId, int abil1Id, int abil2Id)
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
             var model = new GamePageViewModel();
-            model.CurrentPlayer = _playerData.Get(playerId);
-            //System.Diagnostics.Debug.WriteLine(model.CurrentGame.Created);
-            //model.SelectedCharacter = _characterData.Get(charId);
+            model.User = currentUser;
+            model.Character = _characterData.Get(charId);
+
+            //TODO instantiate a new game and assign properties to it - and assign game to user - save in DB from svc
+            //TODO Enter abilities into DB ahead of time so they can be saved to character instances?
             //model.CurrentGame = _gameData.Get(gameId);
             return View(model);
         }

@@ -10,9 +10,18 @@
 <h2>You chose:</h2>
 <h1>@Model.Character.Name</h1>
 <h2>With the following abilities:</h2>
-<ul>
     @foreach(var ability in Model.Character.Abilities)
     {
-        <li>@ability.Name</li>
+        <h3>@ability.Name</h3>
+        <ul>
+            <li>Damage to Character: @ability.CharHarm</li>
+            <li>Healing to Character: @ability.CharHeal</li>
+            <li>Damage to Foe: @ability.FoeHarm</li>
+            <li>Healing to Foe: @ability.FoeHeal</li>
+        </ul>
     }
-</ul>
+
+@Html.ActionLink("Game", "Game", "Game", new {
+    charId = Model.Character.CharacterId,
+    abil1Id = 1,
+    abil2Id = 2 })

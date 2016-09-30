@@ -1,7 +1,7 @@
 ﻿@using Encounter.Entities
-@model Encounter.ViewModels.GamePageViewModel
+@model Encounter.ViewModels.AbilityPageViewModel
 
-<h1>This is @Model.CurrentPlayer.Name's game page</h1>
-<h2>@Model.CurrentPlayer.Name chose: @Model</h2>
-<h2>At: @Model</h2>
+<h1>This is @Model.User.PlayerName's game page</h1>
+<h2>@Model.User.PlayerName chose: @Model.Character.Name</h2>
+<h2>At: @DateTime.Now</h2>
 
