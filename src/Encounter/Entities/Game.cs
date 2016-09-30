@@ -14,6 +14,6 @@ namespace Encounter.Entities
         public DateTime DateCreated { get; set; }
         public ApplicationUser User { get; set; }
         public Character Character { get; set; }
-        //public ICollection<Encounter> Encounters { get; set; }
+        public ICollection<Event> Event { get; set; }
     }
 }
