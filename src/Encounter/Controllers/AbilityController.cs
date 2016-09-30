@@ -44,6 +44,7 @@ namespace Encounter.Controllers
         }
 
         [HttpPost]
+        [Route("Abilities/[action]/{charId}")]
         public async Task<IActionResult> Ready(int charId)
         {
             //temporary abilities
