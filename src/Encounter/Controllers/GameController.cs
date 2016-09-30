@@ -69,7 +69,6 @@ namespace Encounter.Controllers
             model.Character = _characterData.Get(charId);
 
             //TODO instantiate a new game and assign properties to it - and assign game to user - save in DB from svc
-            //TODO Enter abilities into DB ahead of time so they can be saved to character instances?
             //model.CurrentGame = _gameData.Get(gameId);
             return View(model);
         }

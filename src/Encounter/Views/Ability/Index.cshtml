@@ -8,7 +8,7 @@
 <h1>Choose your skills, @Model.User.PlayerName</h1>
 <h2>You chose: @Model.Character.Name</h2>
 
-@using (Html.BeginForm("Ready", "Ability", new { charId = 2 }))
+@using (Html.BeginForm("Ready", "Ability", new { charId = Model.Character.CharacterId }))
 {
     @foreach (var ability in Model.Abilities)
     {

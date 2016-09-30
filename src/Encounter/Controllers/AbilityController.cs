@@ -48,26 +48,8 @@ namespace Encounter.Controllers
         {
             //temporary abilities
             ICollection<Ability> abilities = new List<Ability>();
-            Ability totalMess = new Ability
-            {
-                AbilityId = 1,
-                CharHarm = 1,
-                CharHeal = 3,
-                FoeHarm = 5,
-                FoeHeal = 2,
-                Name = "Total Mess"
-            };
-            Ability powerUp = new Ability
-            {
-                AbilityId = 2,
-                CharHarm = 0,
-                CharHeal = 10,
-                FoeHarm = 0,
-                FoeHeal = 10,
-                Name = "Power Up"
-            };
-            abilities.Add(totalMess);
-            abilities.Add(powerUp);
+            abilities.Add(_abilityData.Get(7));
+            abilities.Add(_abilityData.Get(8));
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
