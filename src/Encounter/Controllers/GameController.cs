@@ -16,20 +16,23 @@ namespace Encounter.Controllers
     [Route("[controller]")]
     public class GameController : Controller
     {
-        private ICharacterData _characterData;
         private IGameData _gameData;
-        private IPlayerData _playerData;
+        private ICharacterData _characterData;
+        private IEventData _eventData;
+        private IFoeData _foeData;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public GameController(
-            IPlayerData playerData,
             IGameData gameData,
             ICharacterData characterData,
+            IEventData eventData,
+            IFoeData foeData,
             UserManager<ApplicationUser> userManager)
         {
-            _playerData = playerData;
             _gameData = gameData;
             _characterData = characterData;
+            _eventData = eventData;
+            _foeData = foeData;
             _userManager = userManager;
         }
         
