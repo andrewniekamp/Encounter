@@ -1,4 +1,5 @@
 ﻿using Encounter.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,10 @@ namespace Encounter.Services
 
         public Game Get(int id)
         {
-            return _context.Games.FirstOrDefault(g => g.GameId == id);
+            //example of multiple includes
+            return _context.Games.Include(c => c.Events)
+                .ThenInclude(c => c.Foe)
+                .ThenInclude(c => c.Abilities).FirstOrDefault(g => g.GameId == id);
         }
 
         public IEnumerable<Game> GetAll()

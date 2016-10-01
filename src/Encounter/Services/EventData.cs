@@ -1,4 +1,5 @@
 ﻿using Encounter.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,10 @@ namespace Encounter.Services
 
         public Event Get(int id)
         {
-            return _context.Events.FirstOrDefault(c => c.EventId == id);
+            return _context.Events
+                .Include(e => e.Foe)
+                .ThenInclude(f => f.Abilities)
+                .FirstOrDefault(c => c.EventId == id);
         }
 
         public IEnumerable<Event> GetAll()
