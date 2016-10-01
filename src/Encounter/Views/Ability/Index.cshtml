@@ -2,21 +2,5 @@
     ViewData["Title"] = "New Game";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using Encounter.Entities
-@model Encounter.ViewModels.AbilityPageViewModel
 
-<h1>Choose your skills, @Model.User.PlayerName</h1>
-<h2>You chose: @Model.Character.Name</h2>
-
-@using (Html.BeginForm("Ready", "Ability", new { charId = Model.Character.CharacterId }))
-{
-    @foreach (var ability in Model.Character.Abilities)
-    {
-        <div class="col-xs-3">
-            <div>
-                @Html.Label(ability.Name)
-            </div>
-        </div>
-    }
-    <input type="submit" value="Confirm Choice" />
-}
+<h1>Ability controller index</h1>

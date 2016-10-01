@@ -11,7 +11,7 @@
     <div class="col-xs-3">
         <h3>@character.Name</h3>
         <img class="char-select" src="@character.SpriteUrl" />
-        @using (Html.BeginForm("Index", "Ability", new { charId = character.CharacterId }))
+        @using (Html.BeginForm("Ready", "Ability", new { charId = character.CharacterId }))
         {
             <div>
                 <input type="submit" value="Select Character" />
