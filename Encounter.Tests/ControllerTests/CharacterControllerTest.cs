@@ -10,16 +10,19 @@ using Xunit;
 
 namespace Encounter.Tests.ControllerTests
 {
-    [Fact]
-    public void Get_ViewResult_Index_Test()
+    public class CharacterControllerTest
     {
-        //arrange
-        CharacterController controller = new CharacterController();
+        [Fact]
+        public void Get_ViewResult_Index_Test()
+        {
+            //arrange
+            CharacterController controller = new CharacterController();
 
-        //act
-        var result = controller.Index();
+            //act
+            var result = controller.Index();
 
-        //assert
-        Assert.IsType<ViewResult>(result);
+            //assert
+            Assert.IsType<Task<IActionResult>>(result);
+        }
     }
 }

@@ -21,6 +21,11 @@ namespace Encounter.Controllers
             _userManager = userManager;
         }
 
+        public CharacterController()
+        {
+
+        }
+
         public async Task<IActionResult> Index()
         {
             var model = new CharacterPageViewModel();
