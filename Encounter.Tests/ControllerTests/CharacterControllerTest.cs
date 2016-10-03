@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Encounter.Tests
+namespace Encounter.Tests.ControllerTests
 {
-    public class Class1
+    public class CharacterControllerTest
     {
-        public Class1()
-        {
-        }
     }
 }
