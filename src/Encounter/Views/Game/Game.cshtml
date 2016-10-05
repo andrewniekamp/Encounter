@@ -4,7 +4,7 @@
 <h2>@Model.User.PlayerName chose: @Model.Character.Name</h2>
 <h2>At: @Model.DateCreated</h2>
 
-
+<img class="rdy-img" src="@Model.Character.SpriteUrl" alt="@Model.Character.Name" />
 <h2>Character is: @Model.Character.Name, with @Model.Character.Health health</h2>
 @foreach (var ability in Model.Character.Abilities)
 {
@@ -19,7 +19,10 @@
 
 @foreach (var currentEvent in Model.Events)
 {
+    <img class="rdy-img" src="@currentEvent.ImageUrl" alt="@currentEvent.Name"/>
     <h2>Event is called: @currentEvent.Name</h2>
+
+    <img class="rdy-img" src="@currentEvent.Foe.SpriteUrl" alt="@currentEvent.Foe.Name"/>
     <h3>Event foe is: @currentEvent.Foe.Name, with @currentEvent.Foe.Health health</h3>
     @foreach (var ability in currentEvent.Foe.Abilities)
     {

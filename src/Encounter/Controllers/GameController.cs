@@ -16,6 +16,7 @@ namespace Encounter.Controllers
     {
         private IGameData _gameData;
         private ICharacterData _characterData;
+        private IAbilityData _abilityData;
         private IEventData _eventData;
         private IFoeData _foeData;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -23,40 +24,53 @@ namespace Encounter.Controllers
         public GameController(
             IGameData gameData,
             ICharacterData characterData,
+            IAbilityData abilityData,
             IEventData eventData,
             IFoeData foeData,
             UserManager<ApplicationUser> userManager)
         {
             _gameData = gameData;
             _characterData = characterData;
+            _abilityData = abilityData;
             _eventData = eventData;
             _foeData = foeData;
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        //Method to generate temp/initial values to the DB
+        [HttpPost]
+        public async Task<IActionResult> GenerateData()
         {
-            return View();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
+            _abilityData.Add(new Ability { Name = "Attack", FoeHarm = 10 });
+            _abilityData.Add(new Ability { Name = "Defend", FoeHarm = 0 });
+            _abilityData.Add(new Ability { Name = "Kick", FoeHarm = 4 });
+            _abilityData.Add(new Ability { Name = "Pray", FoeHarm = 0 });
+            _abilityData.Add(new Ability { Name = "Shout", FoeHarm = 1 });
+            _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 2 });
+            _abilityData.Add(new Ability { Name = "Total Mess", FoeHarm = 7 });
+            _abilityData.Add(new Ability { Name = "Power Up", FoeHarm = 0 });
+            
+            _eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
+            _eventData.Add(new Event { Name = "Mountains", ImageUrl = "/img/mountains.jpg" });
+            
+            _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
+            _characterData.Add(new Character { Name = "Branson", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
+            _characterData.Add(new Character { Name = "Cornelius", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
+            _characterData.Add(new Character { Name = "Drew", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
+
+            _foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = _eventData.Get(1), Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+            _foeData.Add(new Foe { Health = 11, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = _eventData.Get(2), Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(2) } });
+
+            return RedirectToAction("Landing", "Player", currentUser);
         }
-
-        //[HttpGet]
-        //[Route("[action]/{id}")]
-        //public IActionResult Create(int id)
-        //{
-        //    var model = new CharacterPageViewModel();
-        //    //model.Player = _playerData.Get(id);
-        //    model.Characters = _characterData.GetAll();
-        //    return View(model);
-        //}
-
-        //[HttpPost]
-        //[ActionName("Create")]
-        //[Route("[action]/Player/{playerId}/Character/{charId}")]
-        //public IActionResult CreateGameFormSubmit(int playerId, int charId)
-        //{
-        //    int gameId =_gameData.Add(playerId, charId);
-        //    return RedirectToAction("Game", new { playerId = playerId, charId = charId, gameId = gameId });
-        //}
 
         [Route("play")]
         [Route("Character/{charId}/Abilities/{abil1Id}/{abil2Id}")]

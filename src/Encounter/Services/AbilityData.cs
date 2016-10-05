@@ -37,6 +37,4 @@ namespace Encounter.Services
             return _context.Abilities.ToList();
         }
     }
-
-
 }
