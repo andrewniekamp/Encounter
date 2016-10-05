@@ -1,4 +1,8 @@
-﻿@model Encounter.Entities.Game
+﻿@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Encounter.Entities.Game
 
 <h1>This is @Model.User.PlayerName's game page</h1>
 <h2>@Model.User.PlayerName chose: @Model.Character.Name</h2>
