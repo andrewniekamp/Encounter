@@ -65,15 +65,15 @@ namespace Encounter.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
-            if (result.Succeeded)
+            if (model.Email != null || model.Password != null)
             {
-                return RedirectToAction("Landing", "Player");
+                Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Landing", "Player");
+                }
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         [HttpPost]
