@@ -7,4 +7,18 @@
 <h1>Hello, @Model.PlayerName</h1>
 <p>Account Created: @Model.DateCreated</p>
 <img class="player-avatar" src="@Model.AvatarUrl" />
+<h2>Recent Games:</h2>
+    @foreach(var game in Model.Games)
+    {
+        <h3>Character was: @game.Character.Name</h3>
+        <h4>Date: @game.DateCreated</h4>
+        <h3>Events:</h3>
+        <ul>
+            @foreach(var gameEvent in game.Events)
+            {
+                <li>Location: @gameEvent.Name with Foe: @gameEvent.Foe.Name</li>
+            }
+        </ul>
+    
+    }
 @Html.ActionLink("Home", "Index")

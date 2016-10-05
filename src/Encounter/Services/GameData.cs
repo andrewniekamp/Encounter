@@ -1,7 +1,9 @@
 ﻿using Encounter.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,8 +13,9 @@ namespace Encounter.Services
     {
         IEnumerable<Game> GetAll();
         Game Get(int id);
-        int Add(int playerId, int selectedCharId);
+        void Add(Game newGame);
         void AddGameToUser(string userId, Game Game);
+        ICollection<Game> GetGamesOfUser(string userId);
     }
 
     public class SqlGameData : IGameData
@@ -24,15 +27,10 @@ namespace Encounter.Services
             _context = context;
         }
 
-        public int Add(int playerId, int selectedCharId)
+        public void Add(Game newGame)
         {
-            Character newCharacterInstance = _context.Characters.FirstOrDefault(c => c.CharacterId == selectedCharId);
-            Player thePlayer = _context.Players.FirstOrDefault(p => p.PlayerId == playerId);
-            Game newGame = new Game { Character = newCharacterInstance, DateCreated = DateTime.Now };
-            _context.Players.FirstOrDefault(p => p.PlayerId == playerId).GameInstance = newGame;
+            _context.Games.Add(newGame);
             _context.SaveChanges();
-            return newGame.GameId;
-
         }
 
         public void AddGameToUser(string userId, Game game)
@@ -52,6 +50,16 @@ namespace Encounter.Services
         public IEnumerable<Game> GetAll()
         {
             return _context.Games.ToList();
+        }
+
+        public ICollection<Game> GetGamesOfUser(string userId)
+        {
+            return _context.Games
+                .Include(g => g.Events)
+                .ThenInclude(e => e.Foe)
+                .Include(g => g.Character)
+                .ThenInclude(c => c.Abilities)
+                .Where(m => m.User.Id == userId).ToList();
         }
     }
 

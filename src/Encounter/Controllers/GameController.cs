@@ -78,12 +78,12 @@ namespace Encounter.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-
-            //TODO clean up how game is instantiated and saved - not able to Get events properly yet
+            
             var model = new GamePageViewModel();
             model.User = currentUser;
             model.Character = _characterData.Get(charId);
 
+            //TODO May need to construct events here to avoid simply reassigning events already in db
             ICollection<Event> events = new Collection<Event>();
             events.Add(_eventData.Get(1));
             events.Add(_eventData.Get(2));
@@ -95,9 +95,9 @@ namespace Encounter.Controllers
             newGame.User = model.User;
             newGame.Events = model.Events;
 
-            //_gameData.AddGameToUser(userId, Game);
+            _gameData.Add(newGame);
+            _gameData.AddGameToUser(userId, newGame);
             
-            //TODO instantiate a new game and assign properties to it - and assign game to user - save in DB from svc
             return View(newGame);
         }
     }
