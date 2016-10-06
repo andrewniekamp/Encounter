@@ -78,22 +78,18 @@ namespace Encounter.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-            
-            var model = new GamePageViewModel();
-            model.User = currentUser;
-            model.Character = _characterData.Get(charId);
 
             //TODO May need to construct events here to avoid simply reassigning events already in db
+            //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
             ICollection<Event> events = new Collection<Event>();
             events.Add(_eventData.Get(1));
             events.Add(_eventData.Get(2));
-            model.Events = events;
-
+            
             Game newGame = new Game();
             newGame.DateCreated = DateTime.Now;
-            newGame.Character = model.Character;
-            newGame.User = model.User;
-            newGame.Events = model.Events;
+            newGame.Character = _characterData.Get(charId);
+            newGame.User = currentUser;
+            newGame.Events = events;
 
             _gameData.Add(newGame);
             _gameData.AddGameToUser(userId, newGame);

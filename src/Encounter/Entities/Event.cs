@@ -9,7 +9,6 @@ namespace Encounter.Entities
         public int EventId { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
-        public Game Game { get; set; }
         public Foe Foe { get; set; }
     }
 }
