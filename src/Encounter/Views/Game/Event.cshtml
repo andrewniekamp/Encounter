@@ -4,42 +4,55 @@
 }
 @model Encounter.Entities.Game
 
-<h2>This should get latest event</h2>
-@Model.Events.Last().ImageUrl
-<img class="game-foe-img" src="@Model.Events.Last().ImageUrl" alt="@Model.Events.Last().Name" />
-
-<h1>This is @Model.User.PlayerName's game page</h1>
-<h2>@Model.User.PlayerName chose: @Model.Character.Name</h2>
-<h2>At: @Model.DateCreated</h2>
-
-<img class="game-char-img" src="@Model.Character.SpriteUrl" alt="@Model.Character.Name" />
-<h2>Character is: @Model.Character.Name, with @Model.Character.Health health</h2>
-@foreach (var ability in Model.Character.Abilities)
-{
-    <h4>Ability: @ability.Name</h4>
-    <ul>
-        <li>@ability.CharHarm</li>
-        <li>@ability.FoeHeal</li>
-    </ul>
-}
-
+<div class="container-fluid">
+    <h2>Last Event in List</h2>
+    <div class="event-board row">
+        @*event-board-img outside of normal flow (position: absolute)*@
+        <img class="event-board-img" src="@Model.Events.Last().ImageUrl" alt="@Model.Events.Last().Name" />
+        <div class="overlay">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p>@Model.User.PlayerName chose: @Model.Character.Name</p>
+                        <h3>Player Health: @Model.Character.Health</h3>
+                    </div>
+                    <div class="col-xs-6">
+                        <p>In the @Model.Events.Last().Name, you encounter a @Model.Events.Last().Foe.Name</p>
+                        <h3>@Model.Events.Last().Foe.Name Health: @Model.Events.Last().Foe.Health</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="char-box col-xs-6">
+                        <div class="row">
+                            <div class="center-box">
+                                <div class="char-skill-box">
+                                    @foreach (var ability in Model.Character.Abilities)
+                                    {
+                                        <button>Ability: @ability.Name</button>
+                                        <p>Damage: @ability.FoeHarm</p>
+                                        <p>Healing: @ability.FoeHeal</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row center-box">
+                            <img class="game-char-img" src="@Model.Character.SpriteUrl" alt="@Model.Character.Name" />
+                        </div>
+                    </div>
+                    <div class="foe-box col-xs-6">
+                        <div class="row">
+                            <div class="row center-box">
+                                <img class="game-foe-img" src="@Model.Events.Last().Foe.SpriteUrl" alt="@Model.Events.Last().Foe.Name" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @foreach (var currentEvent in Model.Events)
 {
-    <div class="event-board" style="background:url(@currentEvent.ImageUrl);background-repeat: no-repeat;background-size: 1000px 600px;">
-        <div class="overlay">
-            <h2>Event is called: @currentEvent.Name</h2>
-
-            <img class="game-foe-img" src="@currentEvent.Foe.SpriteUrl" alt="@currentEvent.Foe.Name" />
-            <h3>Event foe is: @currentEvent.Foe.Name, with @currentEvent.Foe.Health health</h3>
-            @foreach (var ability in currentEvent.Foe.Abilities)
-            {
-                <h4>Ability: @ability.Name</h4>
-                <ul>
-                    <li>@ability.CharHarm</li>
-                    <li>@ability.FoeHeal</li>
-                </ul>
-            }
-        </div>
-    </div>
+    <h2>Event @currentEvent.EventId: @currentEvent.Name</h2>
 }
