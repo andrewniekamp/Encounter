@@ -9,41 +9,58 @@
     <div class="event-board row">
         @*event-board-img outside of normal flow (position: absolute)*@
         <img class="event-board-img" src="@Model.Events.Last().ImageUrl" alt="@Model.Events.Last().Name" />
-        <div class="overlay">
-            <div class="col-xs-12">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <p>@Model.User.PlayerName chose: @Model.Character.Name</p>
-                        <h3>Player Health: @Model.Character.Health</h3>
-                    </div>
-                    <div class="col-xs-6">
-                        <p>In the @Model.Events.Last().Name, you encounter a @Model.Events.Last().Foe.Name</p>
-                        <h3>@Model.Events.Last().Foe.Name Health: @Model.Events.Last().Foe.Health</h3>
-                    </div>
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-6">
+                    <p>@Model.User.PlayerName chose: @Model.Character.Name</p>
                 </div>
-                <div class="row">
-                    <div class="char-box col-xs-6">
-                        <div class="row">
-                            <div class="center-box">
-                                <div class="char-skill-box">
-                                    @foreach (var ability in Model.Character.Abilities)
-                                    {
-                                        <button>Ability: @ability.Name</button>
+                <div class="col-xs-6">
+                    <p>In the @Model.Events.Last().Name, you encounter a @Model.Events.Last().Foe.Name</p>
+                </div>
+            </div>
+            <div id="health-bar-row" class="row">
+                <div class="col-xs-6">
+                    @*HEALTH BARS TO UPDATE WITH AJAX*@
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Character.Health
+                             aria-valuemin="0" aria-valuemax=@Model.Character.Health style="width:100%">
+                            <span class="sr-only">100% Complete</span>
+                        </div>
+                    </div>
+                    <h3>Player Health: @Model.Character.Health</h3>
+                </div>
+                <div class="col-xs-6">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Events.Last().Foe.Health
+                             aria-valuemin="0" aria-valuemax=@Model.Events.Last().Foe.Health style="width:100%">
+                            <span class="sr-only">100% Complete</span>
+                        </div>
+                    </div>
+                    <h3>@Model.Events.Last().Foe.Name Health: @Model.Events.Last().Foe.Health</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="char-box col-xs-6">
+                    <div class="row">
+                        <div class="center-box">
+                            <div class="char-skill-box">
+                                @foreach (var ability in Model.Character.Abilities)
+                                {
+                                    <button class="btn btn-default act-btn" value="@ability.AbilityId">Ability: @ability.Name</button>
                                         <p>Damage: @ability.FoeHarm</p>
                                         <p>Healing: @ability.FoeHeal</p>
-                                    }
-                                </div>
+                                }
                             </div>
-                        </div>
-                        <div class="row center-box">
-                            <img class="game-char-img" src="@Model.Character.SpriteUrl" alt="@Model.Character.Name" />
                         </div>
                     </div>
-                    <div class="foe-box col-xs-6">
-                        <div class="row">
-                            <div class="row center-box">
-                                <img class="game-foe-img" src="@Model.Events.Last().Foe.SpriteUrl" alt="@Model.Events.Last().Foe.Name" />
-                            </div>
+                    <div class="row center-box">
+                        <img class="game-char-img" src="@Model.Character.SpriteUrl" alt="@Model.Character.Name" />
+                    </div>
+                </div>
+                <div class="foe-box col-xs-6">
+                    <div class="row">
+                        <div class="row center-box">
+                            <img class="game-foe-img" src="@Model.Events.Last().Foe.SpriteUrl" alt="@Model.Events.Last().Foe.Name" />
                         </div>
                     </div>
                 </div>
@@ -56,3 +73,22 @@
 {
     <h2>Event @currentEvent.EventId: @currentEvent.Name</h2>
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.act-btn').click(function () {
+            var val = parseInt($(this).val());
+            console.log(val);
+
+            $.ajax({
+                type: 'GET',
+                url: 'Game/Event',
+                success: function (result) {
+                    $('#health-bar-row').html(result);
+                }
+            });
+        });
+
+    });
+</script>

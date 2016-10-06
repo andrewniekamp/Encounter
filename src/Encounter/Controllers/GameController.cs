@@ -100,10 +100,16 @@ namespace Encounter.Controllers
             return View("Event", newGame);
         }
 
-        public IActionResult NextEvent(int id)
+        //public IActionResult NextEvent(int id)
+        //{
+        //    Game currentGame = _gameData.Get(id);
+        //    return View(currentGame);
+        //}
+
+        public IActionResult Act()
         {
-            Game currentGame = _gameData.Get(id);
-            return View(currentGame);
+            //var action = _abilityData.Get(id);
+            return Content("Hello", "text/plain");
         }
     }
 }
