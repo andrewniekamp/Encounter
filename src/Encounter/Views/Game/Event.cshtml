@@ -46,9 +46,7 @@
                             <div class="char-skill-box">
                                 @foreach (var ability in Model.Character.Abilities)
                                 {
-                                    <button class="btn btn-default act-btn" value="@ability.AbilityId">Ability: @ability.Name</button>
-                                        <p>Damage: @ability.FoeHarm</p>
-                                        <p>Healing: @ability.FoeHeal</p>
+                                    <button class="btn btn-default act-btn" value="@ability.AbilityId">@ability.Name</button>
                                 }
                             </div>
                         </div>
@@ -80,6 +78,10 @@
             return "Are you sure? All progress will be lost!";
         }
 
+        var EventSettings = {
+            ActionUrl : '@Url.Action("Act", "Game")'
+        }
+
         var playerHealth = @Model.Character.Health;
         var foeHealth = @Model.Events.Last().Foe.Health;
 
@@ -96,7 +98,7 @@
 
             var btn = $(this);
             btn.prop('disabled',true);
-            window.setTimeout(function(){ 
+            window.setTimeout(function(){
                 btn.prop('disabled',false);
             },2000);
 
@@ -131,12 +133,12 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Events.Last().Foe.Health
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=foeHealth
                                  aria-valuemin="0" aria-valuemax=@Model.Events.Last().Foe.Health style="width:`+ foePercent +`%">
                                 <span class="sr-only">100% Complete</span>
                             </div>
                         </div>
-                        <h3>@Model.Events.Last().Foe.Name Health: @Model.Events.Last().Foe.Health</h3>
+                        <h3>@Model.Events.Last().Foe.Name Health:` + foeHealth + `</h3>
                     </div>`;
 
                     $('#health-bar-row').html(resultString);
@@ -144,6 +146,5 @@
                 }
             });
         });
-
     });
 </script>

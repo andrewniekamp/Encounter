@@ -44,6 +44,7 @@
     text-align: center;
 }
 .char-box {
+    background-color: rgba(255,255,255,0.4);
 }
 .char-skill-box {
     background-color: salmon;
@@ -58,8 +59,16 @@
 .game-event-img {
 
 }
+.foe-box {
+    background-color: rgba(255,255,255,0.4);
+}
 .game-foe-img {
     width: 50%;
     transform: scaleX(-1);
+}
+.act-btn {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
 }
 /*Game Page End************/

@@ -81,9 +81,9 @@ namespace Encounter.Controllers
 
             //TODO May need to construct events here to avoid simply reassigning events already in db
             //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
-            Event initialEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" };
+            Event initialEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg" };
             _eventData.Add(initialEvent);
-            _foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = initialEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+            _foeData.Add(new Foe { Health = 15, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = initialEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
             ICollection<Event> events = new Collection<Event>();
             events.Add(initialEvent);
             //events.Add(eventTwo);
