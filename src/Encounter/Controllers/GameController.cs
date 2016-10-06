@@ -58,16 +58,16 @@ namespace Encounter.Controllers
             _abilityData.Add(new Ability { Name = "Total Mess", FoeHarm = 7 });
             _abilityData.Add(new Ability { Name = "Power Up", FoeHarm = 0 });
             
-            _eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
-            _eventData.Add(new Event { Name = "Mountains", ImageUrl = "/img/mountains.jpg" });
+            //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
+            //_eventData.Add(new Event { Name = "Mountains", ImageUrl = "/img/mountains.jpg" });
             
             _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
             _characterData.Add(new Character { Name = "Branson", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
             _characterData.Add(new Character { Name = "Cornelius", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
             _characterData.Add(new Character { Name = "Drew", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
 
-            _foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = _eventData.Get(1), Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-            _foeData.Add(new Foe { Health = 11, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = _eventData.Get(2), Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(2) } });
+            //_foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = _eventData.Get(1), Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+            //_foeData.Add(new Foe { Health = 11, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = _eventData.Get(2), Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(2) } });
 
             return RedirectToAction("Landing", "Player", currentUser);
         }
@@ -81,10 +81,13 @@ namespace Encounter.Controllers
 
             //TODO May need to construct events here to avoid simply reassigning events already in db
             //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
+            Event initialEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" };
+            _eventData.Add(initialEvent);
+            _foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = initialEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
             ICollection<Event> events = new Collection<Event>();
-            events.Add(_eventData.Get(1));
-            events.Add(_eventData.Get(2));
-            
+            events.Add(initialEvent);
+            //events.Add(eventTwo);
+
             Game newGame = new Game();
             newGame.DateCreated = DateTime.Now;
             newGame.Character = _characterData.Get(charId);
@@ -94,7 +97,13 @@ namespace Encounter.Controllers
             _gameData.Add(newGame);
             _gameData.AddGameToUser(userId, newGame);
             
-            return View(newGame);
+            return View("Event", newGame);
+        }
+
+        public IActionResult NextEvent(int id)
+        {
+            Game currentGame = _gameData.Get(id);
+            return View(currentGame);
         }
     }
 }

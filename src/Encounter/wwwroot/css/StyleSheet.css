@@ -5,7 +5,7 @@
 }
 
 .bg-image {
-    background: url(/img/bg.png) no-repeat center center fixed;
+    background: url('/img/bg.png') no-repeat center center fixed;
     min-height: 80vh;
 }
 
@@ -27,3 +27,24 @@
 .rdy-img {
     width: 100px;
 }
+
+/*Game Page Start**********/
+.event-board {
+    width: 1000px;
+    height: 600px;
+}
+.overlay {
+    background-color: rgba(255,255,255,0.7);
+    width: 100%;
+    height: 100%;
+}
+.game-char-img {
+    width: 100px;
+}
+.game-event-img {
+
+}
+.game-foe-img {
+    width: 100px;
+}
+/*Game Page End************/

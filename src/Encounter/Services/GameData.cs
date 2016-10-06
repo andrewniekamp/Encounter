@@ -42,9 +42,14 @@ namespace Encounter.Services
         public Game Get(int id)
         {
             //example of multiple includes
-            return _context.Games.Include(c => c.Events)
-                .ThenInclude(c => c.Foe)
-                .ThenInclude(c => c.Abilities).FirstOrDefault(g => g.GameId == id);
+            return _context.Games
+                .Include(g => g.User)
+                .Include(g => g.Events)
+                .ThenInclude(e => e.Foe)
+                .ThenInclude(f => f.Abilities)
+                .Include(g => g.Character)
+                .ThenInclude(c => c.Abilities)
+                .FirstOrDefault(g => g.GameId == id);
         }
 
         public IEnumerable<Game> GetAll()

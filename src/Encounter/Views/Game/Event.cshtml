@@ -4,6 +4,10 @@
 }
 @model Encounter.Entities.Game
 
+<h2>This should get latest event</h2>
+@Model.Events.Last().ImageUrl
+<img class="game-foe-img" src="@Model.Events.Last().ImageUrl" alt="@Model.Events.Last().Name" />
+
 <h1>This is @Model.User.PlayerName's game page</h1>
 <h2>@Model.User.PlayerName chose: @Model.Character.Name</h2>
 <h2>At: @Model.DateCreated</h2>
@@ -26,7 +30,7 @@
         <div class="overlay">
             <h2>Event is called: @currentEvent.Name</h2>
 
-            <img class="game-foe-img" src="@currentEvent.Foe.SpriteUrl" alt="@currentEvent.Foe.Name"/>
+            <img class="game-foe-img" src="@currentEvent.Foe.SpriteUrl" alt="@currentEvent.Foe.Name" />
             <h3>Event foe is: @currentEvent.Foe.Name, with @currentEvent.Foe.Health health</h3>
             @foreach (var ability in currentEvent.Foe.Abilities)
             {
