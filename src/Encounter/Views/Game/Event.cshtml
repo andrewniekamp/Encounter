@@ -76,16 +76,71 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        window.onbeforeunload = function() {
+            return "Are you sure? All progress will be lost!";
+        }
+
+        var playerHealth = @Model.Character.Health;
+        var foeHealth = @Model.Events.Last().Foe.Health;
+
+        function winCheck() {
+            if (foeHealth <= 0)
+            {
+                console.log("@Model.Events.Last().Foe.Name has died!");
+            }
+        }
 
         $('.act-btn').click(function () {
             var val = parseInt($(this).val());
             console.log(val);
 
+            var btn = $(this);
+            btn.prop('disabled',true);
+            window.setTimeout(function(){ 
+                btn.prop('disabled',false);
+            },2000);
+
             $.ajax({
                 type: 'GET',
-                url: 'Game/Event',
+                data: { id: val },
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '@Url.Action("Act", "Game")',
                 success: function (result) {
-                    $('#health-bar-row').html(result);
+
+                    //@Model.Character.Abilities.Last().CharHarm;
+                    playerHealth -= result.charHarm;
+                    playerHealth += result.charHeal;
+                    playerPercent = playerHealth / @Model.Character.Health * 100;
+                    console.log(playerPercent);
+
+                    foeHealth -= result.foeHarm;
+                    foeHealth += result.foeHeal;
+                    foePercent = foeHealth / @Model.Events.Last().Foe.Health * 100;
+                    console.log(foePercent);
+
+                    var resultString =
+                    `<div class="col-xs-6">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=playerHealth
+                                 aria-valuemin="0" aria-valuemax=@Model.Character.Health style="width:`+ playerPercent +`%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
+                        <h3>Player Health: @Model.Character.Health</h3>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Events.Last().Foe.Health
+                                 aria-valuemin="0" aria-valuemax=@Model.Events.Last().Foe.Health style="width:`+ foePercent +`%">
+                                <span class="sr-only">100% Complete</span>
+                            </div>
+                        </div>
+                        <h3>@Model.Events.Last().Foe.Name Health: @Model.Events.Last().Foe.Health</h3>
+                    </div>`;
+
+                    $('#health-bar-row').html(resultString);
+                    winCheck();
                 }
             });
         });

@@ -106,10 +106,10 @@ namespace Encounter.Controllers
         //    return View(currentGame);
         //}
 
-        public IActionResult Act()
+        public IActionResult Act(int id)
         {
-            //var action = _abilityData.Get(id);
-            return Content("Hello", "text/plain");
+            var actAbility = _abilityData.Get(id);
+            return Json(actAbility);
         }
     }
 }
