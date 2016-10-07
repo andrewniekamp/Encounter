@@ -107,11 +107,12 @@ namespace Encounter.Controllers
             return View("Event", newGame);
         }
 
-        //public IActionResult NextEvent(int gameId)
-        //{
-        //    Game currentGame = _gameData.Get(gameId);
-        //    return View("View", currentGame);
-        //}
+        [ActionName("NextEvent")]
+        public IActionResult Event(int gameId, int eventCount)
+        {
+            Game currentGame = _gameData.Get(gameId);
+            return View("Event", currentGame);
+        }
 
         public IActionResult Act(int id)
         {
