@@ -56,7 +56,7 @@ namespace Encounter.Controllers
             _abilityData.Add(new Ability { Name = "Shout", FoeHarm = 1 });
             _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 2 });
             _abilityData.Add(new Ability { Name = "Total Mess", FoeHarm = 7 });
-            _abilityData.Add(new Ability { Name = "Power Up", FoeHarm = 0 });
+            _abilityData.Add(new Ability { Name = "Power Up", CharHeal = 10, FoeHeal = 10 });
             
             //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
             //_eventData.Add(new Event { Name = "Mountains", ImageUrl = "/img/mountains.jpg" });
