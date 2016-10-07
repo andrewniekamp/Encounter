@@ -92,8 +92,8 @@ namespace Encounter.Controllers
             _foeData.Add(new Foe { Health = 20, Name = "Lizard Monster", SpriteUrl = "/img/lizard.png", Event = thirdEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
             ICollection<Event> events = new Collection<Event>();
             events.Add(initialEvent);
-            //events.Add(secondEvent);
-            //events.Add(thirdEvent);
+            events.Add(secondEvent);
+            events.Add(thirdEvent);
 
             Game newGame = new Game();
             newGame.DateCreated = DateTime.Now;
@@ -107,12 +107,12 @@ namespace Encounter.Controllers
             return View("Event", newGame);
         }
 
-        [ActionName("NextEvent")]
-        public IActionResult Event(int gameId, int eventCount)
-        {
-            Game currentGame = _gameData.Get(gameId);
-            return View("Event", currentGame);
-        }
+        //[ActionName("NextEvent")]
+        //public IActionResult Event(int gameId, int eventCount)
+        //{
+        //    Game currentGame = _gameData.Get(gameId);
+        //    return View("Event", currentGame);
+        //}
 
         public IActionResult Act(int id)
         {
