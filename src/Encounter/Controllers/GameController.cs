@@ -69,6 +69,10 @@ namespace Encounter.Controllers
             //_foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = _eventData.Get(1), Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
             //_foeData.Add(new Foe { Health = 11, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = _eventData.Get(2), Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(2) } });
 
+            _foeData.Add(new Foe { Health = 16, Name = "Goblin", SpriteUrl = "/img/goblin.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+            _foeData.Add(new Foe { Health = 18, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+            _foeData.Add(new Foe { Health = 20, Name = "Lizard Monster", SpriteUrl = "/img/lizard.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+
             return RedirectToAction("Landing", "Player", currentUser);
         }
 
@@ -81,15 +85,12 @@ namespace Encounter.Controllers
 
             //TODO May need to construct events here to avoid simply reassigning events already in db
             //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
-            Event initialEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg" };
-            Event secondEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" };
-            Event thirdEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg" };
+            Event initialEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg", Foe = _foeData.Get(1)};
+            Event secondEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg", Foe = _foeData.Get(2) };
+            Event thirdEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
             _eventData.Add(initialEvent);
             _eventData.Add(secondEvent);
             _eventData.Add(thirdEvent);
-            _foeData.Add(new Foe { Health = 16, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = initialEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-            _foeData.Add(new Foe { Health = 18, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = secondEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-            _foeData.Add(new Foe { Health = 20, Name = "Lizard Monster", SpriteUrl = "/img/lizard.png", Event = thirdEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
             ICollection<Event> events = new Collection<Event>();
             events.Add(initialEvent);
             events.Add(secondEvent);
