@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Encounter.Controllers
 {
-    [Route("[controller]")]
     public class GameController : Controller
     {
         private IGameData _gameData;
@@ -107,17 +107,25 @@ namespace Encounter.Controllers
             return View("Event", newGame);
         }
 
-        //[ActionName("NextEvent")]
-        //public IActionResult Event(int gameId, int eventCount)
-        //{
-        //    Game currentGame = _gameData.Get(gameId);
-        //    return View("Event", currentGame);
-        //}
-
         public IActionResult Act(int id)
         {
             var actAbility = _abilityData.Get(id);
             return Json(actAbility);
+        }
+        
+        [HttpPost]
+        public IActionResult Next(int gameId, int eventsCompleted)
+        {
+            var model = new GamePageViewModel();
+            model.Game = _gameData.Get(gameId);
+            model.EventsCompleted = eventsCompleted;
+            //model.RemainingEvents = model.Game.Events.Skip(eventsCompleted).ToList();
+            if (eventsCompleted == model.Game.Events.Count)
+            {
+                return View("Win");
+            }
+            model.CurrentEvent = model.Game.Events.ElementAt(eventsCompleted);
+            return View("EventNext", model);
         }
     }
 }

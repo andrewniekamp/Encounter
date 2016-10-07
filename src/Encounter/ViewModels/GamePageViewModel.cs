@@ -5,11 +5,9 @@ namespace Encounter.ViewModels
 {
     public class GamePageViewModel
     {
-        public ApplicationUser User { get; set; }
         public Game Game { get; set; }
-        public Character Character { get; set; }
-        public ICollection<Ability> Abilities { get; set; }
-        public ICollection<Event> Events { get; set; }
-        public Foe Foe { get; set; }
+        public Event CurrentEvent { get; set; }
+        public ICollection<Event> RemainingEvents { get; set; }
+        public int EventsCompleted { get; set; }
     }
 }

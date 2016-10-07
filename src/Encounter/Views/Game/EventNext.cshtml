@@ -2,47 +2,49 @@
     ViewData["Title"] = "Game";
     Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
-@model Encounter.Entities.Game
+@using Encounter.Entities
+@model Encounter.ViewModels.GamePageViewModel
 
 @*TODO: MAY BE ABLE TO USE SKIP*@
 @*@Model.Events.Skip(1)*@
-<h2>@Model.User.Games.First().DateCreated</h2>
-<h2>@Model.Events.ElementAt(0).Name</h2>
-<h2>@Model.Events.ElementAt(1).Name</h2>
-<h2>@Model.Events.ElementAt(2).Name</h2>
+<h2>@Model.Game.User.Games.First().DateCreated</h2>
+<h2>@Model.Game.Events.ElementAt(0).Name</h2>
+<h2>@Model.Game.Events.ElementAt(1).Name</h2>
+<h2>@Model.Game.Events.ElementAt(2).Name</h2>
 
 <div class="container-fluid">
+    <h2>Last Event in List</h2>
     <div class="event-board row">
         @*event-board-img outside of normal flow (position: absolute)*@
-        <img class="event-board-img" src="@Model.Events.First().ImageUrl" alt="@Model.Events.First().Name" />
+        <img class="event-board-img" src="@Model.CurrentEvent.ImageUrl" alt="@Model.CurrentEvent.Name" />
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-xs-6">
-                    <p>@Model.User.PlayerName chose: @Model.Character.Name</p>
+                    <p>@Model.Game.User.PlayerName chose: @Model.Game.Character.Name</p>
                 </div>
                 <div class="col-xs-6">
-                    <p>In the @Model.Events.First().Name, you encounter a @Model.Events.First().Foe.Name</p>
+                    <p>In the @Model.CurrentEvent.Name, you encounter a @Model.CurrentEvent.Foe.Name</p>
                 </div>
             </div>
             <div id="health-bar-row" class="row">
                 <div class="col-xs-6">
                     @*HEALTH BARS TO UPDATE WITH AJAX*@
                     <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Character.Health
-                             aria-valuemin="0" aria-valuemax=@Model.Character.Health style="width:100%">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Game.Character.Health
+                             aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:100%">
                             <span class="sr-only">100% Complete</span>
                         </div>
                     </div>
-                    <h3>Player Health: @Model.Character.Health</h3>
+                    <h3>Player Health: @Model.Game.Character.Health</h3>
                 </div>
                 <div class="col-xs-6">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Events.First().Foe.Health
-                             aria-valuemin="0" aria-valuemax=@Model.Events.First().Foe.Health style="width:100%">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.CurrentEvent.Foe.Health
+                             aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health style="width:100%">
                             <span class="sr-only">100% Complete</span>
                         </div>
                     </div>
-                    <h3>@Model.Events.First().Foe.Name Health: @Model.Events.First().Foe.Health</h3>
+                    <h3>@Model.CurrentEvent.Foe.Name Health: @Model.CurrentEvent.Foe.Health</h3>
                 </div>
             </div>
             <div class="row">
@@ -50,7 +52,7 @@
                     <div class="row">
                         <div class="center-box">
                             <div class="char-skill-box">
-                                @foreach (var ability in Model.Character.Abilities)
+                                @foreach (var ability in Model.Game.Character.Abilities)
                                 {
                                     <button class="btn btn-default act-btn" value="@ability.AbilityId">@ability.Name</button>
                                 }
@@ -58,13 +60,13 @@
                         </div>
                     </div>
                     <div class="row center-box">
-                        <img class="game-char-img" src="@Model.Character.SpriteUrl" alt="@Model.Character.Name" />
+                        <img class="game-char-img" src="@Model.Game.Character.SpriteUrl" alt="@Model.Game.Character.Name" />
                     </div>
                 </div>
                 <div class="foe-box col-xs-6">
                     <div class="row">
                         <div class="row center-box">
-                            <img class="game-foe-img" src="@Model.Events.First().Foe.SpriteUrl" alt="@Model.Events.First().Foe.Name" />
+                            <img class="game-foe-img" src="@Model.CurrentEvent.Foe.SpriteUrl" alt="@Model.CurrentEvent.Foe.Name" />
                         </div>
                     </div>
                 </div>
@@ -75,8 +77,8 @@
 
 @using (Html.BeginForm("Next", "Game", new
     {
-        gameId = Model.GameId,
-        eventsCompleted = 1
+        gameId = Model.Game.GameId,
+        eventsCompleted = Model.EventsCompleted + 1
     }))
 {
     <div>
@@ -85,7 +87,7 @@
 }
 
 
-@foreach (var currentEvent in Model.Events)
+@foreach (var currentEvent in Model.Game.Events)
 {
     <h2>Event @currentEvent.EventId: @currentEvent.Name</h2>
 }
@@ -96,14 +98,14 @@
         testing();
         $('#next-event').hide();
 
-        var playerHealth = @Model.Character.Health;
-        var foeHealth = @Model.Events.First().Foe.Health;
+        var playerHealth = @Model.Game.Character.Health;
+        var foeHealth = @Model.CurrentEvent.Foe.Health;
         var gameActive = true;
 
         function winCheck() {
             if (foeHealth <= 0)
             {
-                console.log("@Model.Events.First().Foe.Name has died!");
+                console.log("@Model.CurrentEvent.Foe.Name has died!");
                 gameActive = false;
                 setTimeout(function(){
                     $('#next-event').show();
@@ -130,17 +132,17 @@
 
                     playerHealth -= result.charHarm;
                     playerHealth += result.charHeal;
-                    playerPercent = playerHealth / @Model.Character.Health * 100;
+                    playerPercent = playerHealth / @Model.Game.Character.Health * 100;
 
                     foeHealth -= result.foeHarm;
                     foeHealth += result.foeHeal;
-                    foePercent = foeHealth / @Model.Events.First().Foe.Health * 100;
+                    foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
                     var resultString =
                     `<div class="col-xs-6">
                         <div class="progress">
                             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=playerHealth
-                                 aria-valuemin="0" aria-valuemax=@Model.Character.Health style="width:`+ playerPercent +`%">
+                                 aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:`+ playerPercent +`%">
                                 <span class="sr-only">100% Complete</span>
                             </div>
                         </div>
@@ -149,11 +151,11 @@
                     <div class="col-xs-6">
                         <div class="progress">
                             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=foeHealth
-                                 aria-valuemin="0" aria-valuemax=@Model.Events.First().Foe.Health style="width:`+ foePercent +`%">
+                                 aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health style="width:`+ foePercent +`%">
                                 <span class="sr-only">100% Complete</span>
                             </div>
                         </div>
-                        <h3>@Model.Events.First().Foe.Name Health:` + foeHealth + `</h3>
+                        <h3>@Model.CurrentEvent.Foe.Name Health:` + foeHealth + `</h3>
                     </div>`;
 
                     $('#health-bar-row').html(resultString);
@@ -176,20 +178,19 @@
                     url: '@Url.Action("Act", "Game")',
                     success: function (result) {
 
-                        //@Model.Character.Abilities.First().CharHarm;
                         playerHealth -= result.charHarm;
                         playerHealth += result.charHeal;
-                        playerPercent = playerHealth / @Model.Character.Health * 100;
+                        playerPercent = playerHealth / @Model.Game.Character.Health * 100;
 
                         foeHealth -= result.foeHarm;
                         foeHealth += result.foeHeal;
-                        foePercent = foeHealth / @Model.Events.First().Foe.Health * 100;
+                        foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
                         var resultString =
                         `<div class="col-xs-6">
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=playerHealth
-                                        aria-valuemin="0" aria-valuemax=@Model.Character.Health style="width:`+ playerPercent +`%">
+                                        aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:`+ playerPercent +`%">
                                     <span class="sr-only">100% Complete</span>
                                 </div>
                             </div>
@@ -198,18 +199,18 @@
                         <div class="col-xs-6">
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=foeHealth
-                                        aria-valuemin="0" aria-valuemax=@Model.Events.First().Foe.Health style="width:`+ foePercent +`%">
+                                        aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health style="width:`+ foePercent +`%">
                                     <span class="sr-only">100% Complete</span>
                                 </div>
                             </div>
-                            <h3>@Model.Events.First().Foe.Name Health:` + foeHealth + `</h3>
+                            <h3>@Model.CurrentEvent.Foe.Name Health:` + foeHealth + `</h3>
                         </div>`;
 
                         $('#health-bar-row').html(resultString);
                         winCheck();
                     }
                 });
-            
+
             }
 
         }, 5000);
