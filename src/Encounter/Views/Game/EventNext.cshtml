@@ -13,7 +13,6 @@
 <h2>@Model.Game.Events.ElementAt(2).Name</h2>
 
 <div class="container-fluid">
-    <h2>Last Event in List</h2>
     <div class="event-board row">
         @*event-board-img outside of normal flow (position: absolute)*@
         <img class="event-board-img" src="@Model.CurrentEvent.ImageUrl" alt="@Model.CurrentEvent.Name" />
@@ -75,16 +74,18 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Next", "Game", new
+<div id="next-event">
+    @using (Html.BeginForm("Next", "Game", new
+        {
+            gameId = Model.Game.GameId,
+            eventsCompleted = Model.EventsCompleted + 1
+        }))
     {
-        gameId = Model.Game.GameId,
-        eventsCompleted = Model.EventsCompleted + 1
-    }))
-{
-    <div>
-        <input type="submit" value="Next Event!" />
-    </div>
-}
+        <div>
+            <input type="submit" value="Next Event!" />
+        </div>
+    }
+</div>
 
 
 @foreach (var currentEvent in Model.Game.Events)

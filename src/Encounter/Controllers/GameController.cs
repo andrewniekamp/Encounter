@@ -105,7 +105,14 @@ namespace Encounter.Controllers
             _gameData.Add(newGame);
             _gameData.AddGameToUser(userId, newGame);
             
-            return View("Event", newGame);
+            //return View("Event", newGame);
+
+            var model = new GamePageViewModel();
+            model.Game = newGame;
+            model.EventsCompleted = 0;
+            //model.RemainingEvents = model.Game.Events.Skip(eventsCompleted).ToList();
+            model.CurrentEvent = model.Game.Events.First();
+            return View("EventNext", model);
         }
 
         public IActionResult Act(int id)
