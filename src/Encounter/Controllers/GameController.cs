@@ -61,10 +61,10 @@ namespace Encounter.Controllers
             //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
             //_eventData.Add(new Event { Name = "Mountains", ImageUrl = "/img/mountains.jpg" });
             
-            _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
-            _characterData.Add(new Character { Name = "Branson", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
-            _characterData.Add(new Character { Name = "Cornelius", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
-            _characterData.Add(new Character { Name = "Drew", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
+            _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/gnome.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
+            _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/monk.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
+            _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
+            _characterData.Add(new Character { Name = "Patricia", SpriteUrl = "/img/pilot.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
 
             //_foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = _eventData.Get(1), Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
             //_foeData.Add(new Foe { Health = 11, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = _eventData.Get(2), Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(2) } });

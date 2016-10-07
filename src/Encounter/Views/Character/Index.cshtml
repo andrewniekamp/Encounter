@@ -6,11 +6,14 @@
 @model Encounter.ViewModels.CharacterPageViewModel
 
 <h1>Start New Game, @Model.User.PlayerName</h1>
+
+
 @foreach (var character in Model.Characters)
 {
     <div class="col-xs-3">
         <h3>@character.Name</h3>
         <img class="char-select" src="@character.SpriteUrl" />
+        <button class="char-select" value=@character.CharacterId>Select @character.Name</button>
         @using (Html.BeginForm("Ready", "Ability", new { charId = character.CharacterId }))
         {
             <div>
@@ -19,3 +22,62 @@
         }
     </div>
 }
+
+@foreach (var ability in Model.Abilities)
+{
+    <div class="col-xs-3">
+        <h3>@ability.Name</h3>
+        <button class="abil-select" value=@ability.AbilityId>Select @ability.Name</button>
+        @*@using (Html.BeginForm("Ready", "Ability", new { charId = character.CharacterId }))
+            {
+                <div>
+                    <input type="submit" value="Select Character" />
+                </div>
+            }*@
+    </div>
+}
+
+
+<div class="col-sm-4">
+    <h2>Submitting data with a POST request</h2>
+    <form action="NewDestination" class="new-destination">
+        <label for="newCity">City:</label>
+        <input type="text" name="newCity" />
+        <label for="newCountry">Country:</label>
+        <input type="text" name="newCountry" />
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result6"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var selectedCharId = null;
+        var selectedAbilId = null;
+
+        $('.char-select').click(function () {
+            selectedCharId = $(this).val();
+            console.log("Char ID: ", selectedCharId);
+        })
+        $('.abil-select').click(function () {
+            selectedAbilId = $(this).val();
+            console.log("Abil ID: ", selectedAbilId);
+        })
+
+        $('.new-destination').submit(function (event) {
+            event.preventDefault();
+            console.log($(this).serialize());
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '@Url.Action("NewDestination")',
+                data: $(this).serialize(),
+                success: function (result) {
+                    var resultMessage = 'You\'ve added a new destination to the database!<br>Id: ' + result.destinationId +
+                        '<br>City: ' + result.city + '<br>Country: ' + result.country;
+                    $('#result6').html(resultMessage);
+                }
+            });
+        });
+    });
+</script>

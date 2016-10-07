@@ -8,5 +8,7 @@ namespace Encounter.ViewModels
     {
         public ApplicationUser User { get; set; }
         public IEnumerable<Character> Characters { get; set; }
+        public IEnumerable<Event> Events { get; set; }
+        public IEnumerable<Ability> Abilities { get; set; }
     }
 }

@@ -11,13 +11,19 @@ namespace Encounter.Controllers
     public class CharacterController : Controller
     {
         private ICharacterData _characterData;
+        private IAbilityData _abilityData;
+        private IEventData _eventData;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public CharacterController(
             ICharacterData characterData,
+            IAbilityData abilityData,
+            IEventData eventData,
             UserManager<ApplicationUser> userManager)
         {
             _characterData = characterData;
+            _abilityData = abilityData;
+            _eventData = eventData;
             _userManager = userManager;
         }
 
@@ -35,6 +41,8 @@ namespace Encounter.Controllers
 
             model.User = currentUser;
             model.Characters = _characterData.GetAll();
+            model.Abilities = _abilityData.GetAll();
+            model.Events = _eventData.GetAll();
             return View(model);
         }
     }
