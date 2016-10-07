@@ -67,6 +67,14 @@
     </div>
 </div>
 
+<div id="next-event">
+    @Html.ActionLink("Game", "NextEvent", "Game", new
+    {
+        gameId = Model.GameId
+    })
+</div>
+
+
 @foreach (var currentEvent in Model.Events)
 {
     <h2>Event @currentEvent.EventId: @currentEvent.Name</h2>
@@ -79,6 +87,7 @@
         }
 
         testing();
+        $('#next-event').hide();
 
         var playerHealth = @Model.Character.Health;
         var foeHealth = @Model.Events.Last().Foe.Health;
@@ -89,6 +98,9 @@
             {
                 console.log("@Model.Events.Last().Foe.Name has died!");
                 gameActive = false;
+                setTimeout(function(){
+                    $('#next-event').show();
+                }, 2000);
             }
         }
 

@@ -73,8 +73,8 @@ namespace Encounter.Controllers
         }
 
         [Route("play")]
-        [Route("Character/{charId}/Abilities/{abil1Id}/{abil2Id}")]
-        public async Task<IActionResult> Game(int charId, int abil1Id, int abil2Id)
+        [Route("Character/{charId}")]
+        public async Task<IActionResult> Game(int charId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
@@ -82,11 +82,18 @@ namespace Encounter.Controllers
             //TODO May need to construct events here to avoid simply reassigning events already in db
             //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
             Event initialEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg" };
+            Event secondEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" };
+            Event thirdEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg" };
             _eventData.Add(initialEvent);
-            _foeData.Add(new Foe { Health = 15, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = initialEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+            _eventData.Add(secondEvent);
+            _eventData.Add(thirdEvent);
+            _foeData.Add(new Foe { Health = 16, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = initialEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+            _foeData.Add(new Foe { Health = 18, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = secondEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+            _foeData.Add(new Foe { Health = 20, Name = "Lizard Monster", SpriteUrl = "/img/lizard.png", Event = thirdEvent, Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
             ICollection<Event> events = new Collection<Event>();
             events.Add(initialEvent);
-            //events.Add(eventTwo);
+            //events.Add(secondEvent);
+            //events.Add(thirdEvent);
 
             Game newGame = new Game();
             newGame.DateCreated = DateTime.Now;
@@ -100,10 +107,10 @@ namespace Encounter.Controllers
             return View("Event", newGame);
         }
 
-        //public IActionResult NextEvent(int id)
+        //public IActionResult NextEvent(int gameId)
         //{
-        //    Game currentGame = _gameData.Get(id);
-        //    return View(currentGame);
+        //    Game currentGame = _gameData.Get(gameId);
+        //    return View("View", currentGame);
         //}
 
         public IActionResult Act(int id)

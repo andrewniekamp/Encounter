@@ -22,7 +22,5 @@
     }
 
 @Html.ActionLink("Game", "Game", "Game", new {
-    charId = Model.Character.CharacterId,
-    abil1Id = Model.Character.Abilities.First().AbilityId,
-    abil2Id = Model.Character.Abilities.Last().AbilityId
+    charId = Model.Character.CharacterId
 })
