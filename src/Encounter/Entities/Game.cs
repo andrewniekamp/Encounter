@@ -13,7 +13,7 @@ namespace Encounter.Entities
         public int GameId { get; set; }
         public DateTime DateCreated { get; set; }
         public Character Character { get; set; }
-        public ICollection<Event> Events { get; set; }
+        public List<Event> Events { get; set; }
         public ApplicationUser User { get; set; }
     }
 }
