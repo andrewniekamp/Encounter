@@ -8,6 +8,7 @@
 
 <div class="bg-image">
     <div class="landing-menu">
+        <h1 class="encounter-banner">Encounter</h1>
         @if (User.Identity.IsAuthenticated)
         {
             <div class="welcome">
@@ -33,7 +34,9 @@
         else
         {
             <button class="btn landing-btn reg-btn" onclick="location.href='@Url.Action("Register")';return false;">Register</button>
-            <button class="btn landing-btn" onclick="location.href='@Url.Action("Login")';return false;">Log In</button>
+            <button class="btn landing-btn login-btn" onclick="location.href='@Url.Action("Login")';return false;">Log In</button>
+            //TODO: link to a demo game of hardcoded sample data
+            <button class="btn landing-btn" onclick="location.href='@Url.Action("Login")';return false;">Demo</button>
         }
     </div>
 </div>

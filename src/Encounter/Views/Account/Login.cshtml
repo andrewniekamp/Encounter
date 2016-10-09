@@ -1,20 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Log In";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
 @using Encounter.ViewModels
 
 @model LoginViewModel
 
-<h2>Log in with your account</h2>
-<hr />
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m => m.Email)
+<div class="bg-image">
+    <div class="landing-menu">
+        <h1 class="encounter-banner">Encounter</h1>
+        <h2>Log In</h2>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required", placeholder = "Username" })
 
-    @Html.LabelFor(m => m.Password)
-    @Html.PasswordFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required", placeholder = "Password" })
 
-    <input type="submit" value="Log in" class="btn btn-default" />
-}
+            <input type="submit" value="Log in" class="btn btn-success" />
+        }
+    </div>
+</div>

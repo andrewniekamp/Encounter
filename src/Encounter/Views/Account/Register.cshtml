@@ -1,32 +1,29 @@
 ﻿@{
     ViewData["Title"] = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
 
 @using Encounter.ViewModels
 
 @model RegisterViewModel
 
-<div class="container">
-    <h2>Register a new user</h2>
-    <hr />
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
-    {
-        @Html.LabelFor(m => m.PlayerName, "Username")
-        @Html.TextBoxFor(m => m.PlayerName, new { @class = "form-control", required = "required" })
+<div class="bg-image">
+    <div class="landing-menu">
+        <h1 class="encounter-banner">Encounter</h1>
+        <h2>Register</h2>
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+        {
+            @Html.TextBoxFor(m => m.PlayerName, new { @class = "form-control", required = "required", placeholder="Username" })
+            
+            @Html.TextBoxFor(m => m.AvatarUrl, new { @class = "form-control", required = "required", placeholder = "Avatar URL" })
+            
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required", placeholder = "Email Address" })
+            
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required", placeholder = "Password" })
+            
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required", placeholder = "Confirm Password" })
 
-        @Html.LabelFor(m => m.AvatarUrl, "Avatar URL")
-        @Html.TextBoxFor(m => m.AvatarUrl, new { @class = "form-control", required = "required" })
-
-        @Html.LabelFor(m => m.Email, "Email Address")
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required" })
-
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required" })
-
-        @Html.LabelFor(m => m.ConfirmPassword)
-        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required" })
-
-        <input type="submit" class="btn btn-success" value="Register" />
-    }
+            <input type="submit" class="btn btn-success" value="Register" />
+        }
+    </div>
 </div>
