@@ -1,24 +1,38 @@
 ﻿@{
     ViewData["Title"] = "Category Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
 @model Encounter.Entities.ApplicationUser
 
-<h1>Hello, @Model.PlayerName</h1>
-<p>Account Created: @Model.DateCreated</p>
-<img class="player-avatar" src="@Model.AvatarUrl" />
-<h2>Recent Games:</h2>
-    @foreach(var game in Model.Games.Reverse())
-    {
-        <h3>Character was: @game.Character.Name</h3>
-        <h4>Date: @game.DateCreated</h4>
-        <h3>Events:</h3>
-        <ul>
-            @foreach(var gameEvent in game.Events)
+<div class="bg-image">
+    <div class="landing-menu">
+        <h1 class="encounter-banner">Encounter</h1>
+        @Html.ActionLink("Home", "Index", "Account")
+        <h3>Player Profile</h3>
+        <h1>Hello, @Model.PlayerName</h1>
+        <p>Account Created: @Model.DateCreated</p>
+        <img class="player-avatar" src="@Model.AvatarUrl" />
+        @if (Model.Games.Count > 0)
+        {
+            <h2>Recent Games:</h2>
+            @foreach (var game in Model.Games.Reverse())
             {
-                <li>Location: @gameEvent.Name with Foe: @gameEvent.Foe.Name</li>
+                <h3>Character was: @game.Character.Name</h3>
+                <h4>Date: @game.DateCreated</h4>
+                <h3>Events:</h3>
+                <ul class="recent-games">
+                    @foreach (var gameEvent in game.Events)
+                    {
+                        <li>Location: @gameEvent.Name with Foe: @gameEvent.Foe.Name</li>
+                    }
+                </ul>
+
             }
-        </ul>
-    
-    }
-@Html.ActionLink("Home", "Landing")
+        }
+        else
+        {
+            <h3>No games on record yet!</h3>
+            <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Index", "Character")';return false;">Play!</button>
+        }
+    </div>
+</div>

@@ -67,7 +67,7 @@ body {
 }
 
 .landing-menu a {
-    color: burlywood;
+    color: maroon;
 }
 
 .landing-menu a:hover {
@@ -89,6 +89,10 @@ body {
 
 .padded-btn {
     margin-bottom: 10px;
+}
+
+.recent-games {
+    text-align: left;
 }
 
  /*Account/Landing End******/
