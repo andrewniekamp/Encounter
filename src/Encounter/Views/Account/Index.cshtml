@@ -1,24 +1,39 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
 
 @using System.Security.Claims
+@model Encounter.Entities.ApplicationUser
 
-<h2>Authentication with Identity</h2>
-<hr />
-@if (User.Identity.IsAuthenticated)
-{
-    <p>Hello @User.Identity.Name!</p>
-    @using (Html.BeginForm("LogOff", "Account"))
-    {
-        <input type="submit" class="btn btn-default" value="Log out" />
-    }
-}
-else
-{
-    <p>@Html.ActionLink("Register", "Register")</p>
-    <p>@Html.ActionLink("Log in", "Login")</p>
-}
+<div class="bg-image">
+    <div class="landing-menu">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="welcome">
+                <br />
+                <h1>Welcome, @Model.PlayerName</h1>
 
-<div class="monster"></div>
+                @Html.ActionLink("Player Profile", "Profile", "Player")
+                @Html.ActionLink("Play!", "Index", "Character")
+                <h1>Placeholder sections:</h1>
+                <h2>About</h2>
+                <h2>Credits</h2>
+                <h2>Share</h2>
+                @using (Html.BeginForm("GenerateData", "Game"))
+                {
+                    <input type="submit" class="btn btn-default" value="Generate Data!" />
+                }
+                @using (Html.BeginForm("LogOff", "Account"))
+                {
+                    <input type="submit" class="btn btn-default" value="Log out" />
+                }
+            </div>
+        }
+        else
+        {
+            <button class="btn landing-btn reg-btn" onclick="location.href='@Url.Action("Register")';return false;">Register</button>
+            <button class="btn landing-btn" onclick="location.href='@Url.Action("Login")';return false;">Log In</button>
+        }
+    </div>
+</div>

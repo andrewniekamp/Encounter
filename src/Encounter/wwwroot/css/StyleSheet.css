@@ -15,11 +15,7 @@
     min-height: 10vh;
 }
 
-.bg-image {
-    background: url('/img/landing.jpg');
-    background-size: cover;
-    min-height: 90vh;
-}
+
 
 .welcome {
     background-color: rgba(255,255,255,0.4);
@@ -40,6 +36,58 @@
     width: 100px;
 }
 
+body {
+    font-family: 'Marcellus SC', serif;
+}
+
+ /**************************/
+/*Account/Landing Start****/
+.bg-image {
+    background: url('/img/landing.jpg') center center;
+    background-size: cover;
+    height: 100vh;
+}
+
+.landing-menu {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    min-width: 25%;
+    background-color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 5% 3%;
+    border-radius: 5px;
+}
+
+.landing-menu a {
+    color: burlywood;
+}
+
+.landing-menu a:hover {
+    color: darkblue;
+}
+
+.landing-btn {
+    width: 100%;
+    font-size: 3em;
+    border-radius: 0;
+    background-color: maroon;
+    color: mintcream;
+}
+
+.landing-btn:hover {
+    background-color: #7a685c;
+    color: white;
+}
+
+.reg-btn {
+    margin-bottom: 10px;
+}
+
+ /*Account/Landing End******/
+/**************************/
+
+ /**************************/
 /*Game Page Start**********/
 .event-container {
     position: relative;

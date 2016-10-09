@@ -26,9 +26,16 @@ namespace Encounter.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
+            if (currentUser != null)
+            {
+                return View(currentUser);
+            }
+            else return View();
         }
 
         public IActionResult Register()
@@ -49,7 +56,12 @@ namespace Encounter.Controllers
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("Login");
+                Microsoft.AspNetCore.Identity.SignInResult nextResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Landing", "Player");
+                }
+                return View();
             }
             else
             {

@@ -39,8 +39,12 @@ namespace Encounter.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-            
-            return View(currentUser);
+
+            if (currentUser.Id != null)
+            {
+                return View(currentUser);
+            }
+            else return View();
         }
 
         [HttpGet]
