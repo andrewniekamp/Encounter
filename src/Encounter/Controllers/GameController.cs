@@ -145,7 +145,13 @@ namespace Encounter.Controllers
             var actAbility = _abilityData.Get(id);
             return Json(actAbility);
         }
-        
+
+        public IActionResult FoeAct(int id)
+        {
+            var actAbility = _abilityData.Get(id);
+            return Json(actAbility);
+        }
+
         [HttpPost]
         public IActionResult Next(int gameId, int eventsCompleted)
         {
