@@ -49,29 +49,35 @@ namespace Encounter.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
 
-            _abilityData.Add(new Ability { Name = "Attack", FoeHarm = 10 });
-            _abilityData.Add(new Ability { Name = "Defend", FoeHarm = 0 });
-            _abilityData.Add(new Ability { Name = "Kick", FoeHarm = 4 });
-            _abilityData.Add(new Ability { Name = "Pray", FoeHarm = 0 });
-            _abilityData.Add(new Ability { Name = "Shout", FoeHarm = 1 });
-            _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 2 });
-            _abilityData.Add(new Ability { Name = "Total Mess", FoeHarm = 7 });
-            _abilityData.Add(new Ability { Name = "Power Up", CharHeal = 10, FoeHeal = 10 });
-            
-            //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
-            //_eventData.Add(new Event { Name = "Mountains", ImageUrl = "/img/mountains.jpg" });
-            
-            _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/gnome.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
-            _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/monk.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
-            _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
-            _characterData.Add(new Character { Name = "Patricia", SpriteUrl = "/img/pilot.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
+            List<Character> chars = _characterData.GetAll().ToList();
 
-            //_foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = _eventData.Get(1), Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-            //_foeData.Add(new Foe { Health = 11, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = _eventData.Get(2), Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(2) } });
+            if (chars.Count == 0)
+            {
+                _abilityData.Add(new Ability { Name = "Attack", FoeHarm = 10 });
+                _abilityData.Add(new Ability { Name = "Defend", FoeHarm = 0 });
+                _abilityData.Add(new Ability { Name = "Kick", FoeHarm = 4 });
+                _abilityData.Add(new Ability { Name = "Pray", FoeHarm = 0 });
+                _abilityData.Add(new Ability { Name = "Shout", FoeHarm = 1 });
+                _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 2 });
+                _abilityData.Add(new Ability { Name = "Total Mess", FoeHarm = 7 });
+                _abilityData.Add(new Ability { Name = "Power Up", CharHeal = 10, FoeHeal = 10 });
+            
+                //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
+                //_eventData.Add(new Event { Name = "Mountains", ImageUrl = "/img/mountains.jpg" });
+            
+                _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/gnome.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
+                _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/monk.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
+                _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/testchar.svg", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
+                _characterData.Add(new Character { Name = "Patricia", SpriteUrl = "/img/pilot.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
 
-            _foeData.Add(new Foe { Health = 16, Name = "Goblin", SpriteUrl = "/img/goblin.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-            _foeData.Add(new Foe { Health = 18, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-            _foeData.Add(new Foe { Health = 20, Name = "Lizard Monster", SpriteUrl = "/img/lizard.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+                //_foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = _eventData.Get(1), Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+                //_foeData.Add(new Foe { Health = 11, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = _eventData.Get(2), Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(2) } });
+
+                _foeData.Add(new Foe { Health = 16, Name = "Goblin", SpriteUrl = "/img/goblin.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+                _foeData.Add(new Foe { Health = 18, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+                _foeData.Add(new Foe { Health = 20, Name = "Lizard Monster", SpriteUrl = "/img/lizard.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+
+            }
 
             return RedirectToAction("Index", "Account", currentUser);
         }
