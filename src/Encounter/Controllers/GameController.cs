@@ -85,16 +85,34 @@ namespace Encounter.Controllers
 
             //TODO May need to construct events here to avoid simply reassigning events already in db
             //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
-            Event initialEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg", Foe = _foeData.Get(1)};
-            Event secondEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg", Foe = _foeData.Get(2) };
-            Event thirdEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
+            
+            Event initialEvent = new Event { Name = "Desert", ImageUrl = "/img/desert1.jpg", Foe = _foeData.Get(1)};
+            Event secondEvent = new Event { Name = "Desert", ImageUrl = "/img/desert2.jpg", Foe = _foeData.Get(2) };
+            Event thirdEvent = new Event { Name = "Desert", ImageUrl = "/img/desert3.jpg", Foe = _foeData.Get(3) };
+            Event fourthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert4.jpg", Foe = _foeData.Get(1) };
+            Event fifthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest1.jpg", Foe = _foeData.Get(2) };
+            //Event sixthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
+            //Event seventhEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg", Foe = _foeData.Get(1) };
+            //Event eighthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg", Foe = _foeData.Get(2) };
+            //Event ninthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
+            //Event tenthEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg", Foe = _foeData.Get(1) };
+            //Event twelfthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg", Foe = _foeData.Get(2) };
+            //Event thirteenthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
+
             _eventData.Add(initialEvent);
             _eventData.Add(secondEvent);
             _eventData.Add(thirdEvent);
-            ICollection<Event> events = new Collection<Event>();
+            _eventData.Add(fourthEvent);
+            _eventData.Add(fifthEvent);
+            //_eventData.Add(sixthEvent);
+
+            List<Event> events = new List<Event>();
             events.Add(initialEvent);
             events.Add(secondEvent);
             events.Add(thirdEvent);
+            events.Add(fourthEvent);
+            events.Add(fifthEvent);
+            //events.Add(sixthEvent);
 
             Game newGame = new Game();
             newGame.DateCreated = DateTime.Now;
@@ -132,7 +150,10 @@ namespace Encounter.Controllers
             {
                 return View("Win");
             }
-            model.CurrentEvent = model.Game.Events.ElementAt(eventsCompleted);
+            List<Event> sortedEvents = (from e in model.Game.Events
+                                            orderby e.EventId ascending
+                                            select e).ToList();
+            model.CurrentEvent = sortedEvents.ElementAt(eventsCompleted);
             return View("EventNext", model);
         }
     }
