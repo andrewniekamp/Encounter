@@ -87,7 +87,7 @@ body {
     color: white;
 }
 
-.reg-btn, .login-btn {
+.padded-btn {
     margin-bottom: 10px;
 }
 

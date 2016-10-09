@@ -14,7 +14,8 @@
         @using (Html.BeginForm("Register", "Account", FormMethod.Post))
         {
             @Html.TextBoxFor(m => m.PlayerName, new { @class = "form-control", required = "required", placeholder="Username" })
-            
+
+            //TODO look into Gravatar API usage
             @Html.TextBoxFor(m => m.AvatarUrl, new { @class = "form-control", required = "required", placeholder = "Avatar URL" })
             
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required", placeholder = "Email Address" })

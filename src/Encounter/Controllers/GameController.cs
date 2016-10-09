@@ -73,7 +73,7 @@ namespace Encounter.Controllers
             _foeData.Add(new Foe { Health = 18, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
             _foeData.Add(new Foe { Health = 20, Name = "Lizard Monster", SpriteUrl = "/img/lizard.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
 
-            return RedirectToAction("Landing", "Player", currentUser);
+            return RedirectToAction("Index", "Account", currentUser);
         }
 
         [Route("play")]
