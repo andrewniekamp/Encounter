@@ -112,7 +112,7 @@
                 window.setTimeout(function(){
                     $('#char-sprite-effect-box').fadeOut();
                 },100);
-                
+
             }
             if (result.charHarm > 0) {
                 $('#char-sprite-effect-box').html('<img src="/img/enchant-red-3.png" />')
@@ -127,7 +127,7 @@
                 window.setTimeout(function(){
                     $('#foe-sprite-effect-box').fadeOut();
                 },100);
-                
+
             }
             if (result.foeHarm > 0){
                 $('#foe-sprite-effect-box').html('<img src="/img/enchant-red-3.png" />')
@@ -135,7 +135,7 @@
                 window.setTimeout(function(){
                     $('#foe-sprite-effect-box').fadeOut();
                 },100);
-                
+
             }
 
             playerHealth -= result.charHarm;
@@ -145,7 +145,7 @@
             foeHealth -= result.foeHarm;
             foeHealth += result.foeHeal;
             foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
-        
+
         }
 
         $('.act-btn').click(function () {
@@ -203,9 +203,18 @@
 
         setInterval(function(){
             if(gameActive) {
-                var val = Math.floor(Math.random() * (9 - 7)) + 7;
+                var coinFlip = Math.floor(Math.random() * 2) + 1;
+                var val = 0;
                 console.log(val);
                 console.log("Attacking!");
+
+                if (coinFlip = 1) {
+                    val = @Model.CurrentEvent.Foe.Abilities.First().AbilityId;
+                    console.log(val);
+                } else {
+                    val = @Model.CurrentEvent.Foe.Abilities.Last().AbilityId;
+                    console.log(val);
+                }
 
                 $.ajax({
                     type: 'GET',
@@ -215,18 +224,18 @@
                     url: '@Url.Action("Act", "Game")',
                     success: function (result) {
 
-                        setEffects(result);
+                                    setEffects(result);
 
-                        playerHealth -= result.foeHarm;
-                        playerHealth += result.foeHeal;
-                        playerPercent = playerHealth / @Model.Game.Character.Health * 100;
+                                    playerHealth -= result.foeHarm;
+                                    playerHealth += result.foeHeal;
+                                    playerPercent = playerHealth / @Model.Game.Character.Health * 100;
 
-                        foeHealth -= result.charHarm;
-                        foeHealth += result.charHarm;
-                        foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
+                                    foeHealth -= result.charHarm;
+                                    foeHealth += result.charHarm;
+                                    foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
-                        var resultString =
-                        `<div class="col-xs-6">
+                                    var resultString =
+                                    `<div class="col-xs-6">
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=playerHealth
                                         aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:`+ playerPercent +`%">

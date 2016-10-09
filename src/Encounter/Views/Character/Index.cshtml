@@ -5,50 +5,32 @@
 @using Encounter.Entities
 @model Encounter.ViewModels.CharacterPageViewModel
 
-<h1>Start New Game, @Model.User.PlayerName</h1>
+<h1>Start a new game, @Model.User.PlayerName!</h1>
 
 
 @foreach (var character in Model.Characters)
 {
-    <div class="col-xs-3">
+    <div class="col-xs-6 col-sm-3">
         <h3>@character.Name</h3>
-        <img class="char-select" src="@character.SpriteUrl" />
-        <button class="char-select" value=@character.CharacterId>Select @character.Name</button>
+        <div class="char-select-sprite-box">
+            <img class="char-select" src="@character.SpriteUrl" />
+        </div>
         @using (Html.BeginForm("Ready", "Ability", new { charId = character.CharacterId }))
         {
             <div>
-                <input type="submit" value="Select Character" />
+                <input type="submit" value="Select @character.Name" />
             </div>
         }
-    </div>
-}
-
-@foreach (var ability in Model.Abilities)
-{
-    <div class="col-xs-3">
-        <h3>@ability.Name</h3>
-        <button class="abil-select" value=@ability.AbilityId>Select @ability.Name</button>
-        @*@using (Html.BeginForm("Ready", "Ability", new { charId = character.CharacterId }))
+        <div class="char-select-abil-box">
+            <h4>Abilities</h4>
+            @foreach (var ability in character.Abilities)
             {
-                <div>
-                    <input type="submit" value="Select Character" />
-                </div>
-            }*@
+            
+                <h3>@ability.Name</h3>
+            }
+        </div>
     </div>
 }
-
-
-<div class="col-sm-4">
-    <h2>Submitting data with a POST request</h2>
-    <form action="NewDestination" class="new-destination">
-        <label for="newCity">City:</label>
-        <input type="text" name="newCity" />
-        <label for="newCountry">Country:</label>
-        <input type="text" name="newCountry" />
-        <button type="submit">Submit</button>
-    </form>
-    <div id="result6"></div>
-</div>
 
 <script>
     $(document).ready(function () {

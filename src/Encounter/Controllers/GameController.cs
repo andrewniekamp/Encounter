@@ -53,29 +53,30 @@ namespace Encounter.Controllers
 
             if (chars.Count == 0)
             {
-                _abilityData.Add(new Ability { Name = "Attack", FoeHarm = 10 });
-                _abilityData.Add(new Ability { Name = "Defend", FoeHarm = 0 });
-                _abilityData.Add(new Ability { Name = "Kick", FoeHarm = 4 });
-                _abilityData.Add(new Ability { Name = "Pray", FoeHarm = 0 });
-                _abilityData.Add(new Ability { Name = "Shout", FoeHarm = 1 });
-                _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 2 });
-                _abilityData.Add(new Ability { Name = "Total Mess", FoeHarm = 7 });
-                _abilityData.Add(new Ability { Name = "Power Up", CharHeal = 10, FoeHeal = 10 });
-            
-                //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
-                //_eventData.Add(new Event { Name = "Mountains", ImageUrl = "/img/mountains.jpg" });
-            
-                _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/gnome.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
-                _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/monk.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
-                _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/swordsman.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
-                _characterData.Add(new Character { Name = "Patricia", SpriteUrl = "/img/pilot.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
+                _abilityData.Add(new Ability { Name = "Hammer Blow", FoeHarm = 3 });
+                _abilityData.Add(new Ability { Name = "Piercing Arrow", FoeHarm = 3 });
+                _abilityData.Add(new Ability { Name = "Stab", FoeHarm = 3 });
+                _abilityData.Add(new Ability { Name = "Inspiring Speech", CharHeal = 3, FoeHeal = 1 });
+                _abilityData.Add(new Ability { Name = "Heal", CharHeal = 2 });
+                _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 1 });
+                _abilityData.Add(new Ability { Name = "Snide Remark", FoeHarm = 1 });
+                _abilityData.Add(new Ability { Name = "Belittling Glare", FoeHarm = 2 });
 
-                //_foeData.Add(new Foe { Health = 15, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Event = _eventData.Get(1), Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-                //_foeData.Add(new Foe { Health = 11, Name = "Goblin", SpriteUrl = "/img/goblin.png", Event = _eventData.Get(2), Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(2) } });
+                _abilityData.Add(new Ability { Name = "Heal 2", CharHeal = 4 });
+                _abilityData.Add(new Ability { Name = "Shove 2", FoeHarm = 3 });
+                _abilityData.Add(new Ability { Name = "Rude Remark", FoeHarm = 1 });
+                _abilityData.Add(new Ability { Name = "Salty Insult", FoeHarm = 2 });
 
-                _foeData.Add(new Foe { Health = 16, Name = "Goblin", SpriteUrl = "/img/goblin.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-                _foeData.Add(new Foe { Health = 18, Name = "Gnoll", SpriteUrl = "/img/gnoll.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
-                _foeData.Add(new Foe { Health = 20, Name = "Lizard Monster", SpriteUrl = "/img/lizard.png", Abilities = new List<Ability> { _abilityData.Get(7), _abilityData.Get(8) } });
+                _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/char/cleric.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
+                _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/char/ranger.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
+                _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/char/rogue.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
+                _characterData.Add(new Character { Name = "Pat", SpriteUrl = "/img/char/captain.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
+
+                _foeData.Add(new Foe { Health = 12, Name = "Ogre", SpriteUrl = "/img/foe/ogre.png", Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(4) } });
+                _foeData.Add(new Foe { Health = 16, Name = "Desert Dweller", SpriteUrl = "/img/foe/desert-dweller.png", Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
+                _foeData.Add(new Foe { Health = 18, Name = "Strange Creatures", SpriteUrl = "/img/foe/flying-monster.png", Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
+                _foeData.Add(new Foe { Health = 22, Name = "Vampire", SpriteUrl = "/img/foe/vampire.png", Abilities = new List<Ability> { _abilityData.Get(8), _abilityData.Get(5) } });
+                _foeData.Add(new Foe { Health = 30, Name = "Dragon", SpriteUrl = "/img/foe/dragon.png", Abilities = new List<Ability> { _abilityData.Get(9), _abilityData.Get(10) } });
 
             }
 
@@ -95,8 +96,8 @@ namespace Encounter.Controllers
             Event initialEvent = new Event { Name = "Desert", ImageUrl = "/img/desert1.jpg", Foe = _foeData.Get(1)};
             Event secondEvent = new Event { Name = "Desert", ImageUrl = "/img/desert2.jpg", Foe = _foeData.Get(2) };
             Event thirdEvent = new Event { Name = "Desert", ImageUrl = "/img/desert3.jpg", Foe = _foeData.Get(3) };
-            Event fourthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert4.jpg", Foe = _foeData.Get(1) };
-            Event fifthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest1.jpg", Foe = _foeData.Get(2) };
+            Event fourthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert4.jpg", Foe = _foeData.Get(4) };
+            Event fifthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest1.jpg", Foe = _foeData.Get(5) };
             //Event sixthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
             //Event seventhEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg", Foe = _foeData.Get(1) };
             //Event eighthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg", Foe = _foeData.Get(2) };
@@ -132,7 +133,7 @@ namespace Encounter.Controllers
             //return View("Event", newGame);
 
             var model = new GamePageViewModel();
-            model.Game = newGame;
+            model.Game = _gameData.Get(newGame.GameId);
             model.EventsCompleted = 0;
             //model.RemainingEvents = model.Game.Events.Skip(eventsCompleted).ToList();
             model.CurrentEvent = model.Game.Events.First();

@@ -8,24 +8,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC|Montserrat+Alternates" rel="stylesheet">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <div class="container-fluid nav">
-        <h1>You are in: Encounter</h1>
-        <div class="row">
-            <div class="col-xs-4">
-                @Html.ActionLink("Home", "Landing", "Player")
-            </div>
-            <div class="col-xs-4">
-                <p>Link here?</p>
-            </div>
-            <div class="col-xs-4">
-                @Html.ActionLink("Account", "Index", "Account")
-            </div>
-        </div>
+        @Html.ActionLink("Home", "Index", "Account")
     </div>
     @RenderBody()
 </body>

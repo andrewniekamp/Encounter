@@ -30,12 +30,8 @@ namespace Encounter.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-
-            if (currentUser != null)
-            {
-                return View(currentUser);
-            }
-            else return View();
+            
+            return View(currentUser);
         }
 
         public IActionResult Register()

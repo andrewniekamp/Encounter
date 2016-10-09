@@ -12,7 +12,6 @@
 .nav {
     background-color: black;
     color: white;
-    min-height: 10vh;
 }
 
 
@@ -96,6 +95,17 @@ body {
 }
 
  /*Account/Landing End******/
+/**************************/
+
+ /**************************/
+/*Character Select Start***/
+ .char-select-sprite-box {
+     min-height: 200px;
+ }
+ .char-select-abil-box {
+     background-color: burlywood;
+ }
+/*Character Select End******/
 /**************************/
 
  /**************************/
