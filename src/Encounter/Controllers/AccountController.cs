@@ -59,7 +59,7 @@ namespace Encounter.Controllers
                 Microsoft.AspNetCore.Identity.SignInResult nextResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Landing", "Player");
+                    return RedirectToAction("Index", "Account");
                 }
                 return View();
             }
@@ -82,7 +82,7 @@ namespace Encounter.Controllers
                 Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Landing", "Player");
+                    return RedirectToAction("Index", "Account");
                 }
             }
             return View();
