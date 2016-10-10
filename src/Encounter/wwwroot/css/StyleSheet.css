@@ -141,10 +141,11 @@ body {
 #you-lose {
     z-index: 1;
     position: absolute;
-    top: 50%;
+    top: 30%;
     width: 100%;
-    height: 30%;
+    height: 40%;
     background-color: lightsteelblue;
+    text-align: center;
 }
 .play-area {
     position: relative;
