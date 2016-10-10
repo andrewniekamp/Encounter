@@ -86,62 +86,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        testing();
         $('#next-event').hide();
         $('#char-sprite-effect-box').hide();
 
         var playerHealth = @Model.Game.Character.Health;
         var foeHealth = @Model.CurrentEvent.Foe.Health;
         var gameActive = true;
-
-        function winCheck() {
-            if (foeHealth <= 0)
-            {
-                console.log("@Model.CurrentEvent.Foe.Name has died!");
-                gameActive = false;
-                setTimeout(function(){
-                    $('#next-event').fadeIn();
-                }, 500);
-            }
-        }
-
-        function chooseAction(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
-
-        function setEffects(result) {
-            if (result.charHeal > 0){
-                $('#char-sprite-effect-box').html('<img src="/img/heal-jade-3.png" />')
-                $('#char-sprite-effect-box').fadeIn();
-                window.setTimeout(function(){
-                    $('#char-sprite-effect-box').fadeOut();
-                },100);
-
-            }
-            if (result.charHarm > 0) {
-                $('#char-sprite-effect-box').html('<img src="/img/enchant-red-3.png" />')
-                $('#char-sprite-effect-box').fadeIn();
-                window.setTimeout(function(){
-                    $('#char-sprite-effect-box').fadeOut();
-                },100);
-            }
-            if (result.foeHeal > 0){
-                $('#foe-sprite-effect-box').html('<img src="/img/heal-jade-3.png" />')
-                $('#foe-sprite-effect-box').fadeIn();
-                window.setTimeout(function(){
-                    $('#foe-sprite-effect-box').fadeOut();
-                },100);
-
-            }
-            if (result.foeHarm > 0){
-                $('#foe-sprite-effect-box').html('<img src="/img/enchant-red-3.png" />')
-                $('#foe-sprite-effect-box').fadeIn();
-                window.setTimeout(function(){
-                    $('#foe-sprite-effect-box').fadeOut();
-                },100);
-
-            }
-        }
 
         $('.act-btn').click(function () {
             var val = parseInt($(this).val());
@@ -161,14 +111,13 @@
                 success: function (result) {
                     console.log(result.Name);
 
-                    setEffects(result);
-
+                    setEffects(true, result);
+                    //Running health based on action
                     playerHealth -= result.charHarm;
                     playerHealth += result.charHeal;
-                    playerPercent = playerHealth / @Model.Game.Character.Health * 100;
-
                     foeHealth -= result.foeHarm;
                     foeHealth += result.foeHeal;
+                    playerPercent = playerHealth / @Model.Game.Character.Health * 100;
                     foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
                     var resultString =
@@ -193,6 +142,7 @@
 
                     $('#health-bar-row').html(resultString);
                     winCheck();
+                    console.log("@Model.CurrentEvent.Foe.Name has died!");
                 }
             });
         });
@@ -218,14 +168,14 @@
                     url: '@Url.Action("FoeAct", "Game")',
                     success: function (result) {
                         console.log(result.name);
-                        setEffects(result);
 
+                        setEffects(false, result);
+                        //Running health based on action
                         playerHealth -= result.foeHarm;
                         playerHealth += result.foeHeal;
-                        playerPercent = playerHealth / @Model.Game.Character.Health * 100;
-
                         foeHealth -= result.charHarm;
                         foeHealth += result.charHarm;
+                        playerPercent = playerHealth / @Model.Game.Character.Health * 100;
                         foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
                         var resultString =
