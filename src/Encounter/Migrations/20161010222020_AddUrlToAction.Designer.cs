@@ -8,9 +8,10 @@ using Encounter.Entities;
 namespace Encounter.Migrations
 {
     [DbContext(typeof(EncounterDbContext))]
-    partial class EncounterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161010222020_AddUrlToAction")]
+    partial class AddUrlToAction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

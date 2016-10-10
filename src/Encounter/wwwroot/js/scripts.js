@@ -27,62 +27,63 @@ function setEffects(isPlayer, result) {
     //Player action
     if (isPlayer) {
         if (result.charHeal > 0) {
-            $('#char-sprite-effect-box').html('<img class="effect" src="/img/heal-jade-3.png" />')
-            $('#char-sprite-effect-box').fadeIn();
+            console.log(result.imageUrl);
+            $('#char-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
+            $('#char-sprite-effect-box').show();
             window.setTimeout(function () {
                 $('#char-sprite-effect-box').fadeOut();
-            }, 100);
+            }, 200);
         }
         if (result.charHarm > 0) {
-            $('#char-sprite-effect-box').html('<img class="effect" src="/img/enchant-red-3.png" />')
-            $('#char-sprite-effect-box').fadeIn();
+            $('#char-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
+            $('#char-sprite-effect-box').show();
             window.setTimeout(function () {
                 $('#char-sprite-effect-box').fadeOut();
-            }, 100);
+            }, 200);
         }
         if (result.foeHeal > 0) {
-            $('#foe-sprite-effect-box').html('<img class="effect" src="/img/heal-jade-3.png" />')
-            $('#foe-sprite-effect-box').fadeIn();
+            $('#foe-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
+            $('#foe-sprite-effect-box').show();
             window.setTimeout(function () {
                 $('#foe-sprite-effect-box').fadeOut();
-            }, 100);
+            }, 200);
         }
         if (result.foeHarm > 0) {
-            $('#foe-sprite-effect-box').html('<img class="effect" src="/img/enchant-red-3.png" />')
-            $('#foe-sprite-effect-box').fadeIn();
+            $('#foe-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
+            $('#foe-sprite-effect-box').show();
             window.setTimeout(function () {
                 $('#foe-sprite-effect-box').fadeOut();
-            }, 100);
+            }, 200);
         }
     } else {
         //Foe action
         if (result.charHeal > 0) {
-            $('#foe-sprite-effect-box').html('<img class="effect" src="/img/heal-jade-3.png" />')
-            $('#foe-sprite-effect-box').fadeIn();
+            $('#foe-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
+            $('#foe-sprite-effect-box').show();
             window.setTimeout(function () {
                 $('#foe-sprite-effect-box').fadeOut();
-            }, 100);
+            }, 200);
         }
         if (result.charHarm > 0) {
-            $('#foe-sprite-effect-box').html('<img class="effect" src="/img/enchant-red-3.png" />')
-            $('#foe-sprite-effect-box').fadeIn();
+            $('#foe-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
+            $('#foe-sprite-effect-box').show();
             window.setTimeout(function () {
                 $('#foe-sprite-effect-box').fadeOut();
-            }, 100);
+            }, 200);
         }
         if (result.foeHeal > 0) {
-            $('#char-sprite-effect-box').html('<img class="effect" src="/img/heal-jade-3.png" />')
-            $('#char-sprite-effect-box').fadeIn();
+            $('#char-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
+            $('#char-sprite-effect-box').show();
             window.setTimeout(function () {
                 $('#char-sprite-effect-box').fadeOut();
-            }, 100);
+            }, 200);
         }
         if (result.foeHarm > 0) {
-            $('#char-sprite-effect-box').html('<img class="effect" src="/img/enchant-red-3.png" />')
-            $('#char-sprite-effect-box').fadeIn();
+            $('#char-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
+            $('#char-sprite-effect-box').show();
             window.setTimeout(function () {
                 $('#char-sprite-effect-box').fadeOut();
-            }, 100);
+            }, 200);
         }
     }
 }

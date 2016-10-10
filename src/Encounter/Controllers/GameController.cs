@@ -53,19 +53,19 @@ namespace Encounter.Controllers
 
             if (chars.Count == 0)
             {
-                _abilityData.Add(new Ability { Name = "Hammer Blow", FoeHarm = 3 });
-                _abilityData.Add(new Ability { Name = "Piercing Arrow", FoeHarm = 3 });
-                _abilityData.Add(new Ability { Name = "Stab", FoeHarm = 3 });
-                _abilityData.Add(new Ability { Name = "Inspiring Speech", CharHeal = 3, FoeHeal = 1 });
-                _abilityData.Add(new Ability { Name = "Heal", CharHeal = 2 });
-                _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 1 });
-                _abilityData.Add(new Ability { Name = "Snide Remark", FoeHarm = 1 });
-                _abilityData.Add(new Ability { Name = "Belittling Glare", FoeHarm = 2 });
+                _abilityData.Add(new Ability { Name = "Hammer Blow", FoeHarm = 3, ImageUrl = "/img/actions/hammer-blow.png" });
+                _abilityData.Add(new Ability { Name = "Piercing Arrow", FoeHarm = 3, ImageUrl = "/img/actions/piercing-arrow.png" });
+                _abilityData.Add(new Ability { Name = "Stab", FoeHarm = 3, ImageUrl = "/img/actions/stab.png" });
+                _abilityData.Add(new Ability { Name = "Inspiring Speech", CharHeal = 3, FoeHeal = 1, ImageUrl = "/img/actions/inspiring-speech.png" });
+                _abilityData.Add(new Ability { Name = "Heal", CharHeal = 2, ImageUrl = "/img/actions/heal.png" });
+                _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 1, ImageUrl = "/img/actions/shove.png" });
+                _abilityData.Add(new Ability { Name = "Snide Remark", FoeHarm = 1, ImageUrl = "/img/actions/snide-remark.png" });
+                _abilityData.Add(new Ability { Name = "Belittling Glare", FoeHarm = 2, ImageUrl = "/img/actions/belittling-glare.png" });
 
-                _abilityData.Add(new Ability { Name = "Heal 2", CharHeal = 4 });
-                _abilityData.Add(new Ability { Name = "Shove 2", FoeHarm = 3 });
-                _abilityData.Add(new Ability { Name = "Rude Remark", FoeHarm = 1 });
-                _abilityData.Add(new Ability { Name = "Salty Insult", FoeHarm = 2 });
+                _abilityData.Add(new Ability { Name = "Heal 2", CharHeal = 4, ImageUrl = "/img/actions/heal.png" });
+                _abilityData.Add(new Ability { Name = "Claw Attack", FoeHarm = 3, ImageUrl = "/img/actions/claw-attack.png" });
+                _abilityData.Add(new Ability { Name = "Rude Remark", FoeHarm = 1, ImageUrl = "/img/actions/snide-remark.png" });
+                _abilityData.Add(new Ability { Name = "Salty Insult", FoeHarm = 2, ImageUrl = "/img/actions/heal.png" });
 
                 _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/char/cleric.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
                 _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/char/ranger.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
