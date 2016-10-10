@@ -6,25 +6,29 @@
 @model Encounter.ViewModels.GamePageViewModel
 
 <div class="event-container">
-        @*event-board-img outside of normal flow (position: absolute)*@
-        <img class="event-board-img" src="@Model.CurrentEvent.ImageUrl" alt="@Model.CurrentEvent.Name" />
-        <div id="next-event">
-            @using (Html.BeginForm("Next", "Game", new
-            {
-                gameId = Model.Game.GameId,
-                eventsCompleted = Model.EventsCompleted + 1
-            }))
-            {
-                <div>
-                    <input type="submit" value="Next Event!" />
-                </div>
-            }
-        </div>
-    <div class="container-fluid">
+    @*event-board-img outside of normal flow (position: absolute)*@
+    <img class="event-board-img" src="@Model.CurrentEvent.ImageUrl" alt="@Model.CurrentEvent.Name" />
+    <div id="next-event">
+        @using (Html.BeginForm("Next", "Game", new
+        {
+            gameId = Model.Game.GameId,
+            eventsCompleted = Model.EventsCompleted + 1
+        }))
+        {
+            <div>
+                <input type="submit" value="Next Event!" />
+            </div>
+        }
+    </div>
+    <div id="you-lose">
+
+    </div>
+
+    <div class="container-fluid board-container">
         <div class="event-board row">
             <div class="row">
                 <div class="col-xs-6">
-                    <p>@Model.Game.User.PlayerName chose: @Model.Game.Character.Name, @Model.EventsCompleted</p>
+                    <p><button class="pause">Pause</button>@Model.Game.User.PlayerName chose: @Model.Game.Character.Name, Events Complete: @Model.EventsCompleted</p>
                 </div>
                 <div class="col-xs-6">
                     <p>In the @Model.CurrentEvent.Name, you encounter a @Model.CurrentEvent.Foe.Name</p>
@@ -51,31 +55,38 @@
                     <h3>@Model.CurrentEvent.Foe.Name Health: @Model.CurrentEvent.Foe.Health</h3>
                 </div>
             </div>
-            <div class="row sprite-row">
-                <div class="char-box col-xs-6">
-                    <div class="row">
-                        <div class="center-box">
-                            <div class="char-skill-box">
-                                @foreach (var ability in Model.Game.Character.Abilities)
-                                {
-                                    <button class="btn btn-default act-btn" value="@ability.AbilityId">@ability.Name</button>
-                                }
+            <div class="row play-area">
+                <div class="sprite-row">
+                    <div class="char-box col-xs-6">
+                        <div class="row">
+                            <div class="center-box">
+                                <div class="char-skill-box">
+                                    @foreach (var ability in Model.Game.Character.Abilities)
+                                    {
+                                        <button class="btn btn-default act-btn" value="@ability.AbilityId">@ability.Name</button>
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row center-box char-sprite-box">
-                        <div id="char-sprite-effect-box">
-                            @*TEMPORARY - DO WITHIN AJAX*@
+                        <div class="row center-box char-sprite-box">
+                            <div id="char-sprite-effect-box">
+                                @*TEMPORARY - DO WITHIN AJAX*@
+                            </div>
+                            <img class="game-char-img" src="@Model.Game.Character.SpriteUrl" alt="@Model.Game.Character.Name" />
                         </div>
-                        <img class="game-char-img" src="@Model.Game.Character.SpriteUrl" alt="@Model.Game.Character.Name" />
                     </div>
-                </div>
-                <div class="foe-box col-xs-6">
-                    <div class="row center-box foe-sprite-box">
-                        <div id="foe-sprite-effect-box">
-                            @*TEMPORARY - DO WITHIN AJAX*@
+                    <div class="foe-box col-xs-6">
+                        <div class="row">
+                            <div class="center-box foe-name">
+                                @Model.CurrentEvent.Foe.Name
+                            </div>
                         </div>
-                        <img class="game-foe-img" src="@Model.CurrentEvent.Foe.SpriteUrl" alt="@Model.CurrentEvent.Foe.Name" />
+                        <div class="row center-box foe-sprite-box">
+                            <div id="foe-sprite-effect-box">
+                                @*TEMPORARY - DO WITHIN AJAX*@
+                            </div>
+                            <img class="game-foe-img" src="@Model.CurrentEvent.Foe.SpriteUrl" alt="@Model.CurrentEvent.Foe.Name" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,6 +103,19 @@
         var playerHealth = @Model.Game.Character.Health;
         var foeHealth = @Model.CurrentEvent.Foe.Health;
         var gameActive = true;
+        var player = "char";
+        var foe = "foe";
+
+        $(".pause").click(function() {
+            if (gameActive){
+                gameActive = false;
+                console.log("Paused");
+            }
+            else {
+                gameActive = true;
+                console.log("Unpaused");
+            }
+        })
 
         $('.act-btn').click(function () {
             var val = parseInt($(this).val());
@@ -109,7 +133,8 @@
                 contentType: 'application/json',
                 url: '@Url.Action("Act", "Game")',
                 success: function (result) {
-                    console.log(result.Name);
+                    console.log(result.name);
+                    move(player);
 
                     setEffects(true, result);
                     //Running health based on action
@@ -141,8 +166,7 @@
                     </div>`;
 
                     $('#health-bar-row').html(resultString);
-                    winCheck();
-                    console.log("@Model.CurrentEvent.Foe.Name has died!");
+                    gameActive = winCheck(foeHealth, playerHealth);
                 }
             });
         });
@@ -168,6 +192,7 @@
                     url: '@Url.Action("FoeAct", "Game")',
                     success: function (result) {
                         console.log(result.name);
+                        move(foe);
 
                         setEffects(false, result);
                         //Running health based on action
@@ -199,7 +224,7 @@
                         </div>`;
 
                         $('#health-bar-row').html(resultString);
-                        winCheck();
+                        gameActive = winCheck(foeHealth, playerHealth);
                     }
                 });
 
