@@ -90,15 +90,15 @@ function setEffects(isPlayer, result) {
 function move(actor) {
     if (actor == "char") {
         var char = $(".game-char-img");
-        char.animate({ marginBottom: "+=10%" }, { duration: 100, queue: false });
+        char.animate({ marginTop: "-=10%" }, { duration: 100, queue: false });
         char.animate({ marginLeft: "+=10%" }, 200);
-        char.animate({ marginBottom: "-=10%" }, 100);
+        char.animate({ marginTop: "+=10%" }, 100);
         char.animate({ marginLeft: "-=10%" }, 200);
     } else if (actor == "foe") {
         var foe = $(".game-foe-img");
-        foe.animate({ marginBottom: "+=10%" }, { duration: 100, queue: false });
+        foe.animate({ marginTop: "-=10%" }, { duration: 100, queue: false });
         foe.animate({ marginRight: "+=10%" }, 200);
-        foe.animate({ marginBottom: "-=10%" }, 100);
+        foe.animate({ marginTop: "+=10%" }, 100);
         foe.animate({ marginRight: "-=10%" }, 200);
     }
 

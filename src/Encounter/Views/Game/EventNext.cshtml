@@ -5,89 +5,83 @@
 @using Encounter.Entities
 @model Encounter.ViewModels.GamePageViewModel
 
-<div class="event-container">
-    @*event-board-img outside of normal flow (position: absolute)*@
-    <img class="event-board-img" src="@Model.CurrentEvent.ImageUrl" alt="@Model.CurrentEvent.Name" />
-    <div id="next-event">
-        @using (Html.BeginForm("Next", "Game", new
-        {
-            gameId = Model.Game.GameId,
-            eventsCompleted = Model.EventsCompleted + 1
-        }))
-        {
-            <div>
-                <input type="submit" value="Next Event!" />
-            </div>
-        }
-    </div>
-    <div id="you-lose">
+@*event-board-img outside of normal flow (position: absolute)*@
+<img class="event-board-img" src="@Model.CurrentEvent.ImageUrl" alt="@Model.CurrentEvent.Name" />
+<div id="next-event">
+    @using (Html.BeginForm("Next", "Game", new
+    {
+        gameId = Model.Game.GameId,
+        eventsCompleted = Model.EventsCompleted + 1
+    }))
+    {
+        <div>
+            <input type="submit" value="Next Event!" />
+        </div>
+    }
+</div>
+<div id="you-lose">
+    <h1>YOU LOSE</h1>
+</div>
 
+<div class="event-container container-fluid">
+    <div class="row">
+        <div class="top-buttons-container">
+            <button class="pause btn btn-danger">Pause</button><button class="status btn btn-info">Status</button>
+        </div>
     </div>
-
-    <div class="container-fluid board-container">
-        <div class="event-board row">
-            <div class="row">
-                <div class="col-xs-6">
-                    <p><button class="pause">Pause</button>@Model.Game.User.PlayerName chose: @Model.Game.Character.Name, Events Complete: @Model.EventsCompleted</p>
-                </div>
-                <div class="col-xs-6">
-                    <p>In the @Model.CurrentEvent.Name, you encounter a @Model.CurrentEvent.Foe.Name</p>
+    <div id="health-bar-row" class="row">
+        <div class="col-xs-6">
+            @*HEALTH BARS TO UPDATE WITH AJAX*@
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Game.Character.Health
+                        aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:100%">
+                    <span class="sr-only">100% Complete</span>
                 </div>
             </div>
-            <div id="health-bar-row" class="row">
-                <div class="col-xs-6">
-                    @*HEALTH BARS TO UPDATE WITH AJAX*@
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Game.Character.Health
-                                aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:100%">
-                            <span class="sr-only">100% Complete</span>
-                        </div>
-                    </div>
-                    <h3>Player Health: @Model.Game.Character.Health</h3>
-                </div>
-                <div class="col-xs-6">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.CurrentEvent.Foe.Health
-                                aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health style="width:100%">
-                            <span class="sr-only">100% Complete</span>
-                        </div>
-                    </div>
-                    <h3>@Model.CurrentEvent.Foe.Name Health: @Model.CurrentEvent.Foe.Health</h3>
+            <h3 class="health-info">Player Health: @Model.Game.Character.Health</h3>
+        </div>
+        <div class="col-xs-6">
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.CurrentEvent.Foe.Health
+                        aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health style="width:100%">
+                    <span class="sr-only">100% Complete</span>
                 </div>
             </div>
-            <div class="row play-area">
-                <div class="sprite-row">
-                    <div class="char-box col-xs-6">
-                        <div class="row">
-                            <div class="center-box">
-                                <div class="char-skill-box">
-                                    @foreach (var ability in Model.Game.Character.Abilities)
-                                    {
-                                        <button class="btn btn-default act-btn" value="@ability.AbilityId">@ability.Name</button>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row center-box char-sprite-box">
-                            <div id="char-sprite-effect-box">
-                                @*TEMPORARY - DO WITHIN AJAX*@
-                            </div>
-                            <img class="game-char-img" src="@Model.Game.Character.SpriteUrl" alt="@Model.Game.Character.Name" />
-                        </div>
+            <h3 class="health-info">@Model.CurrentEvent.Foe.Name Health: @Model.CurrentEvent.Foe.Health</h3>
+        </div>
+    </div>
+    <div class="row play-area center-box">
+        <div class="row action-row">
+            <div class="char-skill-box col-xs-6 col-md-4 col-lg-3">
+                @foreach (var ability in Model.Game.Character.Abilities)
+                {
+                    <button class="btn btn-default act-btn" value="@ability.AbilityId">@ability.Name</button>
+                }
+            </div>
+            <div class="col-xs-0 col-md-4 col-lg-6"></div>
+            <div class="center-box foe-name col-xs-6 col-md-4 col-lg-3">
+                @Model.CurrentEvent.Foe.Name
+            </div>
+        </div>
+        <div class="sprite-row row">
+            <div class="char-box col-xs-6 col-md-4 col-lg-3">
+                <div class="row center-box char-sprite-box">
+                    <div id="char-sprite-effect-box">
+                        @*TEMPORARY - DO WITHIN AJAX*@
                     </div>
-                    <div class="foe-box col-xs-6">
-                        <div class="row">
-                            <div class="center-box foe-name">
-                                @Model.CurrentEvent.Foe.Name
-                            </div>
-                        </div>
-                        <div class="row center-box foe-sprite-box">
-                            <div id="foe-sprite-effect-box">
-                                @*TEMPORARY - DO WITHIN AJAX*@
-                            </div>
-                            <img class="game-foe-img" src="@Model.CurrentEvent.Foe.SpriteUrl" alt="@Model.CurrentEvent.Foe.Name" />
-                        </div>
+                    <img class="game-char-img" src="@Model.Game.Character.SpriteUrl" alt="@Model.Game.Character.Name" />
+                </div>
+            </div>
+            <div class="col-xs-0 col-md-4 col-lg-6"></div>
+            <div class="foe-box col-xs-6 col-md-4 col-lg-3">
+                <div class="row">
+                        
+                </div>
+                <div class="row center-box foe-sprite-box">
+                    <div id="foe-sprite-effect-box">
+                        @*TEMPORARY - DO WITHIN AJAX*@
                     </div>
+                    <img class="game-foe-img" src="@Model.CurrentEvent.Foe.SpriteUrl" alt="@Model.CurrentEvent.Foe.Name" />
                 </div>
             </div>
         </div>
@@ -98,6 +92,7 @@
     $(document).ready(function () {
 
         $('#next-event').hide();
+        $('#you-lose').hide();
         $('#char-sprite-effect-box').hide();
 
         var playerHealth = @Model.Game.Character.Health;
@@ -153,7 +148,7 @@
                                 <span class="sr-only">100% Complete</span>
                             </div>
                         </div>
-                        <h3>Player Health: ` + playerHealth + `</h3>
+                        <h3 class="health-info">Player Health: ` + playerHealth + `</h3>
                     </div>
                     <div class="col-xs-6">
                         <div class="progress">
@@ -162,7 +157,7 @@
                                 <span class="sr-only">100% Complete</span>
                             </div>
                         </div>
-                        <h3>@Model.CurrentEvent.Foe.Name Health:` + foeHealth + `</h3>
+                        <h3 class="health-info">@Model.CurrentEvent.Foe.Name Health:` + foeHealth + `</h3>
                     </div>`;
 
                     $('#health-bar-row').html(resultString);
@@ -211,7 +206,7 @@
                                     <span class="sr-only">100% Complete</span>
                                 </div>
                             </div>
-                            <h3>Player Health:` + playerHealth + `</h3>
+                            <h3 class="health-info">Player Health:` + playerHealth + `</h3>
                         </div>
                         <div class="col-xs-6">
                             <div class="progress">
@@ -220,7 +215,7 @@
                                     <span class="sr-only">100% Complete</span>
                                 </div>
                             </div>
-                            <h3>@Model.CurrentEvent.Foe.Name Health:` + foeHealth + `</h3>
+                            <h3 class="health-info">@Model.CurrentEvent.Foe.Name Health:` + foeHealth + `</h3>
                         </div>`;
 
                         $('#health-bar-row').html(resultString);
