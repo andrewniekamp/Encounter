@@ -67,10 +67,10 @@ namespace Encounter.Controllers
                 _abilityData.Add(new Ability { Name = "Rude Remark", FoeHarm = 1, ImageUrl = "/img/actions/snide-remark.png" });
                 _abilityData.Add(new Ability { Name = "Salty Insult", FoeHarm = 2, ImageUrl = "/img/actions/heal.png" });
 
-                _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/char/cleric.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
-                _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/char/ranger.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
-                _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/char/rogue.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
-                _characterData.Add(new Character { Name = "Pat", SpriteUrl = "/img/char/captain.png", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
+                _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/char/cleric.png", Class="Cleric", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
+                _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/char/ranger.png", Class = "Ranger", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
+                _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/char/rogue.png", Class = "Rogue", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
+                _characterData.Add(new Character { Name = "Pat", SpriteUrl = "/img/char/captain.png", Class = "Captain", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
 
                 _foeData.Add(new Foe { Health = 12, Name = "Ogre", SpriteUrl = "/img/foe/ogre.png", Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(4) } });
                 _foeData.Add(new Foe { Health = 16, Name = "Desert Dweller", SpriteUrl = "/img/foe/desert-dweller.png", Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });

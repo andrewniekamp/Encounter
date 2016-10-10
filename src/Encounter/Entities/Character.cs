@@ -11,6 +11,7 @@ namespace Encounter.Entities
         [Key]
         public int CharacterId { get; set; }
         public string Name { get; set; }
+        public string Class { get; set; }
         public string SpriteUrl { get; set; }
         public int Health { get; set; }
         public ICollection<Ability> Abilities { get; set; }
