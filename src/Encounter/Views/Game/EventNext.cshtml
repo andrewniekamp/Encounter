@@ -43,21 +43,21 @@
         <div class="col-xs-6">
             @*HEALTH BARS TO UPDATE WITH AJAX*@
             <div class="progress">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Game.Character.Health
-                        aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:100%">
+                <div id="char-bar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Game.Character.Health
+                        aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health>
                     <span class="sr-only">100% Complete</span>
                 </div>
             </div>
-            <h3 class="health-info">Player Health: @Model.Game.Character.Health</h3>
+            <h3 class="health-info">Player Health: <span id="char-health-amt">@Model.Game.Character.Health</span></h3>
         </div>
         <div class="col-xs-6">
             <div class="progress">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.CurrentEvent.Foe.Health
-                        aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health style="width:100%">
+                <div id="foe-bar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.CurrentEvent.Foe.Health
+                        aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health>
                     <span class="sr-only">100% Complete</span>
                 </div>
             </div>
-            <h3 class="health-info">@Model.CurrentEvent.Foe.Name Health: @Model.CurrentEvent.Foe.Health</h3>
+            <h3 class="health-info">@Model.CurrentEvent.Foe.Name Health: <span id="foe-health-amt">@Model.CurrentEvent.Foe.Health</span></h3>
         </div>
     </div>
     <div class="row play-area center-box">
@@ -155,27 +155,10 @@
                         playerPercent = playerHealth / @Model.Game.Character.Health * 100;
                         foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
-                        var resultString =
-                        `<div class="col-xs-6">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=playerHealth
-                                     aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:`+ playerPercent +`%">
-                                    <span class="sr-only">100% Complete</span>
-                                </div>
-                            </div>
-                            <h3 class="health-info">Player Health: ` + playerHealth + `</h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=foeHealth
-                                     aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health style="width:`+ foePercent +`%">
-                                    <span class="sr-only">100% Complete</span>
-                                </div>
-                            </div>
-                            <h3 class="health-info">@Model.CurrentEvent.Foe.Name Health:` + foeHealth + `</h3>
-                        </div>`;
-
-                        $('#health-bar-row').html(resultString);
+                        $("#char-health-amt").text(playerHealth);
+                        $("#foe-health-amt").text(foeHealth);
+                        $("#char-bar").css("width", playerPercent + "%");
+                        $("#foe-bar").css("width", foePercent + "%");
                         gameActive = winCheck(foeHealth, playerHealth);
                     }
                 });
@@ -214,27 +197,10 @@
                         playerPercent = playerHealth / @Model.Game.Character.Health * 100;
                         foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
-                        var resultString =
-                        `<div class="col-xs-6">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=playerHealth
-                                        aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health style="width:`+ playerPercent +`%">
-                                    <span class="sr-only">100% Complete</span>
-                                </div>
-                            </div>
-                            <h3 class="health-info">Player Health:` + playerHealth + `</h3>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=foeHealth
-                                        aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health style="width:`+ foePercent +`%">
-                                    <span class="sr-only">100% Complete</span>
-                                </div>
-                            </div>
-                            <h3 class="health-info">@Model.CurrentEvent.Foe.Name Health:` + foeHealth + `</h3>
-                        </div>`;
-
-                        $('#health-bar-row').html(resultString);
+                        $("#char-health-amt").text(playerHealth);
+                        $("#foe-health-amt").text(foeHealth);
+                        $("#char-bar").css("width", playerPercent + "%");
+                        $("#foe-bar").css("width", foePercent + "%");
                         gameActive = winCheck(foeHealth, playerHealth);
                     }
                 });

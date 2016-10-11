@@ -14,7 +14,13 @@
     color: white;
 }
 
-
+#char-bar, #foe-bar {
+    width: 100%;
+    -webkit-transition: width 0.5s ease !important;
+    -moz-transition: width 0.5s ease !important;
+    -o-transition: width 0.5s ease !important;
+    transition: width 0.5s ease !important;
+}
 
 .welcome {
     background-color: rgba(255,255,255,0.4);
