@@ -16,7 +16,7 @@
         <div class="char-select-sprite-box">
             <img class="char-select-img" src="@character.SpriteUrl" />
         </div>
-        @using (Html.BeginForm("Ready", "Ability", new { charId = character.CharacterId }))
+        @using (Html.BeginForm("Game", "Game", new { charId = character.CharacterId }))
         {
             <div>
                 <input class="btn char-select-btn" type="submit" value="Select @character.Name" />

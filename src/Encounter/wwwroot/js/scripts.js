@@ -1,4 +1,32 @@
-﻿//Randomization check for foe action
+﻿//Count down on event start
+function countDown(count) {
+    var intervalId = setInterval(function () {
+        $("#count-down").text(count);
+        if (count == 0) {
+            clearInterval(intervalId);
+            $('#start-banner').hide();
+            $('#start-btn').fadeIn();
+            console.log("START");
+        };
+        count -= 1;
+    }, 1000);
+}
+
+//Pause game
+function pressPause(gameActive, paused) {
+    if (gameActive && paused == false) {
+        $("#paused").fadeIn();
+        console.log("Paused");
+        return true;
+    }
+    else {
+        $("#paused").fadeOut();
+        console.log("Unpaused");
+        return false;
+    }
+}
+
+//Randomization check for foe action
 function chooseAction(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }

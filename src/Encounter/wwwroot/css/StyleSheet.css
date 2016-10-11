@@ -136,35 +136,33 @@ body {
 
  /**************************/
 /*Game Page Start**********/
-#next-event {
-    text-align: center;
+#count-down-box, #next-event, #paused, #you-lose {
     color: white;
+    text-align: center;
     z-index: 1;
     position: absolute;
     padding-top: 30vh;
     width: 100%;
     height: 100vh;
-    background-color: rgba(27, 153, 35, 0.65);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+#next-event {
+    background-color: rgba(44, 153, 65, 0.65);
 }
 #paused {
-    text-align: center;
-    color: white;
-    z-index: 1;
-    position: absolute;
-    padding-top: 30vh;
-    width: 100%;
-    height: 100vh;
     background-color: rgba(100, 100, 100, 0.8);
 }
 #you-lose {
-    text-align: center;
-    color: white;
-    z-index: 1;
-    position: absolute;
-    padding-top: 30vh;
-    width: 100%;
-    height: 100vh;
     background-color: rgba(255, 50, 50, 0.8);
+}
+#count-down-box {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+.game-overlay-btn {
+    min-height: 20vh;
+    min-width: 20vw;
+    font-size: 30px;
 }
 .event-container {
     position: relative;
@@ -267,7 +265,6 @@ foe-sprite-box {
 /*Game Page End************/
 
 @media only screen and (max-width:800px){
-    /* styles for mobile browsers smaller than 480px; (iPhone) */
     .health-info {
         font-size: 14px;
         margin: 2px;
@@ -308,6 +305,16 @@ foe-sprite-box {
     .encounter-banner {
         font-size: 2.5em;
         margin-bottom: 10px;
+    }
+}
+@media only screen and (max-height:800px) {
+    .act-btn {
+        width: 75px;
+        height: 75px;
+        background-size: cover;
+    }
+    #foe-sprite-effect-box, #char-sprite-effect-box {
+        max-width: 200px;
     }
 }
 @media only screen and (max-width:1400px) {

@@ -15,13 +15,17 @@
     }))
     {
         <div>
-            <input class="btn btn-default" type="submit" value="Next Event!" />
+            <input class="btn btn-default game-overlay-btn" type="submit" value="Next Event!" />
         </div>
     }
 </div>
+<div id="count-down-box">
+    <h1 id="start-banner">Game Starting: <span id="count-down">3</span></h1>
+    <button id="start-btn" class="btn btn-info game-overlay-btn">Start</button>
+</div>
 <div id="paused">
     <h1>GAME PAUSED</h1>
-    <button class="pause btn btn-danger">Unpause</button>
+    <button class="pause btn btn-danger game-overlay-btn">Unpause</button>
 </div>
 <div id="you-lose">
     <h1>YOU LOSE</h1>
@@ -97,6 +101,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        $('#start-btn').hide();
         $('#next-event').hide();
         $('#you-lose').hide();
         $('#paused').hide();
@@ -104,22 +109,21 @@
 
         var playerHealth = @Model.Game.Character.Health;
         var foeHealth = @Model.CurrentEvent.Foe.Health;
-        var gameActive = true;
-        paused = false;
+        var gameActive = false;
+        var paused = false;
         var player = "char";
         var foe = "foe";
+        var countDownCount = 2;
+
+        countDown(countDownCount);
+
+        $("#start-btn").click(function() {
+            gameActive = true;
+            $("#count-down-box").fadeOut();
+        })
 
         $(".pause").click(function() {
-            if (gameActive && paused == false){
-                paused = true;
-                $("#paused").fadeIn();
-                console.log("Paused");
-            }
-            else {
-                paused = false;
-                $("#paused").fadeOut();
-                console.log("Unpaused");
-            }
+            paused = pressPause(gameActive, paused);
         })
 
         $('.act-btn').click(function () {
@@ -139,7 +143,7 @@
                     contentType: 'application/json',
                     url: '@Url.Action("Act", "Game")',
                     success: function (result) {
-                        console.log(result.imageUrl);
+                        console.log(result.name);
                         move(player);
 
                         setEffects(true, result);
