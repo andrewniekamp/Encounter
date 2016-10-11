@@ -13,12 +13,10 @@
         {
             <h1>Welcome, @Model.PlayerName</h1>
 
-            <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Profile", "Player")';return false;">Profile</button>
             <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Index", "Character")';return false;">Play!</button>
-            <h1>Placeholder sections:</h1>
-            <h2>About</h2>
-            <h2>Credits</h2>
-            <h2>Share</h2>
+            <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Profile", "Player")';return false;">Profile</button>
+            <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Credits", "Home")';return false;">Share (Incomplete)</button>
+            <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Credits", "Home")';return false;">About/Credits</button>
             @using (Html.BeginForm("GenerateData", "Game"))
             {
                 <input type="submit" class="btn btn-default" value="Generate Data!" />

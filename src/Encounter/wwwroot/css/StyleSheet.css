@@ -39,19 +39,20 @@ body {
  /**************************/
 /*Account/Landing Start****/
 .bg-image {
-    background: url('/img/landing.jpg') center center;
+    background: url('/img/landing.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 100vh;
+    position: relative;
+    padding: 10% 0;
+    min-height: 100vh;
 }
 
 .landing-menu {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
     min-width: 25%;
-    background-color: rgba(255,255,255,0.4);
+    max-width: 65%;
+    background-color: rgba(255,255,255,0.65);
     text-align: center;
     padding: 1% 3% 5%;
+    margin: 0 auto;
     border-radius: 5px;
 }
 
@@ -292,10 +293,21 @@ foe-sprite-box {
         background-size: cover;
     }
     .char-select-btn {
-     font-size: 12px;
+        font-size: 12px;
     }
     .abil-name {
-     font-size: 14px;
+        font-size: 14px;
+    }
+    .landing-btn {
+        width: 100%;
+        font-size: 1.5em;
+    }
+    .bg-image {
+        padding: 5% 0;
+    }
+    .encounter-banner {
+        font-size: 2.5em;
+        margin-bottom: 10px;
     }
 }
 @media only screen and (max-width:1400px) {

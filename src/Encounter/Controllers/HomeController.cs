@@ -16,5 +16,9 @@ namespace Encounter.Controllers
         {
             return View();
         }
+        public IActionResult Credits()
+        {
+            return View();
+        }
     }
 }
