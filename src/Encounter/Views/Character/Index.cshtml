@@ -5,7 +5,7 @@
 @using Encounter.Entities
 @model Encounter.ViewModels.CharacterPageViewModel
 
-<h1>Start a new game, @Model.User.PlayerName!</h1>
+<h1 class="new-game-banner">Start a new game, @Model.User.PlayerName!</h1>
 
 
 @foreach (var character in Model.Characters)
@@ -27,7 +27,7 @@
                 @foreach (var ability in character.Abilities)
                 {
                     <div class="col-xs-6">
-                        <h4>@ability.Name</h4>
+                        <h4 class="abil-name">@ability.Name</h4>
                     </div>
                 }
             </div>

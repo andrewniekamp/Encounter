@@ -95,6 +95,9 @@ body {
 
  /**************************/
 /*Character Select Start***/
+.new-game-banner {
+    text-align: center;
+}
 .char-select-container {
     text-align: center;
 }
@@ -107,11 +110,20 @@ body {
     margin: 0 auto;
 }
  .char-select-btn {
+     font-size: 20px;
      width: 100%;
+     height: 40px;
+     background-color: maroon;
+     color: white;
+ }
+ .char-select-btn:hover {
+     width: 100%;
+     background-color: #7a685c;
+     color: white;
  }
  .char-select-abil-box {
-     background-color: burlywood;
-     padding: 10px;
+     background-color: blanchedalmond;
+     padding: 15px;
  }
  .act-icon {
      width: 100%;
@@ -278,6 +290,12 @@ foe-sprite-box {
         width: 75px;
         height: 75px;
         background-size: cover;
+    }
+    .char-select-btn {
+     font-size: 12px;
+    }
+    .abil-name {
+     font-size: 14px;
     }
 }
 @media only screen and (max-width:1400px) {

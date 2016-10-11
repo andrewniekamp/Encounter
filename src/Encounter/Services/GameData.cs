@@ -41,7 +41,7 @@ namespace Encounter.Services
 
         public Game Get(int id)
         {
-            //example of multiple includes
+            //many includes
             return _context.Games
                 .Include(g => g.User)
                 .Include(g => g.Events)
