@@ -16,10 +16,6 @@
 
 #char-bar, #foe-bar {
     width: 100%;
-    -webkit-transition: width 0.5s ease !important;
-    -moz-transition: width 0.5s ease !important;
-    -o-transition: width 0.5s ease !important;
-    transition: width 0.5s ease !important;
 }
 
 .welcome {
@@ -266,7 +262,18 @@ foe-sprite-box {
 .act-btn {
     width: 150px;
     height: 150px;
+    padding: 0;
     background-size: cover;
+    opacity: 1 !important;
+}
+.cooldown-box {
+    background-color: lightgray;
+    height: 100%;
+    opacity: 0.8;
+}
+.cooldown-bar {
+    width: 100%;
+    opacity: 0.75;
 }
 /*Game Page End************/
 

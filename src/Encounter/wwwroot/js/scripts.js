@@ -55,7 +55,6 @@ function setEffects(isPlayer, result) {
     //Player action
     if (isPlayer) {
         if (result.charHeal > 0) {
-            console.log(result.imageUrl);
             $('#char-sprite-effect-box').html('<img class="effect" src="' + result.imageUrl + '" />')
             $('#char-sprite-effect-box').show();
             window.setTimeout(function () {
