@@ -1,9 +1,7 @@
 ﻿using Encounter.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Encounter.Services
 {
@@ -27,7 +25,6 @@ namespace Encounter.Services
             _context.Add(newCharacter);
             _context.SaveChanges();
         }
-
         public Character Get(int id)
         {
             return _context.Characters.Include(c => c.Abilities).FirstOrDefault(c => c.CharacterId == id);

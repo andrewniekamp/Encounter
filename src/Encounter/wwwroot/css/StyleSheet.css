@@ -96,6 +96,21 @@ body {
  /*Account/Landing End******/
 /**************************/
 
+ /**********************/
+/*Registration Start***/
+#avatar-container {
+    padding: 15px;
+    height: 110px;
+}
+#avatar {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+}
+ /*Registration End*********/
+/**************************/
+
  /**************************/
 /*Character Select Start***/
 .new-game-banner {

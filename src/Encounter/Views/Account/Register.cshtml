@@ -11,20 +11,42 @@
     <div class="landing-menu">
         <h1 class="encounter-banner">Encounter</h1>
         <h2>Register</h2>
+        <button id="grav-btn">Generate Avatar!</button>
         @using (Html.BeginForm("Register", "Account", FormMethod.Post))
         {
-            @Html.TextBoxFor(m => m.PlayerName, new { @class = "form-control", required = "required", placeholder="Username" })
+            @Html.TextBoxFor(m => m.PlayerName, new { @class = "form-control", placeholder="Username" })
 
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control email-input", placeholder = "Email Address" })
+            <div id="avatar-container"></div>
             //TODO look into Gravatar API usage
-            @Html.TextBoxFor(m => m.AvatarUrl, new { @class = "form-control", required = "required", placeholder = "Avatar URL" })
+            @Html.TextBoxFor(m => m.AvatarUrl, new { @class = "form-control", placeholder = "Avatar URL" })
             
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "required", placeholder = "Email Address" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
             
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required", placeholder = "Password" })
-            
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "required", placeholder = "Confirm Password" })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
 
             <input type="submit" class="btn btn-success" value="Register" />
         }
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        //Player action
+        $('#grav-btn').click(function () {
+            var emailInput = $('.email-input').val();
+
+            $.ajax({
+                type: 'GET',
+                data: { email: emailInput },
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '@Url.Action("GetHash", "Account")',
+                success: function (result) {
+                    console.log(result);
+                    $('#avatar-container').html("<img id='avatar' src='" + result + "' alt='Profile Image' />")
+                }
+            });
+        });
+    });
+</script>

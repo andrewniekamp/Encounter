@@ -20,7 +20,7 @@ namespace Encounter.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
 
         public PlayerController(
-            IGameData gameData, 
+            IGameData gameData,
             UserManager<ApplicationUser> userManager)
         {
             _gameData = gameData;
@@ -57,7 +57,6 @@ namespace Encounter.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-            
             currentUser.Games = _gameData.GetGamesOfUser(userId);
             return View(currentUser);
         }

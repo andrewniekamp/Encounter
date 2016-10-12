@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Encounter.Controllers
@@ -42,32 +43,45 @@ namespace Encounter.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var user = new ApplicationUser
+            if (model.Email != null && model.AvatarUrl != null && model.PlayerName != null)
             {
-                UserName = model.Email,
-                AvatarUrl = model.AvatarUrl,
-                PlayerName = model.PlayerName,
-                DateCreated = DateTime.Now
-            };
-            IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                Microsoft.AspNetCore.Identity.SignInResult nextResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    AvatarUrl = model.AvatarUrl,
+                    PlayerName = model.PlayerName,
+                    DateCreated = DateTime.Now
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Account");
+                    Microsoft.AspNetCore.Identity.SignInResult nextResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Account");
+                    }
+                    return View();
                 }
                 return View();
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         public IActionResult Login()
         {
             return View();
+        }
+
+        public IActionResult GetHash(string email)
+        {
+            if (email != null)
+            {
+                string hash = CreateMD5(email.ToLower());
+                string urlString = "https://www.gravatar.com/avatar/" + hash + "?d=retro";
+                return Json(urlString);
+            }
+            return Json("/img/unicorn.svg");
         }
 
         [HttpPost]
@@ -89,6 +103,22 @@ namespace Encounter.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
+        }
+
+        internal string CreateMD5(string input)
+        {
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                return sb.ToString();
+            }
         }
     }
 }
