@@ -37,7 +37,14 @@ namespace Encounter
             services.AddEntityFramework()
                 .AddDbContext<EncounterDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(req =>
+                {
+                    req.Password.RequiredLength = 5;
+                    req.Password.RequireNonAlphanumeric = false;
+                    req.Password.RequireDigit = false;
+                    req.Password.RequireLowercase = false;
+                    req.Password.RequireUppercase = false;
+                })
                 .AddEntityFrameworkStores<EncounterDbContext>()
                 .AddDefaultTokenProviders();
 
