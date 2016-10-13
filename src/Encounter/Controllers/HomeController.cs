@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Encounter.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         // GET: /<controller>/

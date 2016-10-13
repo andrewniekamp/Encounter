@@ -20,7 +20,9 @@ namespace Encounter
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json");
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -33,7 +35,7 @@ namespace Encounter
             services.AddMvc();
 
             services.AddEntityFramework()
-                .AddDbContext<EncounterDbContext>(options => options.UseSqlServer(Configuration["database:connection"]));
+                .AddDbContext<EncounterDbContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<EncounterDbContext>()
