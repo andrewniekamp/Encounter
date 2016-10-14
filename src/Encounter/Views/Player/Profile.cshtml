@@ -17,15 +17,18 @@
             <h2>Recent Games:</h2>
             @foreach (var game in Model.Games.Reverse())
             {
-                <h3>Character was: @game.Character.Name</h3>
-                <h4>Date: @game.DateCreated</h4>
-                <h3>Events:</h3>
-                <ul class="recent-games">
-                    @foreach (var gameEvent in game.Events)
-                    {
-                        <li>Location: @gameEvent.Name with Foe: @gameEvent.Foe.Name</li>
-                    }
-                </ul>
+                <div class="game-info-box">
+                    <h3>Character was: @game.Character.Name</h3>
+                    <h4>Date: @game.DateCreated</h4>
+                    <button class="delete-game-btn" value=@game.GameId>Delete Game</button>
+                    <h3>Events:</h3>
+                    <ul class="recent-games">
+                        @foreach (var gameEvent in game.Events)
+                        {
+                            <li>Location: @gameEvent.Name with Foe: @gameEvent.Foe.Name</li>
+                        }
+                    </ul>
+                </div>
 
             }
         }
@@ -36,3 +39,27 @@
         }
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        //Delete game action
+        $('.delete-game-btn').click(function () {
+            var gameId = parseInt($(this).val());
+            var boxToRemove = $(this).parent();
+
+            $.ajax({
+                type: 'GET',
+                data: { id: gameId },
+                dataType: 'json',
+                contentType: 'application/json',
+                url: '@Url.Action("UserDeleteGame", "Account")',
+                success: function (result) {
+                    boxToRemove.fadeOut(500, function () {
+                        boxToRemove.remove();
+                    });
+                }
+            });
+        });
+
+    })
+</script>

@@ -15,6 +15,7 @@ namespace Encounter.Services
     {
         ICollection<ApplicationUser> GetAllUsers();
         void DeleteUser(string id);
+        void DeleteGame(int id);
     }
     public class SqlApplicationUserData : IApplicationUserData
     {
@@ -33,12 +34,20 @@ namespace Encounter.Services
                 .ThenInclude(c => c.Abilities)
                 .ToList();
         }
-
-        [HttpPost]
+        
         public void DeleteUser(string id)
         {
             var thisUser = _context.Users.FirstOrDefault(u => u.Id == id);
             _context.Users.Remove(thisUser);
+            _context.SaveChanges();
+        }
+        
+        public void DeleteGame(int id)
+        {
+            var thisGame = _context.Games.FirstOrDefault(u => u.GameId == id);
+
+            _context.Events.RemoveRange(_context.Events.Where(e => e.Game == thisGame));
+            _context.Games.Remove(thisGame);
             _context.SaveChanges();
         }
     }

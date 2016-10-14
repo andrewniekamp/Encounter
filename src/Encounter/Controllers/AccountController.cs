@@ -1,4 +1,5 @@
 ﻿using Encounter.Entities;
+using Encounter.Services;
 using Encounter.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,21 @@ namespace Encounter.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly EncounterDbContext _db;
+        private IApplicationUserData _applicationUserData;
+        private IGameData _gameData;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AccountController (
+            IApplicationUserData applicationUserData,
+            IGameData gameData,
             UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager, 
-            EncounterDbContext db)
+            SignInManager<ApplicationUser> signInManager)
         {
+            _applicationUserData = applicationUserData;
+            _gameData = gameData;
             _userManager = userManager;
             _signInManager = signInManager;
-            _db = db;
         }
 
         public async Task<IActionResult> Index()
@@ -104,6 +108,12 @@ namespace Encounter.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
+        }
+        
+        public IActionResult UserDeleteGame(int id)
+        {
+            _applicationUserData.DeleteGame(id);
+            return Json(true);
         }
 
         internal string CreateMD5(string input)
