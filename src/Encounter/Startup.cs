@@ -50,7 +50,7 @@ namespace Encounter
 
             services.AddSingleton(provider => Configuration);
             services.AddSingleton<IGreeter, Greeter>();
-            services.AddScoped<ICategoryData, SqlCategoryData>();
+            services.AddScoped<IApplicationUserData, SqlApplicationUserData>();
             services.AddScoped<IPlayerData, SqlPlayerData>();
             services.AddScoped<IGameData, SqlGameData>();
             services.AddScoped<ICharacterData, SqlCharacterData>();

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Encounter.Entities.ApplicationUser>
+
+<h1>ADMIN VIEW</h1>
+
+@foreach (var user in Model)
+{
+    <h4>@user.PlayerName</h4>
+}
