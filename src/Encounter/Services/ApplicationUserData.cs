@@ -1,5 +1,6 @@
 ﻿using Encounter.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace Encounter.Services
 {
     public interface IApplicationUserData
     {
-        void AddGameToUser(Game game);
-        ICollection<ApplicationUser> GetAllUsers(); 
+        ICollection<ApplicationUser> GetAllUsers();
+        void DeleteUser(string id);
     }
     public class SqlApplicationUserData : IApplicationUserData
     {
@@ -23,10 +24,6 @@ namespace Encounter.Services
         {
             _context = context;
         }
-        public void AddGameToUser(Game game)
-        {
-
-        }
 
         public ICollection<ApplicationUser> GetAllUsers()
         {
@@ -35,6 +32,14 @@ namespace Encounter.Services
                 .ThenInclude(g => g.Character)
                 .ThenInclude(c => c.Abilities)
                 .ToList();
+        }
+
+        [HttpPost]
+        public void DeleteUser(string id)
+        {
+            var thisUser = _context.Users.FirstOrDefault(u => u.Id == id);
+            _context.Users.Remove(thisUser);
+            _context.SaveChanges();
         }
     }
 }
