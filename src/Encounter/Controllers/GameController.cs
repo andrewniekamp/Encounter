@@ -84,8 +84,8 @@ namespace Encounter.Controllers
         }
 
         [Route("play")]
-        [Route("Character/{charId}")]
-        public async Task<IActionResult> Game(int charId)
+        [Route("Character/{charId}/Scenario/{scenarioId}")]
+        public async Task<IActionResult> Game(int charId, int scenarioId)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
@@ -93,11 +93,11 @@ namespace Encounter.Controllers
             //TODO May need to construct events here to avoid simply reassigning events already in db
             //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
             
-            Event initialEvent = new Event { Name = "Desert", ImageUrl = "/img/desert1.jpg", Foe = _foeData.Get(1)};
-            Event secondEvent = new Event { Name = "Desert", ImageUrl = "/img/desert2.jpg", Foe = _foeData.Get(2) };
-            Event thirdEvent = new Event { Name = "Desert", ImageUrl = "/img/desert3.jpg", Foe = _foeData.Get(3) };
-            Event fourthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert4.jpg", Foe = _foeData.Get(4) };
-            Event fifthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest1.jpg", Foe = _foeData.Get(5) };
+            Event initialEvent = new Event { Name = "Desert", Level = 1, ImageUrl = "/img/desert1.jpg", Foe = _foeData.Get(1)};
+            Event secondEvent = new Event { Name = "Desert", Level = 2, ImageUrl = "/img/desert2.jpg", Foe = _foeData.Get(2) };
+            Event thirdEvent = new Event { Name = "Desert", Level = 3, ImageUrl = "/img/desert3.jpg", Foe = _foeData.Get(3) };
+            Event fourthEvent = new Event { Name = "Desert", Level = 4, ImageUrl = "/img/desert4.jpg", Foe = _foeData.Get(4) };
+            Event fifthEvent = new Event { Name = "Forest", Level = 1, ImageUrl = "/img/forest1.jpg", Foe = _foeData.Get(5) };
             //Event sixthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
             //Event seventhEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg", Foe = _foeData.Get(1) };
             //Event eighthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg", Foe = _foeData.Get(2) };
@@ -163,9 +163,7 @@ namespace Encounter.Controllers
             {
                 return View("Win");
             }
-            List<Event> sortedEvents = (from e in model.Game.Events
-                                            orderby e.EventId ascending
-                                            select e).ToList();
+            List<Event> sortedEvents = (from e in model.Game.Events orderby e.EventId ascending select e).ToList();
             model.CurrentEvent = sortedEvents.ElementAt(eventsCompleted);
             return View("EventNext", model);
         }

@@ -12,17 +12,20 @@ namespace Encounter.Controllers
     {
         private ICharacterData _characterData;
         private IAbilityData _abilityData;
+        private IScenarioData _scenarioData;
         private IEventData _eventData;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public CharacterController(
             ICharacterData characterData,
             IAbilityData abilityData,
+            IScenarioData scenarioData,
             IEventData eventData,
             UserManager<ApplicationUser> userManager)
         {
             _characterData = characterData;
             _abilityData = abilityData;
+            _scenarioData = scenarioData;
             _eventData = eventData;
             _userManager = userManager;
         }
@@ -34,6 +37,8 @@ namespace Encounter.Controllers
 
         public async Task<IActionResult> Index()
         {
+            _scenarioData.Generate();
+
             var model = new CharacterPageViewModel();
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -42,7 +47,18 @@ namespace Encounter.Controllers
             model.User = currentUser;
             model.Characters = _characterData.GetAll();
             model.Abilities = _abilityData.GetAll();
-            model.Events = _eventData.GetAll();
+            return View(model);
+        }
+        public async Task<IActionResult> Scenario(int charId)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
+            var model = new CharacterPageViewModel();
+            model.User = currentUser;
+            model.SelectedCharacter = _characterData.Get(charId);
+            model.Scenarios = _scenarioData.GetAll();
+
             return View(model);
         }
     }

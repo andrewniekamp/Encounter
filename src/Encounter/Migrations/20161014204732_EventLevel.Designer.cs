@@ -8,9 +8,10 @@ using Encounter.Entities;
 namespace Encounter.Migrations
 {
     [DbContext(typeof(EncounterDbContext))]
-    partial class EncounterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161014204732_EventLevel")]
+    partial class EventLevel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -138,25 +139,21 @@ namespace Encounter.Migrations
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("EventLevel");
+
                     b.Property<int?>("FoeId");
 
                     b.Property<int?>("GameId");
 
                     b.Property<string>("ImageUrl");
 
-                    b.Property<int>("Level");
-
                     b.Property<string>("Name");
-
-                    b.Property<int?>("ScenarioId");
 
                     b.HasKey("EventId");
 
                     b.HasIndex("FoeId");
 
                     b.HasIndex("GameId");
-
-                    b.HasIndex("ScenarioId");
 
                     b.ToTable("Events");
                 });
@@ -217,20 +214,6 @@ namespace Encounter.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Players");
-                });
-
-            modelBuilder.Entity("Encounter.Entities.Scenario", b =>
-                {
-                    b.Property<int>("ScenarioId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("IconUrl");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ScenarioId");
-
-                    b.ToTable("Scenarios");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -360,10 +343,6 @@ namespace Encounter.Migrations
                     b.HasOne("Encounter.Entities.Game", "Game")
                         .WithMany("Events")
                         .HasForeignKey("GameId");
-
-                    b.HasOne("Encounter.Entities.Scenario", "Scenario")
-                        .WithMany("Events")
-                        .HasForeignKey("ScenarioId");
                 });
 
             modelBuilder.Entity("Encounter.Entities.Game", b =>

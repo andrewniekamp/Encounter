@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Encounter.Entities
+@model Encounter.ViewModels.CharacterPageViewModel
+
+<div class="container">
+    <h1 class="new-game-banner">Select a Scenario, @Model.User.PlayerName!</h1>
+
+    <div class="col-xs-12 char-select-container">
+        <h2>@Model.SelectedCharacter.Name</h2>
+        <h5>The @Model.SelectedCharacter.Class</h5>
+        <div class="char-select-sprite-box">
+            <img class="char-select-img" src="@Model.SelectedCharacter.SpriteUrl" />
+        </div>
+        <div class="row">
+        @foreach (var ability in Model.SelectedCharacter.Abilities)
+        {
+                <img class="small-act-icon" src=@ability.ImageUrl alt="@ability.Name" />
+        }
+        </div>
+    </div>
+
+    @foreach (var scenario in Model.Scenarios)
+    {
+        <div class="col-xs-6 col-sm-3 char-select-container">
+            <h2>@scenario.Name</h2>
+            <div class="char-select-sprite-box">
+                <img class="char-select-img" src="@scenario.IconUrl" />
+            </div>
+            @using (Html.BeginForm("Game", "Game", new { charId = Model.SelectedCharacter.CharacterId, scenarioId = scenario.ScenarioId }))
+            {
+                <div>
+                    <input class="btn char-select-btn" type="submit" value="Select @scenario.Name" />
+                </div>
+            }
+        </div>
+    }
+</div>

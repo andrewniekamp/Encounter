@@ -21,6 +21,7 @@ namespace Encounter.Entities
         public DbSet<Character> Characters { get; set; }
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<Game> Games { get; set; }
+        public DbSet<Scenario> Scenarios { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Foe> Foes { get; set; }
     }

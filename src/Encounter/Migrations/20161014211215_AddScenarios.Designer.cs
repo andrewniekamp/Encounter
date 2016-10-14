@@ -8,9 +8,10 @@ using Encounter.Entities;
 namespace Encounter.Migrations
 {
     [DbContext(typeof(EncounterDbContext))]
-    partial class EncounterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161014211215_AddScenarios")]
+    partial class AddScenarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -223,8 +224,6 @@ namespace Encounter.Migrations
                 {
                     b.Property<int>("ScenarioId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("IconUrl");
 
                     b.Property<string>("Name");
 

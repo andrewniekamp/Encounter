@@ -43,8 +43,7 @@
         <div class="col-xs-6">
             @*HEALTH BARS TO UPDATE WITH AJAX*@
             <div class="progress">
-                <div id="char-bar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.Game.Character.Health
-                        aria-valuemin="0" aria-valuemax=@Model.Game.Character.Health>
+                <div id="char-bar" class="progress-bar progress-bar-success" role="progressbar">
                     <span class="sr-only">100% Complete</span>
                 </div>
             </div>
@@ -52,8 +51,7 @@
         </div>
         <div class="col-xs-6">
             <div class="progress">
-                <div id="foe-bar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow=@Model.CurrentEvent.Foe.Health
-                        aria-valuemin="0" aria-valuemax=@Model.CurrentEvent.Foe.Health>
+                <div id="foe-bar" class="progress-bar progress-bar-success" role="progressbar">
                     <span class="sr-only">100% Complete</span>
                 </div>
             </div>

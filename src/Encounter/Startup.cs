@@ -55,6 +55,7 @@ namespace Encounter
             services.AddScoped<IGameData, SqlGameData>();
             services.AddScoped<ICharacterData, SqlCharacterData>();
             services.AddScoped<IAbilityData, SqlAbilityData>();
+            services.AddScoped<IScenarioData, SqlScenarioData>();
             services.AddScoped<IEventData, SqlEventData>();
             services.AddScoped<IFoeData, SqlFoeData>();
         }

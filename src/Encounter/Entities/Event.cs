@@ -9,7 +9,9 @@ namespace Encounter.Entities
         [Key]
         public int EventId { get; set; }
         public string Name { get; set; }
+        public int Level { get; set; }
         public string ImageUrl { get; set; }
+        public Scenario Scenario { get; set; }
         public Foe Foe { get; set; }
         public Game Game { get; set; }
     }
