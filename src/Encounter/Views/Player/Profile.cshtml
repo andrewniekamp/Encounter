@@ -19,15 +19,14 @@
             {
                 <div class="game-info-box">
                     <h3>Character was: @game.Character.Name</h3>
+                    <h3>Scenario: @game.Events.First().Scenario.Name</h3>
                     <h4>Date: @game.DateCreated</h4>
                     <button class="delete-game-btn" value=@game.GameId>Delete Game</button>
                     <h3>Events:</h3>
-                    <ul class="recent-games">
-                        @foreach (var gameEvent in game.Events)
-                        {
-                            <li>Location: @gameEvent.Name with Foe: @gameEvent.Foe.Name</li>
-                        }
-                    </ul>
+                    @foreach (var gameEvent in game.Events)
+                    {
+                        <p>Location: @gameEvent.Name with Foe: @gameEvent.Foe.Name</p>
+                    }
                 </div>
 
             }

@@ -35,9 +35,7 @@ namespace Encounter.Services
                 _context.Add(new Scenario { Name = "Forest", IconUrl = "/img/scenarios/forest.png" });
                 _context.Add(new Scenario { Name = "Desert", IconUrl = "/img/scenarios/desert.png" });
                 _context.Add(new Scenario { Name = "Lair", IconUrl = "/img/scenarios/lair.png" });
-                _context.Add(new Scenario { Name = "Village", IconUrl = "/img/scenarios/village.png" });
-                _context.Add(new Scenario { Name = "Haunted Forest", IconUrl = "/img/scenarios/haunted-forest.png" });
-                _context.Add(new Scenario { Name = "Hut", IconUrl = "/img/scenarios/hut.png" });
+
                 _context.SaveChanges();
             }
         }

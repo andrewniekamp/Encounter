@@ -18,6 +18,7 @@ namespace Encounter.Controllers
         private ICharacterData _characterData;
         private IAbilityData _abilityData;
         private IEventData _eventData;
+        private IScenarioData _scenarioData;
         private IFoeData _foeData;
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -26,6 +27,7 @@ namespace Encounter.Controllers
             ICharacterData characterData,
             IAbilityData abilityData,
             IEventData eventData,
+            IScenarioData scenarioData,
             IFoeData foeData,
             UserManager<ApplicationUser> userManager)
         {
@@ -33,6 +35,7 @@ namespace Encounter.Controllers
             _characterData = characterData;
             _abilityData = abilityData;
             _eventData = eventData;
+            _scenarioData = scenarioData;
             _foeData = foeData;
             _userManager = userManager;
         }
@@ -90,53 +93,22 @@ namespace Encounter.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
 
-            //TODO May need to construct events here to avoid simply reassigning events already in db
-            //_eventData.Add(new Event { Name = "Forest", ImageUrl = "/img/forest.jpg" });
+            Scenario currentScenario = _scenarioData.Get(scenarioId);
+            List<Event> scenarioEvents = _eventData.Generate(scenarioId).ToList();
             
-            Event initialEvent = new Event { Name = "Desert", Level = 1, ImageUrl = "/img/desert1.jpg", Foe = _foeData.Get(1)};
-            Event secondEvent = new Event { Name = "Desert", Level = 2, ImageUrl = "/img/desert2.jpg", Foe = _foeData.Get(2) };
-            Event thirdEvent = new Event { Name = "Desert", Level = 3, ImageUrl = "/img/desert3.jpg", Foe = _foeData.Get(3) };
-            Event fourthEvent = new Event { Name = "Desert", Level = 4, ImageUrl = "/img/desert4.jpg", Foe = _foeData.Get(4) };
-            Event fifthEvent = new Event { Name = "Forest", Level = 1, ImageUrl = "/img/forest1.jpg", Foe = _foeData.Get(5) };
-            //Event sixthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
-            //Event seventhEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg", Foe = _foeData.Get(1) };
-            //Event eighthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg", Foe = _foeData.Get(2) };
-            //Event ninthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
-            //Event tenthEvent = new Event { Name = "Mountain", ImageUrl = "/img/mountains.jpg", Foe = _foeData.Get(1) };
-            //Event twelfthEvent = new Event { Name = "Forest", ImageUrl = "/img/forest.jpg", Foe = _foeData.Get(2) };
-            //Event thirteenthEvent = new Event { Name = "Desert", ImageUrl = "/img/desert.jpg", Foe = _foeData.Get(3) };
-
-            _eventData.Add(initialEvent);
-            _eventData.Add(secondEvent);
-            _eventData.Add(thirdEvent);
-            _eventData.Add(fourthEvent);
-            _eventData.Add(fifthEvent);
-            //_eventData.Add(sixthEvent);
-
-            List<Event> events = new List<Event>();
-            events.Add(initialEvent);
-            events.Add(secondEvent);
-            events.Add(thirdEvent);
-            events.Add(fourthEvent);
-            events.Add(fifthEvent);
-            //events.Add(sixthEvent);
-
             Game newGame = new Game();
             newGame.DateCreated = DateTime.Now;
             newGame.Character = _characterData.Get(charId);
             newGame.User = currentUser;
-            newGame.Events = events;
+            newGame.Events = scenarioEvents;
 
             _gameData.Add(newGame);
             _gameData.AddGameToUser(userId, newGame);
-            
-            //return View("Event", newGame);
 
             var model = new GamePageViewModel();
             model.Game = _gameData.Get(newGame.GameId);
             model.EventsCompleted = 0;
-            //model.RemainingEvents = model.Game.Events.Skip(eventsCompleted).ToList();
-            model.CurrentEvent = model.Game.Events.First();
+            model.CurrentEvent = currentScenario.Events.First();
             return View("EventNext", model);
         }
 

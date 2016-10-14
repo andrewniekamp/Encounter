@@ -60,10 +60,9 @@ namespace Encounter.Services
         public ICollection<Game> GetGamesOfUser(string userId)
         {
             return _context.Games
-                .Include(g => g.Events)
-                .ThenInclude(e => e.Foe)
-                .Include(g => g.Character)
-                .ThenInclude(c => c.Abilities)
+                .Include(g => g.Events).ThenInclude(e => e.Foe)
+                .Include(g => g.Events).ThenInclude(e => e.Scenario)
+                .Include(g => g.Character).ThenInclude(c => c.Abilities)
                 .Where(m => m.User.Id == userId).ToList();
         }
     }

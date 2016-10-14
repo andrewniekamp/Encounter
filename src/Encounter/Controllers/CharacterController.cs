@@ -37,8 +37,6 @@ namespace Encounter.Controllers
 
         public async Task<IActionResult> Index()
         {
-            _scenarioData.Generate();
-
             var model = new CharacterPageViewModel();
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -51,6 +49,8 @@ namespace Encounter.Controllers
         }
         public async Task<IActionResult> Scenario(int charId)
         {
+            _scenarioData.Generate();
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
 
