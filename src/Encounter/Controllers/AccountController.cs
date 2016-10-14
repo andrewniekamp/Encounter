@@ -48,6 +48,7 @@ namespace Encounter.Controllers
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
+                    Authorized = false,
                     AvatarUrl = model.AvatarUrl,
                     PlayerName = model.PlayerName,
                     DateCreated = DateTime.Now
@@ -78,7 +79,7 @@ namespace Encounter.Controllers
             if (email != null)
             {
                 string hash = CreateMD5(email.ToLower());
-                string urlString = "https://www.gravatar.com/avatar/" + hash + "?d=retro";
+                string urlString = "http://unicornify.appspot.com/avatar/" + hash + "?s=128";
                 return Json(urlString);
             }
             return Json("/img/unicorn.svg");

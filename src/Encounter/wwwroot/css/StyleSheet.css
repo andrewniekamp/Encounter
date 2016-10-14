@@ -25,10 +25,6 @@
     text-align: center;
 }
 
-.player-avatar {
-    width: 150px;
-}
-
 .rdy-img {
     width: 100px;
 }
@@ -100,15 +96,25 @@ body {
 /*Registration Start***/
 #avatar-container {
     padding: 15px;
-    height: 110px;
+    max-height: 158px;
 }
 #avatar {
     display: block;
     margin: 0 auto;
-    width: 80px;
-    height: 80px;
+    max-width: 100%;
+}
+.reg-input {
+
 }
  /*Registration End*********/
+/**************************/
+
+ /**************************/
+/*Player Profile Start*****/
+.player-avatar {
+    width: 128px;
+}
+ /*Player Profile End*******/
 /**************************/
 
  /**************************/
