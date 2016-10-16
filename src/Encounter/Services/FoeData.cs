@@ -75,7 +75,7 @@ namespace Encounter.Services
                 });
                 _context.Add(new Foe { Health = 20, Name = "Mysterious Creatures", SpriteUrl = "/img/foe/flying-monster.png", Level = 2,
                     Scenario = _context.Scenarios.FirstOrDefault(a => a.Name == "Desert"),
-                    Ability1 = _context.Abilities.FirstOrDefault(a => a.Name == "Bite"),
+                    Ability1 = _context.Abilities.FirstOrDefault(a => a.Name == "Mysterious Chant"),
                     Ability2 = _context.Abilities.FirstOrDefault(a => a.Name == "Shove"),
                 });
                 _context.Add(new Foe { Health = 24, Name = "Ogre", SpriteUrl = "/img/foe/patchwork-ogre.png", Level = 2,

@@ -64,12 +64,12 @@ namespace Encounter.Services
                 });
                 _context.Add(new Character
                 {
-                    Name = "Pat",
-                    SpriteUrl = "/img/char/captain.png",
-                    Class = "Captain",
+                    Name = "Veda",
+                    SpriteUrl = "/img/char/demon-hunter.png",
+                    Class = "Demon Hunter",
                     Health = 18,
-                    Ability1 = _context.Abilities.FirstOrDefault(a => a.Name == "Belittling Glare"),
-                    Ability2 = _context.Abilities.FirstOrDefault(a => a.Name == "Inspiring Speech"),
+                    Ability1 = _context.Abilities.FirstOrDefault(a => a.Name == "Intense Glare"),
+                    Ability2 = _context.Abilities.FirstOrDefault(a => a.Name == "Mysterious Chant"),
                     //Ability3 = _context.Abilities.FirstOrDefault(a => a.Name == "Hammer Blow"),
                 });
 

@@ -235,7 +235,6 @@ body {
     max-height:40vh;
     width: auto;
     height: auto;
-    transform: scaleX(-1);
 }
 .char-sprite-box {
     /*height: 100%;*/
@@ -268,7 +267,6 @@ body {
     max-height:40vh;
     width: auto;
     height: auto;
-    transform: scaleX(-1);
 }
 foe-sprite-box {
     /*height: 100%;*/

@@ -41,8 +41,8 @@ namespace Encounter.Services
                 _context.Add(new Ability { Name = "Stab", FoeHarm = 4, ImageUrl = "/img/actions/stab.png", CoolDownMiliSecs = 2300 });
                 _context.Add(new Ability { Name = "Snide Remark", FoeHarm = 1, ImageUrl = "/img/actions/snide-remark.png", CoolDownMiliSecs = 500 });
 
-                _context.Add(new Ability { Name = "Inspiring Speech", CharHeal = 2, ImageUrl = "/img/actions/inspiring-speech.png", CoolDownMiliSecs = 2000 });
-                _context.Add(new Ability { Name = "Belittling Glare", FoeHarm = 2, ImageUrl = "/img/actions/belittling-glare.png", CoolDownMiliSecs = 1500 });
+                _context.Add(new Ability { Name = "Mysterious Chant", CharHeal = 2, CharHarm = 1, ImageUrl = "/img/actions/inspiring-speech.png", CoolDownMiliSecs = 2000 });
+                _context.Add(new Ability { Name = "Intense Glare", FoeHarm = 2, ImageUrl = "/img/actions/belittling-glare.png", CoolDownMiliSecs = 1500 });
 
                 _context.Add(new Ability { Name = "Heal 2", CharHeal = 4, ImageUrl = "/img/actions/heal.png", CoolDownMiliSecs = 3000 });
                 _context.Add(new Ability { Name = "Claw Attack", FoeHarm = 3, ImageUrl = "/img/actions/claw-attack.png", CoolDownMiliSecs = 2000 });
