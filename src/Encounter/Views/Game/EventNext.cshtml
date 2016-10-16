@@ -155,7 +155,6 @@
                     contentType: 'application/json',
                     url: '@Url.Action("Act", "Game")',
                     success: function (result) {
-                        //var cooldown = result.cooldown;
                         var cooldown = result.coolDownMiliSecs;
                         var cooldownSecs = cooldown / 1000;
 
@@ -215,7 +214,6 @@
                     contentType: 'application/json',
                     url: '@Url.Action("FoeAct", "Game")',
                     success: function (result) {
-                        console.log(result.name);
                         move(foe);
 
                         setEffects(false, result);
@@ -223,7 +221,7 @@
                         playerHealth -= result.foeHarm;
                         playerHealth += result.foeHeal;
                         foeHealth -= result.charHarm;
-                        foeHealth += result.charHarm;
+                        foeHealth += result.charHeal;
                         playerPercent = playerHealth / @Model.Game.Character.Health * 100;
                         foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
