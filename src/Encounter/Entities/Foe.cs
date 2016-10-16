@@ -14,7 +14,12 @@ namespace Encounter.Entities
         public string Name { get; set; }
         public string SpriteUrl { get; set; }
         public int Health { get; set; }
-        public ICollection<Ability> Abilities { get; set; }
+        public Scenario Scenario { get; set; }
+        public int Level { get; set; }
         public ICollection<Event> Events { get; set; }
+        public Ability Ability1 { get; set; }
+        public Ability Ability2 { get; set; }
+        public Ability Ability3 { get; set; }
+        //public ICollection<Ability> Abilities { get; set; }
     }
 }

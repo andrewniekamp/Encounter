@@ -61,17 +61,22 @@
     <div class="row play-area center-box">
         <div class="row action-row">
             <div class="char-skill-box col-xs-6 col-md-4 col-lg-3">
-                @foreach (var ability in Model.Game.Character.Abilities)
-                {
-                    <button class="btn act-btn" value="@ability.AbilityId" style="background-image: url(@ability.ImageUrl);">
-                        <div class="progress cooldown-box">
-                            <div class="progress-bar cooldown-bar" role="progressbar" aria-valuenow="70"
-                                 aria-valuemin="0" aria-valuemax="100">
-                                <span class="sr-only">100% Complete</span>
-                            </div>
+                <button class="btn act-btn" value="@Model.Game.Character.Ability1.AbilityId" style="background-image: url(@Model.Game.Character.Ability1.ImageUrl);">
+                    <div class="progress cooldown-box">
+                        <div class="progress-bar cooldown-bar" role="progressbar" aria-valuenow="70"
+                             aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">100% Complete</span>
                         </div>
-                    </button>
-                }
+                    </div>
+                </button>
+                <button class="btn act-btn" value="@Model.Game.Character.Ability2.AbilityId" style="background-image: url(@Model.Game.Character.Ability2.ImageUrl);">
+                    <div class="progress cooldown-box">
+                        <div class="progress-bar cooldown-bar" role="progressbar" aria-valuenow="70"
+                             aria-valuemin="0" aria-valuemax="100">
+                            <span class="sr-only">100% Complete</span>
+                        </div>
+                    </div>
+                </button>
             </div>
             <div class="col-xs-0 col-md-4 col-lg-6"></div>
             <div class="center-box foe-name col-xs-6 col-md-4 col-lg-3">
@@ -151,7 +156,7 @@
                     url: '@Url.Action("Act", "Game")',
                     success: function (result) {
                         //var cooldown = result.cooldown;
-                        var cooldown = 2000;
+                        var cooldown = result.coolDownMiliSecs;
                         var cooldownSecs = cooldown / 1000;
 
                         cooldownBar.css({
@@ -196,10 +201,10 @@
                 var val = 0;
 
                 if (coinFlip == 1) {
-                    val = @Model.CurrentEvent.Foe.Abilities.First().AbilityId;
+                    val = @Model.CurrentEvent.Foe.Ability1.AbilityId;
                     console.log(val);
                 } else {
-                    val = @Model.CurrentEvent.Foe.Abilities.Last().AbilityId;
+                    val = @Model.CurrentEvent.Foe.Ability2.AbilityId;
                     console.log(val);
                 }
 

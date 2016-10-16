@@ -44,11 +44,12 @@ namespace Encounter.Services
             //many includes
             return _context.Games
                 .Include(g => g.User)
-                .Include(g => g.Events)
-                .ThenInclude(e => e.Foe)
-                .ThenInclude(f => f.Abilities)
-                .Include(g => g.Character)
-                .ThenInclude(c => c.Abilities)
+                .Include(g => g.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability1)
+                .Include(g => g.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability2)
+                .Include(g => g.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability3)
+                .Include(g => g.Character).ThenInclude(c => c.Ability1)
+                .Include(g => g.Character).ThenInclude(c => c.Ability2)
+                .Include(g => g.Character).ThenInclude(c => c.Ability3)
                 .FirstOrDefault(g => g.GameId == id);
         }
 
@@ -62,7 +63,9 @@ namespace Encounter.Services
             return _context.Games
                 .Include(g => g.Events).ThenInclude(e => e.Foe)
                 .Include(g => g.Events).ThenInclude(e => e.Scenario)
-                .Include(g => g.Character).ThenInclude(c => c.Abilities)
+                .Include(g => g.Character).ThenInclude(c => c.Ability1)
+                .Include(g => g.Character).ThenInclude(c => c.Ability2)
+                .Include(g => g.Character).ThenInclude(c => c.Ability3)
                 .Where(m => m.User.Id == userId).ToList();
         }
     }

@@ -36,21 +36,21 @@ namespace Encounter.Services
 
             if (scenario.Name == "Forest")
             {
-                events.Add(new Event { Name = "Forest 1", Level = 1, ImageUrl = "/img/events/forest.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
-                events.Add(new Event { Name = "Forest 2", Level = 2, ImageUrl = "/img/events/forest.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
-                events.Add(new Event { Name = "Forest 3", Level = 3, ImageUrl = "/img/events/forest.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Forest 1", Level = 1, ImageUrl = "/img/events/forest.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 1).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Forest 2", Level = 2, ImageUrl = "/img/events/forest.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 2).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Forest 3", Level = 3, ImageUrl = "/img/events/forest.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 3).Take(1).First(), Scenario = scenario });
             }
             else if (scenario.Name == "Desert")
             {
-                events.Add(new Event { Name = "Desert 1", Level = 1, ImageUrl = "/img/events/desert.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
-                events.Add(new Event { Name = "Desert 2", Level = 2, ImageUrl = "/img/events/desert.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
-                events.Add(new Event { Name = "Desert 3", Level = 3, ImageUrl = "/img/events/desert.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Desert 1", Level = 1, ImageUrl = "/img/events/desert.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 1).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Desert 2", Level = 2, ImageUrl = "/img/events/desert.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 2).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Desert 3", Level = 3, ImageUrl = "/img/events/desert.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 3).Take(1).First(), Scenario = scenario });
             }
             else if (scenario.Name == "Lair")
             {
-                events.Add(new Event { Name = "Lair 1", Level = 1, ImageUrl = "/img/events/lair.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
-                events.Add(new Event { Name = "Lair 2", Level = 2, ImageUrl = "/img/events/lair.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
-                events.Add(new Event { Name = "Lair 3", Level = 3, ImageUrl = "/img/events/lair.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Lair 1", Level = 1, ImageUrl = "/img/events/lair.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 1).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Lair 2", Level = 2, ImageUrl = "/img/events/lair.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 2).Take(1).First(), Scenario = scenario });
+                events.Add(new Event { Name = "Lair 3", Level = 3, ImageUrl = "/img/events/lair.jpg", Foe = _context.Foes.OrderBy(r => Guid.NewGuid()).Where(f => f.Scenario.Name == scenario.Name && f.Level == 3).Take(1).First(), Scenario = scenario });
             }
             return events;
         }
@@ -59,8 +59,9 @@ namespace Encounter.Services
         {
             return _context.Events
                 .Include(e => e.Scenario)
-                .Include(e => e.Foe)
-                .ThenInclude(f => f.Abilities)
+                .Include(e => e.Foe).ThenInclude(f => f.Ability1)
+                .Include(e => e.Foe).ThenInclude(f => f.Ability2)
+                .Include(e => e.Foe).ThenInclude(f => f.Ability3)
                 .FirstOrDefault(c => c.EventId == id);
         }
 

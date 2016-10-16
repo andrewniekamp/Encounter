@@ -14,6 +14,7 @@ namespace Encounter.Controllers
         private IAbilityData _abilityData;
         private IScenarioData _scenarioData;
         private IEventData _eventData;
+        private IFoeData _foeData;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public CharacterController(
@@ -21,12 +22,14 @@ namespace Encounter.Controllers
             IAbilityData abilityData,
             IScenarioData scenarioData,
             IEventData eventData,
+            IFoeData foeData,
             UserManager<ApplicationUser> userManager)
         {
             _characterData = characterData;
             _abilityData = abilityData;
             _scenarioData = scenarioData;
             _eventData = eventData;
+            _foeData = foeData;
             _userManager = userManager;
         }
 
@@ -37,6 +40,11 @@ namespace Encounter.Controllers
 
         public async Task<IActionResult> Index()
         {
+            _scenarioData.Generate();
+            _abilityData.Generate();
+            _characterData.Generate();
+            _foeData.Generate();
+
             var model = new CharacterPageViewModel();
 
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -47,10 +55,9 @@ namespace Encounter.Controllers
             model.Abilities = _abilityData.GetAll();
             return View(model);
         }
+        [HttpPost]
         public async Task<IActionResult> Scenario(int charId)
         {
-            _scenarioData.Generate();
-
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
 

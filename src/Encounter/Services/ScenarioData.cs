@@ -43,9 +43,9 @@ namespace Encounter.Services
         public Scenario Get(int id)
         {
             return _context.Scenarios
-                .Include(s => s.Events)
-                .ThenInclude(e => e.Foe)
-                .ThenInclude(f => f.Abilities)
+                .Include(s => s.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability1)
+                .Include(s => s.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability2)
+                .Include(s => s.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability3)
                 .FirstOrDefault(s => s.ScenarioId == id);
         }
 

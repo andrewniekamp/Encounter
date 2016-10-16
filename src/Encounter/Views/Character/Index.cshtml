@@ -24,20 +24,20 @@
         }
         <div class="char-select-abil-box">
             <div class="row">
-                @foreach (var ability in character.Abilities)
-                {
-                    <div class="col-xs-6">
-                        <h4 class="abil-name">@ability.Name</h4>
-                    </div>
-                }
+                <div class="col-xs-6">
+                    <h4 class="abil-name">@character.Ability1.Name</h4>
+                </div>
+                <div class="col-xs-6">
+                    <h4 class="abil-name">@character.Ability2.Name</h4>
+                </div>
             </div>
             <div class="row">
-                @foreach (var ability in character.Abilities)
-                {
-                    <div class="col-xs-6">
-                        <img class="act-icon" src=@ability.ImageUrl alt="@ability.Name" />
-                    </div>
-                }
+                <div class="col-xs-6">
+                    <img class="act-icon" src=@character.Ability1.ImageUrl alt="@character.Ability1.Name" />
+                </div>
+                <div class="col-xs-6">
+                    <img class="act-icon" src=@character.Ability2.ImageUrl alt="@character.Ability2.Name" />
+                </div>
             </div>
         </div>
     </div>

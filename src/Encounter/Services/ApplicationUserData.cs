@@ -29,9 +29,9 @@ namespace Encounter.Services
         public ICollection<ApplicationUser> GetAllUsers()
         {
             return _context.Users
-                .Include(u => u.Games)
-                .ThenInclude(g => g.Character)
-                .ThenInclude(c => c.Abilities)
+                .Include(u => u.Games).ThenInclude(g => g.Character).ThenInclude(c => c.Ability1)
+                .Include(u => u.Games).ThenInclude(g => g.Character).ThenInclude(c => c.Ability2)
+                .Include(u => u.Games).ThenInclude(g => g.Character).ThenInclude(c => c.Ability3)
                 .ToList();
         }
         

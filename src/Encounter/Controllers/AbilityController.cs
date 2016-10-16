@@ -29,18 +29,18 @@ namespace Encounter.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost]
-        [Route("Character/{charId}/Abilities")]
-        public async Task<IActionResult> Index(int charId)
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+        //[HttpPost]
+        //[Route("Character/{charId}")]
+        //public async Task<IActionResult> Index(int charId)
+        //{
+        //    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        //    ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
 
-            var model = new AbilityPageViewModel();
-            model.Character = _characterData.Get(charId);
-            model.User = currentUser;
-            return View(model);
-        }
+        //    var model = new AbilityPageViewModel();
+        //    model.Character = _characterData.Get(charId);
+        //    model.User = currentUser;
+        //    return View(model);
+        //}
 
         [HttpPost]
         [Route("Abilities/[action]/{charId}")]
@@ -58,7 +58,6 @@ namespace Encounter.Controllers
             model.User = currentUser;
             // may not need - model.Abilities = abilities;
             model.Character = _characterData.Get(charId);
-            model.Character.Abilities = _characterData.Get(charId).Abilities.ToList();
             return View(model);
         }
     }

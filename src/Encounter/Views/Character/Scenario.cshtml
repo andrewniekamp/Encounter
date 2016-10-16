@@ -15,10 +15,8 @@
             <img class="char-select-img" src="@Model.SelectedCharacter.SpriteUrl" />
         </div>
         <div class="row">
-        @foreach (var ability in Model.SelectedCharacter.Abilities)
-        {
-                <img class="small-act-icon" src=@ability.ImageUrl alt="@ability.Name" />
-        }
+            <img class="small-act-icon" src=@Model.SelectedCharacter.Ability1.ImageUrl alt="@Model.SelectedCharacter.Ability1.Name" />
+            <img class="small-act-icon" src=@Model.SelectedCharacter.Ability2.ImageUrl alt="@Model.SelectedCharacter.Ability2.Name" />
         </div>
     </div>
 

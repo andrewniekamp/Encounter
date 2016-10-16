@@ -52,35 +52,33 @@ namespace Encounter.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
 
-            List<Character> chars = _characterData.GetAll().ToList();
+            
+            //_abilityData.Add(new Ability { Name = "Hammer Blow", FoeHarm = 3, ImageUrl = "/img/actions/hammer-blow.png" });
+            //_abilityData.Add(new Ability { Name = "Piercing Arrow", FoeHarm = 3, ImageUrl = "/img/actions/piercing-arrow.png" });
+            //_abilityData.Add(new Ability { Name = "Stab", FoeHarm = 3, ImageUrl = "/img/actions/stab.png" });
+            //_abilityData.Add(new Ability { Name = "Inspiring Speech", CharHeal = 3, FoeHeal = 1, ImageUrl = "/img/actions/inspiring-speech.png" });
+            //_abilityData.Add(new Ability { Name = "Heal", CharHeal = 2, ImageUrl = "/img/actions/heal.png" });
+            //_abilityData.Add(new Ability { Name = "Shove", FoeHarm = 1, ImageUrl = "/img/actions/shove.png" });
+            //_abilityData.Add(new Ability { Name = "Snide Remark", FoeHarm = 1, ImageUrl = "/img/actions/snide-remark.png" });
+            //_abilityData.Add(new Ability { Name = "Belittling Glare", FoeHarm = 2, ImageUrl = "/img/actions/belittling-glare.png" });
+            //_abilityData.Add(new Ability { Name = "Heal 2", CharHeal = 4, ImageUrl = "/img/actions/heal.png" });
+            //_abilityData.Add(new Ability { Name = "Claw Attack", FoeHarm = 3, ImageUrl = "/img/actions/claw-attack.png" });
+            //_abilityData.Add(new Ability { Name = "Rude Remark", FoeHarm = 1, ImageUrl = "/img/actions/snide-remark.png" });
+            //_abilityData.Add(new Ability { Name = "Salty Insult", FoeHarm = 2, ImageUrl = "/img/actions/heal.png" });
+            _abilityData.Generate();
 
-            if (chars.Count == 0)
-            {
-                _abilityData.Add(new Ability { Name = "Hammer Blow", FoeHarm = 3, ImageUrl = "/img/actions/hammer-blow.png" });
-                _abilityData.Add(new Ability { Name = "Piercing Arrow", FoeHarm = 3, ImageUrl = "/img/actions/piercing-arrow.png" });
-                _abilityData.Add(new Ability { Name = "Stab", FoeHarm = 3, ImageUrl = "/img/actions/stab.png" });
-                _abilityData.Add(new Ability { Name = "Inspiring Speech", CharHeal = 3, FoeHeal = 1, ImageUrl = "/img/actions/inspiring-speech.png" });
-                _abilityData.Add(new Ability { Name = "Heal", CharHeal = 2, ImageUrl = "/img/actions/heal.png" });
-                _abilityData.Add(new Ability { Name = "Shove", FoeHarm = 1, ImageUrl = "/img/actions/shove.png" });
-                _abilityData.Add(new Ability { Name = "Snide Remark", FoeHarm = 1, ImageUrl = "/img/actions/snide-remark.png" });
-                _abilityData.Add(new Ability { Name = "Belittling Glare", FoeHarm = 2, ImageUrl = "/img/actions/belittling-glare.png" });
-                _abilityData.Add(new Ability { Name = "Heal 2", CharHeal = 4, ImageUrl = "/img/actions/heal.png" });
-                _abilityData.Add(new Ability { Name = "Claw Attack", FoeHarm = 3, ImageUrl = "/img/actions/claw-attack.png" });
-                _abilityData.Add(new Ability { Name = "Rude Remark", FoeHarm = 1, ImageUrl = "/img/actions/snide-remark.png" });
-                _abilityData.Add(new Ability { Name = "Salty Insult", FoeHarm = 2, ImageUrl = "/img/actions/heal.png" });
+            //_characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/char/cleric.png", Class="Cleric", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
+            //_characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/char/ranger.png", Class = "Ranger", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
+            //_characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/char/rogue.png", Class = "Rogue", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
+            //_characterData.Add(new Character { Name = "Pat", SpriteUrl = "/img/char/captain.png", Class = "Captain", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
+            _characterData.Generate();
 
-                _characterData.Add(new Character { Name = "Winterberry", SpriteUrl = "/img/char/cleric.png", Class="Cleric", Health = 20, Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(5) } });
-                _characterData.Add(new Character { Name = "Clementine", SpriteUrl = "/img/char/ranger.png", Class = "Ranger", Health = 20, Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
-                _characterData.Add(new Character { Name = "Alfonse", SpriteUrl = "/img/char/rogue.png", Class = "Rogue", Health = 20, Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
-                _characterData.Add(new Character { Name = "Pat", SpriteUrl = "/img/char/captain.png", Class = "Captain", Health = 20, Abilities = new List<Ability> { _abilityData.Get(4), _abilityData.Get(8) } });
-
-                _foeData.Add(new Foe { Health = 12, Name = "Ogre", SpriteUrl = "/img/foe/ogre.png", Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(4) } });
-                _foeData.Add(new Foe { Health = 16, Name = "Desert Dweller", SpriteUrl = "/img/foe/desert-dweller.png", Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
-                _foeData.Add(new Foe { Health = 18, Name = "Strange Creatures", SpriteUrl = "/img/foe/flying-monster.png", Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
-                _foeData.Add(new Foe { Health = 22, Name = "Vampire", SpriteUrl = "/img/foe/vampire.png", Abilities = new List<Ability> { _abilityData.Get(8), _abilityData.Get(5) } });
-                _foeData.Add(new Foe { Health = 30, Name = "Dragon", SpriteUrl = "/img/foe/dragon.png", Abilities = new List<Ability> { _abilityData.Get(9), _abilityData.Get(10) } });
-
-            }
+            //_foeData.Add(new Foe { Health = 12, Name = "Ogre", SpriteUrl = "/img/foe/ogre.png", Abilities = new List<Ability> { _abilityData.Get(1), _abilityData.Get(4) } });
+            //_foeData.Add(new Foe { Health = 16, Name = "Desert Dweller", SpriteUrl = "/img/foe/desert-dweller.png", Abilities = new List<Ability> { _abilityData.Get(2), _abilityData.Get(6) } });
+            //_foeData.Add(new Foe { Health = 18, Name = "Strange Creatures", SpriteUrl = "/img/foe/flying-monster.png", Abilities = new List<Ability> { _abilityData.Get(3), _abilityData.Get(7) } });
+            //_foeData.Add(new Foe { Health = 22, Name = "Vampire", SpriteUrl = "/img/foe/vampire.png", Abilities = new List<Ability> { _abilityData.Get(8), _abilityData.Get(5) } });
+            //_foeData.Add(new Foe { Health = 30, Name = "Dragon", SpriteUrl = "/img/foe/dragon.png", Abilities = new List<Ability> { _abilityData.Get(9), _abilityData.Get(10) } });
+            _foeData.Generate();
 
             return RedirectToAction("Index", "Account", currentUser);
         }
@@ -91,9 +89,11 @@ namespace Encounter.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-
+            
             Scenario currentScenario = _scenarioData.Get(scenarioId);
             List<Event> scenarioEvents = _eventData.Generate(scenarioId).ToList();
+
+
             
             Game newGame = new Game();
             newGame.DateCreated = DateTime.Now;
