@@ -15,9 +15,7 @@ namespace Encounter.Entities
         //{
         //    base.OnModelCreating(builder);
         //}
-
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Player> Players { get; set; }
+        
         public DbSet<Character> Characters { get; set; }
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<Game> Games { get; set; }
