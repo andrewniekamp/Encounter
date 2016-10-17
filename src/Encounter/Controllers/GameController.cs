@@ -91,6 +91,11 @@ namespace Encounter.Controllers
             var model = new GamePageViewModel();
             model.Game = _gameData.Get(gameId);
             model.EventsCompleted = eventsCompleted;
+            model.LastEvent = false;
+            if (eventsCompleted == model.Game.Events.Count -1)
+            {
+                model.LastEvent = true;
+            }
             if (eventsCompleted == model.Game.Events.Count)
             {
                 return View("Win");
@@ -123,6 +128,11 @@ namespace Encounter.Controllers
             model.CurrentEvent = sortedEvents.ElementAt(eventsCompleted);
             model.CurrentEvent.Foe = _foeData.Demo(eventsCompleted);
             return View("Demo", model);
+        }
+
+        public IActionResult GameOver()
+        {
+            return View();
         }
     }
 }

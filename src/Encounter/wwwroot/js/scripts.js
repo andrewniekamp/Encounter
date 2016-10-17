@@ -31,25 +31,6 @@ function chooseAction(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-//Checks for a winner
-function winCheck(foeHealth, playerHealth) {
-    if (foeHealth <= 0) {
-        setTimeout(function () {
-            $('#next-event').fadeIn();
-        }, 500);
-        console.log("Foe has died!");
-        return false;
-    }
-    if (playerHealth <= 0) {
-        setTimeout(function () {
-            $('#you-lose').fadeIn();
-        }, 500);
-        console.log("You have died!");
-        return false;
-    }
-    return true;
-}
-
 //Sets animations and adjusts health based on Act Ajax
 function setEffects(isPlayer, result) {
     //Player action

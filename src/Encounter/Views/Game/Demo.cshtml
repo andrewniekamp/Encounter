@@ -135,6 +135,25 @@
             paused = pressPause(gameActive, paused);
         })
 
+        //Checks for a winner
+        function winCheck(foeHealth, playerHealth) {
+            if (foeHealth <= 0) {
+                setTimeout(function () {
+                    $('#next-event').fadeIn();
+                }, 500);
+                console.log("Foe has died!");
+                return false;
+            }
+            if (playerHealth <= 0) {
+                setTimeout(function () {
+                    window.location.href = "/{Game}/{GameOver}";
+                }, 500);
+                console.log("You have died!");
+                return false;
+            }
+            return true;
+        }
+
         //Player action
         $('.act-btn').click(function () {
             if (paused == false) {

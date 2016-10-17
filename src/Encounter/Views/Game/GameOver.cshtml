@@ -1,14 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "You Win!";
+    ViewData["Title"] = "Game Over";
     Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
 <div id="black-bg">
     <p class="game-over-text">@Html.ActionLink("Home", "Index", "Account")</p>
-    <h1 class="game-over-text">Congratulations!</h1>
+    <h1 class="game-over-text">GAME OVER</h1>
     <div id="vid-container">
         <video autoplay muted id="vid-background">
             <!-- <source src="video.webm" type="video/webm"> -->
-            <source src="/vid/win.mp4" type="video/mp4">
+            <source src="/vid/gameover.mp4" type="video/mp4">
         </video>
     </div>
 </div>

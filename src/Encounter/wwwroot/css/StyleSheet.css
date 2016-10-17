@@ -172,6 +172,10 @@ body {
 
  /**************************/
 /*Game Page Start**********/
+#black-bg {
+    height: 100vh;
+    background-color: black;
+}
 #count-down-box, #next-event, #paused, #you-lose {
     color: white;
     text-align: center;
@@ -318,7 +322,22 @@ foe-sprite-box {
     width: 100%;
     opacity: 0.75;
 }
-/*Game Page End************/
+ /*Game Page End************/
+/**************************/
+
+/************************/
+.game-over-text {
+    padding-top: 15px;
+    color: white;
+    text-align: center;
+}
+#vid-background {
+  width: auto;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+}
+/***********************/
 @media only screen and (max-width:800px){
     .health-info {
         font-size: 14px;
