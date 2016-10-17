@@ -8,8 +8,7 @@
     <div class="landing-menu">
         <h1 class="encounter-banner">Encounter</h1>
         @Html.ActionLink("Home", "Index", "Account")
-        <h3>Player Profile</h3>
-        <h1>Hello, @Model.PlayerName</h1>
+        <h3>Player Profile: @Model.PlayerName</h3>
         <p>Account Created: @Model.DateCreated</p>
         <img class="player-avatar" src="@Model.AvatarUrl" />
         @if (Model.Games.Count > 0)
