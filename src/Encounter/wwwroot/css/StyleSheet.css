@@ -373,11 +373,15 @@ foe-sprite-box {
         font-size: 12px;
     }
     .landing-btn {
-        width: 100%;
+        max-width: 55%;
         font-size: 1.5em;
     }
     .bg-image {
-        padding: 1% 0;
+        padding: 0;
+    }
+    .landing-menu {
+        min-width: 100%;
+        min-height: 100%;
     }
     .encounter-banner {
         font-size: 18px;
