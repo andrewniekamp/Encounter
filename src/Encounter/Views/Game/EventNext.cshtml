@@ -130,7 +130,9 @@
         $('#char-sprite-effect-box').hide();
         $(".cooldown-box").hide();
 
+        var playerMaxHealth = @Model.Game.Character.Health;
         var playerHealth = @Model.Game.Character.Health;
+        var foeMaxHealth = @Model.CurrentEvent.Foe.Health;
         var foeHealth = @Model.CurrentEvent.Foe.Health;
         var gameActive = false;
         var paused = false;
@@ -205,9 +207,15 @@
                         setEffects(true, result);
                         //Running health based on action
                         playerHealth -= result.charHarm;
-                        playerHealth += result.charHeal;
+                        if (playerHealth < playerMaxHealth)
+                        {
+                            playerHealth += result.charHeal;
+                        }
                         foeHealth -= result.foeHarm;
-                        foeHealth += result.foeHeal;
+                        if (foeHealth < foeMaxHealth)
+                        {
+                            foeHealth += result.foeHeal;
+                        }
                         playerPercent = playerHealth / @Model.Game.Character.Health * 100;
                         foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
@@ -243,13 +251,19 @@
                     url: '@Url.Action("FoeAct", "Game")',
                     success: function (result) {
                         move(foe);
-
                         setEffects(false, result);
                         //Running health based on action
+                        //These actions are partially retooled here to reuse actions for player and foe
                         playerHealth -= result.foeHarm;
-                        playerHealth += result.foeHeal;
+                        if (playerHealth < playerMaxHealth)
+                        {
+                            playerHealth += result.foeHeal;
+                        }
                         foeHealth -= result.charHarm;
-                        foeHealth += result.charHeal;
+                        if (foeHealth < foeMaxHealth)
+                        {
+                            foeHealth += result.charHeal;
+                        }
                         playerPercent = playerHealth / @Model.Game.Character.Health * 100;
                         foePercent = foeHealth / @Model.CurrentEvent.Foe.Health * 100;
 
