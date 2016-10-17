@@ -1,6 +1,7 @@
 ﻿using Encounter.Entities;
 using Encounter.Services;
 using Encounter.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,7 +45,7 @@ namespace Encounter.Controllers
         //{
         //    return View();
         //}
-        
+        [Authorize]
         [Route("Character/{charId}/Scenario/{scenarioId}")]
         public async Task<IActionResult> Game(int charId, int scenarioId)
         {
@@ -53,8 +54,6 @@ namespace Encounter.Controllers
             
             Scenario currentScenario = _scenarioData.Get(scenarioId);
             List<Event> scenarioEvents = _eventData.Generate(scenarioId).ToList();
-
-
             
             Game newGame = new Game();
             newGame.DateCreated = DateTime.Now;
@@ -84,11 +83,13 @@ namespace Encounter.Controllers
             return Json(actAbility);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Game/{gameId}/{eventsCompleted}")]
         public IActionResult Next(int gameId, int eventsCompleted)
         {
             var model = new GamePageViewModel();
+            model.Demo = false;
             model.Game = _gameData.Get(gameId);
             model.EventsCompleted = eventsCompleted;
             model.LastEvent = false;
@@ -116,9 +117,14 @@ namespace Encounter.Controllers
             demoGame.Events = scenarioEvents;
 
             var model = new GamePageViewModel();
+            model.Demo = true;
             model.Game = demoGame;
             model.EventsCompleted = eventsCompleted;
-
+            model.LastEvent = false;
+            if (eventsCompleted == model.Game.Events.Count - 1)
+            {
+                model.LastEvent = true;
+            }
             if (eventsCompleted == model.Game.Events.Count)
             {
                 return View("Win");
@@ -127,7 +133,7 @@ namespace Encounter.Controllers
             List<Event> sortedEvents = (from e in model.Game.Events orderby e.EventId ascending select e).ToList();
             model.CurrentEvent = sortedEvents.ElementAt(eventsCompleted);
             model.CurrentEvent.Foe = _foeData.Demo(eventsCompleted);
-            return View("Demo", model);
+            return View("EventNext", model);
         }
 
         public IActionResult GameOver()

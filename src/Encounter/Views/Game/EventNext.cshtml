@@ -10,22 +10,29 @@
         @*event-board-img outside of normal flow (position: absolute)*@
         <img class="event-board-img" src="@Model.CurrentEvent.ImageUrl" alt="@Model.CurrentEvent.Name" />
         <div id="next-event">
-            @using (Html.BeginForm("Next", "Game", new
+            @if (Model.Demo == true)
             {
-                gameId = Model.Game.GameId,
-                eventsCompleted = Model.EventsCompleted + 1
-            }))
+                @using (Html.BeginForm("Demo", "Game", new { eventsCompleted = Model.EventsCompleted + 1 }))
+                {
+                    <div>
+                        @if (Model.LastEvent == true)
+                        {<input class="btn btn-default game-overlay-btn" type="submit" value="You Win!" />}
+                        else
+                        {<input class="btn btn-default game-overlay-btn" type="submit" value="Next Event!" />}
+                    </div>
+                }
+            }
+            else
             {
-                <div>
-                    @if (Model.LastEvent == true)
-                    {
-                        <input class="btn btn-default game-overlay-btn" type="submit" value="You Win!" />
-                    }
-                    else
-                    {
-                        <input class="btn btn-default game-overlay-btn" type="submit" value="Next Event!" />
-                    }
-                </div>
+                @using (Html.BeginForm("Next", "Game", new { gameId = Model.Game.GameId, eventsCompleted = Model.EventsCompleted + 1 }))
+                {
+                    <div>
+                        @if (Model.LastEvent == true)
+                        {<input class="btn btn-default game-overlay-btn" type="submit" value="You Win!" />}
+                        else
+                        {<input class="btn btn-default game-overlay-btn" type="submit" value="Next Event!" />}
+                    </div>
+                }
             }
         </div>
         <div id="count-down-box">
@@ -148,7 +155,6 @@
                 setTimeout(function () {
                     $('#next-event').fadeIn();
                 }, 500);
-                console.log("Foe has died!");
                 return false;
             }
             if (playerHealth <= 0) {
@@ -156,7 +162,6 @@
                 setTimeout(function () {
                     window.location.href = '@Url.Action("GameOver", "Game")';
                 }, 1000);
-                console.log("You have died!");
                 return false;
             }
             return true;
