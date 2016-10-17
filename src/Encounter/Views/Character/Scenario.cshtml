@@ -22,10 +22,10 @@
 
     @foreach (var scenario in Model.Scenarios)
     {
-        <div class="col-xs-6 col-sm-3 char-select-container">
+        <div class="col-xs-4 scenario-select-container">
             <h2>@scenario.Name</h2>
-            <div class="char-select-sprite-box">
-                <img class="char-select-img" src="@scenario.IconUrl" />
+            <div class="scenario-select-sprite-box">
+                <img class="scenario-select-img" src="@scenario.IconUrl" />
             </div>
             @using (Html.BeginForm("Game", "Game", new { charId = Model.SelectedCharacter.CharacterId, scenarioId = scenario.ScenarioId }))
             {

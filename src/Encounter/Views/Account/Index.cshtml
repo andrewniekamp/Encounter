@@ -11,7 +11,7 @@
         <h1 class="encounter-banner">Encounter</h1>
         @if (User.Identity.IsAuthenticated)
         {
-            <h1>Welcome, @Model.PlayerName</h1>
+            <h1 class="player-welcome">Welcome, @Model.PlayerName</h1>
 
             <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Index", "Character")';return false;">Play!</button>
             <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Profile", "Player")';return false;">Profile</button>
