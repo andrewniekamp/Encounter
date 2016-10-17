@@ -28,7 +28,7 @@
             <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Register")';return false;">Register</button>
             <button class="btn landing-btn padded-btn" onclick="location.href='@Url.Action("Login")';return false;">Log In</button>
             //TODO: link to a demo game of hardcoded sample data
-            <button class="btn landing-btn" onclick="location.href='@Url.Action("Login")';return false;">Demo</button>
+            <button class="btn landing-btn" onclick="location.href='@Url.Action("Demo", "Game", new { eventsCompleted = 0 })';return false;">Demo</button>
         }
     </div>
 </div>

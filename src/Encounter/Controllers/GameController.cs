@@ -44,8 +44,7 @@ namespace Encounter.Controllers
         //{
         //    return View();
         //}
-
-        [Route("play")]
+        
         [Route("Character/{charId}/Scenario/{scenarioId}")]
         public async Task<IActionResult> Game(int charId, int scenarioId)
         {
@@ -86,12 +85,12 @@ namespace Encounter.Controllers
         }
 
         [HttpPost]
+        [Route("Game/{gameId}/{eventsCompleted}")]
         public IActionResult Next(int gameId, int eventsCompleted)
         {
             var model = new GamePageViewModel();
             model.Game = _gameData.Get(gameId);
             model.EventsCompleted = eventsCompleted;
-            //model.RemainingEvents = model.Game.Events.Skip(eventsCompleted).ToList();
             if (eventsCompleted == model.Game.Events.Count)
             {
                 return View("Win");
@@ -99,6 +98,31 @@ namespace Encounter.Controllers
             List<Event> sortedEvents = (from e in model.Game.Events orderby e.EventId ascending select e).ToList();
             model.CurrentEvent = sortedEvents.ElementAt(eventsCompleted);
             return View("EventNext", model);
+        }
+
+        [Route("Demo/{eventsCompleted}")]
+        public IActionResult Demo(int eventsCompleted)
+        {
+            Scenario currentScenario = _scenarioData.Demo();
+            List<Event> scenarioEvents = _eventData.Generate(currentScenario.ScenarioId).ToList();
+            
+            Game demoGame = new Game();
+            demoGame.Character = _characterData.Demo();
+            demoGame.Events = scenarioEvents;
+
+            var model = new GamePageViewModel();
+            model.Game = demoGame;
+            model.EventsCompleted = eventsCompleted;
+
+            if (eventsCompleted == model.Game.Events.Count)
+            {
+                return View("Win");
+            }
+
+            List<Event> sortedEvents = (from e in model.Game.Events orderby e.EventId ascending select e).ToList();
+            model.CurrentEvent = sortedEvents.ElementAt(eventsCompleted);
+            model.CurrentEvent.Foe = _foeData.Demo(eventsCompleted);
+            return View("Demo", model);
         }
     }
 }

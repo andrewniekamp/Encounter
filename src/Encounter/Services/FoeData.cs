@@ -1,4 +1,5 @@
 ﻿using Encounter.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Encounter.Services
         Foe Get(int id);
         void Add(Foe newFoe);
         void Generate();
+        Foe Demo(int eventsCompleted);
     }
 
     public class SqlFoeData : IFoeData
@@ -26,6 +28,14 @@ namespace Encounter.Services
         {
             _context.Add(newFoe);
             _context.SaveChanges();
+        }
+
+        public Foe Demo(int eventsCompleted)
+        {
+            return _context.Foes
+                .Include(f => f.Ability1)
+                .Include(f => f.Ability2)
+                .FirstOrDefault(f => f.Scenario.Name == "Lair" && f.Level == eventsCompleted + 1);
         }
 
         public void Generate()

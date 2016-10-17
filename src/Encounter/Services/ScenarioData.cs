@@ -12,6 +12,7 @@ namespace Encounter.Services
         Scenario Get(int id);
         void Add(Scenario newScenario);
         void Generate();
+        Scenario Demo();
     }
 
     public class SqlScenarioData : IScenarioData
@@ -26,6 +27,15 @@ namespace Encounter.Services
         {
             _context.Add(newScenario);
             _context.SaveChanges();
+        }
+
+        public Scenario Demo()
+        {
+            return _context.Scenarios
+                .Include(s => s.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability1)
+                .Include(s => s.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability2)
+                .Include(s => s.Events).ThenInclude(e => e.Foe).ThenInclude(f => f.Ability3)
+                .FirstOrDefault(s => s.Name == "Lair");
         }
 
         public void Generate()

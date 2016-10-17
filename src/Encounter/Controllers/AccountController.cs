@@ -16,23 +16,43 @@ namespace Encounter.Controllers
     {
         private IApplicationUserData _applicationUserData;
         private IGameData _gameData;
+        private ICharacterData _characterData;
+        private IAbilityData _abilityData;
+        private IScenarioData _scenarioData;
+        private IEventData _eventData;
+        private IFoeData _foeData;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
         public AccountController (
             IApplicationUserData applicationUserData,
             IGameData gameData,
+            ICharacterData characterData,
+            IAbilityData abilityData,
+            IScenarioData scenarioData,
+            IEventData eventData,
+            IFoeData foeData,
             UserManager<ApplicationUser> userManager, 
             SignInManager<ApplicationUser> signInManager)
         {
             _applicationUserData = applicationUserData;
             _gameData = gameData;
+            _characterData = characterData;
+            _abilityData = abilityData;
+            _scenarioData = scenarioData;
+            _eventData = eventData;
+            _foeData = foeData;
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
         {
+            _scenarioData.Generate();
+            _abilityData.Generate();
+            _characterData.Generate();
+            _foeData.Generate();
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
             

@@ -12,6 +12,7 @@ namespace Encounter.Services
         Character Get(int id);
         void Add(Character newCharacter);
         void Generate();
+        Character Demo();
     }
 
     public class SqlCharacterData : ICharacterData
@@ -26,6 +27,15 @@ namespace Encounter.Services
         {
             _context.Add(newCharacter);
             _context.SaveChanges();
+        }
+
+        public Character Demo()
+        {
+            return _context.Characters
+                .Include(c => c.Ability1)
+                .Include(c => c.Ability2)
+                .Include(c => c.Ability3)
+                .FirstOrDefault(c => c.Name == "Winterberry");
         }
 
         public void Generate()

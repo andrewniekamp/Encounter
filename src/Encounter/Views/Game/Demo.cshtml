@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Game";
+    ViewData["Title"] = "Demo";
     Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
 @using Encounter.Entities
@@ -8,14 +8,13 @@
 @*event-board-img outside of normal flow (position: absolute)*@
 <img class="event-board-img" src="@Model.CurrentEvent.ImageUrl" alt="@Model.CurrentEvent.Name" />
 <div id="next-event">
-    @using (Html.BeginForm("Next", "Game", new
+    @using (Html.BeginForm("Demo", "Game", new
     {
-        gameId = Model.Game.GameId,
         eventsCompleted = Model.EventsCompleted + 1
     }))
     {
         <div>
-            <input class="btn btn-default game-overlay-btn" type="submit" value="Next Event!" />
+            <input class="btn btn-default game-overlay-btn" type="submit" value="Next Level!" />
         </div>
     }
 </div>
@@ -28,7 +27,7 @@
     <button class="pause btn btn-danger game-overlay-btn">Unpause</button>
 </div>
 <div id="you-lose">
-    <h1>YOU LOSE</h1>
+    <h1>Nice try!</h1>
     @Html.ActionLink("Home", "Index", "Account")
 </div>
 
@@ -95,7 +94,7 @@
         <div class="col-xs-0 col-md-4 col-lg-6"></div>
         <div class="foe-box col-xs-6 col-md-4 col-lg-3">
             <div class="row">
-
+                        
             </div>
             <div class="row center-box foe-sprite-box">
                 <div id="foe-sprite-effect-box">
