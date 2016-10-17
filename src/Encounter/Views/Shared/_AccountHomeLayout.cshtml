@@ -1,0 +1,40 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC|Montserrat+Alternates" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/StyleSheet.css" />
+
+    <title>@ViewBag.Title</title>
+    <!-- You can use Open Graph tags to customize link previews.
+    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+    <meta property="og:url" content="http://goencounter.azurewebsites.net" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Encounter" />
+    <meta property="og:description" content="A simple mini-battle game." />
+    <meta property="og:image" content="http://goencounter.azurewebsites.net/img/testchar.svg" />
+</head>
+
+<body>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
