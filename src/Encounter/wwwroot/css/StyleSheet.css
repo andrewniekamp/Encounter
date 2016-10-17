@@ -319,7 +319,6 @@ foe-sprite-box {
     opacity: 0.75;
 }
 /*Game Page End************/
-
 @media only screen and (max-width:800px){
     .health-info {
         font-size: 14px;
@@ -338,8 +337,8 @@ foe-sprite-box {
         bottom: 30px;
     }
     .act-btn {
-        width: 85px;
-        height: 85px;
+        width: 75px;
+        height: 75px;
         background-size: cover;
     }
     .char-select-name {
@@ -378,6 +377,19 @@ foe-sprite-box {
     }
     #foe-sprite-effect-box, #char-sprite-effect-box {
         max-width: 200px;
+    }
+}
+@media only screen and (max-height:400px) and (max-width:600px) {
+    .act-btn {
+        width: 45px;
+        height: 45px;
+    }
+    .pause {
+
+    }
+    .pause, .status {
+        height: 24px;
+        font-size: 10px;
     }
 }
 @media only screen and (max-width:1400px) {

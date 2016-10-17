@@ -13,7 +13,7 @@ namespace Encounter.Services
     {
         public string GetGreeting()
         {
-            return "The Greeter Class Greets You";
+            return "This isn't right. You seem to be lost...";
         }
     }
 }
