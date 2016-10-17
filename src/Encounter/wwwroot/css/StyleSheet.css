@@ -391,6 +391,9 @@ foe-sprite-box {
         height: 24px;
         font-size: 10px;
     }
+    #foe-sprite-effect-box, #char-sprite-effect-box {
+        max-width: 130px;
+    }
 }
 @media only screen and (max-width:1400px) {
     .play-area {
