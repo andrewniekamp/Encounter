@@ -6,6 +6,8 @@ A web-based, mini-battle game
 
 _Subscribe and play, or try the demo!_
 
+![Alt text](/src/Encounter/wwwroot/img/encounter.png?raw=true "Optional Title")
+
 ## Setup/Installation
 
 * To install and run locally, clone the project in Visual Studio and open the Solution
