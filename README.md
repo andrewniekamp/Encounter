@@ -5,6 +5,7 @@ A web-based, mini-battle game
 ## Description
 
 _Subscribe and play, or try the demo!_
+http://goencounter.azurewebsites.net/
 
 ![Alt text](/src/Encounter/wwwroot/img/encounter.png?raw=true "Optional Title")
 
