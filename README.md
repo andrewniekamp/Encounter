@@ -22,7 +22,3 @@ dotnet ef database update
 ## Technologies Used
 
 _C#, .NET, .NET MVC, Xunit, HTML, CSS, JavaScript, JQuery, Bootstrap._
-
-### License
-
-Copyright (c) 2016 Andrew Niekamp
